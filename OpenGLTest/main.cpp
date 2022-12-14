@@ -2,6 +2,14 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+// Close window if ESC was pressed
+void processInput(GLFWwindow* window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
+}
+
+
 int main() {
 
 	// Initialize GLFW
@@ -25,6 +33,7 @@ int main() {
 	}
 	// Introduce the window into the current context
 	glfwMakeContextCurrent(window);
+	
 
 	// Load GLAD so it configures OpenGL
 	gladLoadGL();
@@ -33,15 +42,20 @@ int main() {
 	// In this case the viewport goes from x = 0, y = 0, to x = 800, y = 600
 	glViewport(0, 0, 800, 600);
 
-	// Specify the color of the background
-	glClearColor(0.7f, 0.13f, 0.17f, 1.0f);
-	// Clean the back buffer and assign the new color to it
-	glClear(GL_COLOR_BUFFER_BIT);
-	// Swap the back buffer with the front buffer
-	glfwSwapBuffers(window);
-
+	
 	// Main while loop
 	while (!glfwWindowShouldClose(window)) {
+
+		// Input
+		processInput(window);
+
+		// Specify the color of the background
+		glClearColor(0.7f, 0.13f, 0.17f, 1.0f);
+		// Clean the back buffer and assign the new color to it
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		// Swap the back buffer with the front buffer
+		glfwSwapBuffers(window);
 		// Take care of all GLFW events
 		glfwPollEvents();
 	}
