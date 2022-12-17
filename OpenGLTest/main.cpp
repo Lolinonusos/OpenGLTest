@@ -44,7 +44,7 @@ int main()
 
     // glfw window creation
     // --------------------
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Skrankel Rankel", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -111,6 +111,21 @@ int main()
 
         // render the triangle
         ourShader.use();
+
+
+        float timeVal = glfwGetTime();
+
+        // Sine function:
+        // a * sin(x * b) + c
+        // a = amplitude, controls size of sine wave
+        // b = periodicity, controls frequency/speed of sine wave
+        // c = offset, puts a physical offset on the sine wave
+
+
+        float Move = 0.5f * sin(timeVal);
+        ourShader.setFloat("xMove", Move);
+
+
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -119,6 +134,8 @@ int main()
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
+    
 
     // optional: de-allocate all resources once they've outlived their purpose:
     // ------------------------------------------------------------------------

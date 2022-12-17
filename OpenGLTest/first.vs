@@ -4,9 +4,14 @@ layout (location = 1) in vec3 aColor;
 
 out vec3 ourColor;
 
+out vec3 ourPosition;
+
+uniform float xMove;
+
 void main()
 {
     // positive/negative y flips up or down 
-    gl_Position = vec4(aPos.x + 0.6, -aPos.y, aPos.z, 1.0);
+    gl_Position = vec4(aPos.x + xMove, aPos.y, aPos.z, 1.0);
     ourColor = aColor;
+    ourPosition = aPos;
 }
