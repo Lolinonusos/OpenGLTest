@@ -8,10 +8,12 @@ out vec3 ourPosition;
 
 uniform float xMove;
 
+uniform float yMove;
+
 void main()
 {
     // positive/negative y flips up or down 
-    gl_Position = vec4(aPos.x + xMove, aPos.y, aPos.z, 1.0);
+    gl_Position = vec4(aPos.x + xMove, aPos.y + yMove, aPos.z, 1.0);
     ourColor = aColor;
     ourPosition = aPos;
 }

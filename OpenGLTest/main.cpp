@@ -122,8 +122,10 @@ int main()
         // c = offset, puts a physical offset on the sine wave
 
 
-        float Move = 0.5f * sin(timeVal);
-        ourShader.setFloat("xMove", Move);
+        float xMove = 0.5f * sin(timeVal);
+        float yMove = 0.5f * sin(timeVal);
+        ourShader.setFloat("xMove", xMove);
+        ourShader.setFloat("yMove", yMove);
 
 
         glBindVertexArray(VAO);
