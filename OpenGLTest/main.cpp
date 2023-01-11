@@ -1,7 +1,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stb/stb_image.h>
+
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
 #include <cmath>
@@ -12,12 +15,13 @@
 #include "VBO.h"
 #include "EBO.h"
 
+#include "vertex.h"
 
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 800;
 
-//float mixValue = 0.2f;
+float mixValue = 0.2f;
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
@@ -79,7 +83,9 @@ int main() {
 
     // build and compile our shader program
     // ------------------------------------
-    Shader ourShader("firstTexVertShader.vs", "firstTexFragShader.fs"); // you can name your shader files however you like
+    //Shader ourShader("firstTexVertShader.vs", "firstTexFragShader.fs"); // you can name your shader files however you like
+    Shader ourShader("rotate.vs", "firstTexFragShader.fs"); // you can name your shader files however you like
+
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     float vertices[] = {
@@ -94,6 +100,7 @@ int main() {
          0, 2, 1,
          0, 3, 2
     };
+
 
     VAO vao;
     vao.bind();
@@ -116,8 +123,11 @@ int main() {
     // Change how triangles are drawn
     //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Full triangles
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wire-Frame
+    
+    glm::vec4 vec(1.0, 0.0f, 0.0f, 0.0f);
+    glm::mat4 trans = glm::mat4(1.0f);
 
-   
+    //trans = glm::translate(trans, glm::vec3(0.5f, 0.5f, 0.0f));
 
     // render loop
     while (!glfwWindowShouldClose(window))
@@ -137,7 +147,12 @@ int main() {
         helene.bind();
         
 
+        unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
+
+        trans = glm::rotate(trans, glm::radians(2.0f), glm::vec3(0.0, 0.0, 1.0));
+        //std::cout << "W = " << vec.w << "  X = " << vec.x << "  Y = " << vec.y << "  Z = " << vec.z << std::endl;
 
 
 
@@ -152,7 +167,7 @@ int main() {
         //float yMove = 0.5f * sin(timeVal);
         //ourShader.setFloat("xMove", xMove);
         //ourShader.setFloat("yMove", yMove);
-        //ourShader.setFloat("mixValue", mixValue); // Expose the variable to the shader files
+        ourShader.setFloat("mixValue", mixValue); // Expose the variable to the shader files
         
         // Binds texture so that it appears in render
         vao.bind();

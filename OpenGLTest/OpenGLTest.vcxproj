@@ -159,6 +159,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
+    <ClCompile Include="vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EBO.h" />
@@ -167,12 +168,15 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />
+    <ClInclude Include="vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="first.fs" />
     <None Include="first.vs" />
     <None Include="firstTexFragShader.fs" />
     <None Include="firstTexVertShader.vs" />
+    <None Include="mixTexture.fs" />
+    <None Include="rotate.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="awesomeface.png" />
