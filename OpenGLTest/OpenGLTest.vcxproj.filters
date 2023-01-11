@@ -81,7 +81,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\.Blender\.RenderOutput\Helene.png">
+    <Image Include="awesomeface.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Helene.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
   </ItemGroup>

@@ -175,7 +175,8 @@
     <None Include="firstTexVertShader.vs" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\.Blender\.RenderOutput\Helene.png" />
+    <Image Include="awesomeface.png" />
+    <Image Include="Helene.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

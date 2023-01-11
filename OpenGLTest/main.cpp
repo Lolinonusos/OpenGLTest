@@ -1,6 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stb/stb_image.h>
+#include <glm/glm.hpp>
 
 #include <iostream>
 #include <cmath>
@@ -16,26 +17,39 @@
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 800;
 
+float mixValue = 0.2f;
+
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow* window)
-{
+void processInput(GLFWwindow* window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+        mixValue += 0.001f;
+        if (mixValue >= 1.0f) {
+            mixValue = 1.0f;
+        }
+    }
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+        mixValue -= 0.001f;
+        if (mixValue <= 0.0f) {
+            mixValue = 0.0f;
+        }
+    }
 }
+
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
 // ---------------------------------------------------------------------------------------------
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     // make sure the viewport matches the new window dimensions; note that width and 
     // height will be significantly larger than specified on retina displays.
     glViewport(0, 0, width, height);
 }
 
 
-int main()
-{
+int main() {
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();
@@ -76,9 +90,9 @@ int main()
     float vertices[] = {
         // Positions         // Colours         // Texture
         //  x      y     z      r     g     b      u     v
-         0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  1.0f, 0.0f,    // bottom right
-         0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 1.0f,    // bottom left
-        -0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,  0.0f, 1.0f,    // top 
+         0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  2.0f, 0.0f,    // bottom right
+         0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  2.0f, 2.0f,    // bottom left
+        -0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,  0.0f, 2.0f,    // top 
         -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f,  0.0f, 0.0f
     };
     unsigned int indices[] = {  // note that we start from 0!
@@ -102,14 +116,19 @@ int main()
      
     
     // Texture
-    unsigned int texture;
-    glGenTextures(1, &texture);
+    unsigned int texture1, texture2;
+    glGenTextures(1, &texture1);
     // Binding texture
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, texture1);
     
+    // GL_REPEAT: The default behavior for textures.Repeats the texture image.
+    // GL_MIRRORED_REPEAT : Same as GL_REPEAT but mirrors the image with each repeat.
+    // GL_CLAMP_TO_EDGE : Clamps the coordinates between 0 and 1. The result is that higher coordinates become clamped to the edge, resulting in a stretched edge pattern.
+    // GL_CLAMP_TO_BORDER : Coordinates outside the range are now given a user - specified border color.
+
     // Set texture wrapping and filtering options on the currently bound texture object
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -118,8 +137,30 @@ int main()
     //glActiveTexture(GL_TEXTURE0);
 
     // Load and generate texture
-    int imgWidth, imgHeight, numColChannels;
+    int imgWidth, imgHeight, numColChannels;// Image width, height and colour channels
     unsigned char* bytes = stbi_load("Helene.png", &imgWidth, &imgHeight, &numColChannels, 0);
+    if (bytes) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, bytes);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else {
+        std::cout << "Failed to load image texture" << std::endl;
+    }
+
+    // Freeing image memory
+    stbi_image_free(bytes);
+
+
+    glGenTextures(1, &texture2);
+    glBindTexture(GL_TEXTURE_2D, texture2);
+
+    // Set texture wrapping and filtering options on the currently bound texture object
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    bytes = stbi_load("awesomeface.png", &imgWidth, &imgHeight, &numColChannels, 0);
     if (bytes) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, bytes);
         glGenerateMipmap(GL_TEXTURE_2D);
@@ -158,6 +199,12 @@ int main()
     //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Full triangles
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wire-Frame
 
+    // Use our shader program
+    ourShader.use();
+
+    glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
+
+    ourShader.setInt("texture2", 1);
 
     // render loop
     // -----------
@@ -172,11 +219,13 @@ int main()
         // Clean the back buffer and assign the new color to it
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Use our shader program
-        ourShader.use();
-
-        glBindTexture(GL_TEXTURE_2D, texture);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture1);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, texture2);
+        
         vao.bind();
+
 
         float timeVal = glfwGetTime();
 
@@ -191,7 +240,7 @@ int main()
         float yMove = 0.5f * sin(timeVal);
         ourShader.setFloat("xMove", xMove);
         ourShader.setFloat("yMove", yMove);
-
+        ourShader.setFloat("mixValue", mixValue); // Expose the variable to the shader files
 
        // glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -213,7 +262,7 @@ int main()
     vao.remove();
     vbo.remove();
     ebo.remove();
-    glDeleteTextures(1, &texture);
+    glDeleteTextures(1, &texture1);
     
     ourShader.remove();
 
