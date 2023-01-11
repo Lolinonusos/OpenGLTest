@@ -1,14 +1,21 @@
 #version 330 core
-out vec4 FragColor;
-  
-in vec3 ourColor;
-in vec2 TexCoord;
 
-uniform sampler2D texture1;
-uniform sampler2D texture2;
+// Outputs colours in RGBA
+out vec4 FragColour;
 
-uniform float mixValue;
 
-void main(){
-    FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), mixValue);
+// Inputs the colour from the vert shader  
+in vec3 ourColour;
+
+// Inputs the texture coordinates from the vert shader
+in vec2 texCoord;
+
+
+// Gets the texture unit from the main function
+uniform sampler2D tex0;
+
+
+void main()
+{
+    FragColour = texture(tex0, texCoord);
 }
