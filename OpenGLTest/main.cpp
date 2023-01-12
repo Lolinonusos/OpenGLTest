@@ -124,10 +124,8 @@ int main() {
     //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Full triangles
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wire-Frame
     
-    glm::vec4 vec(1.0, 0.0f, 0.0f, 0.0f);
-    glm::mat4 trans = glm::mat4(1.0f);
+    //glm::vec4 vec(1.0, 0.0f, 0.0f, 0.0f);
 
-    //trans = glm::translate(trans, glm::vec3(0.5f, 0.5f, 0.0f));
 
     // render loop
     while (!glfwWindowShouldClose(window))
@@ -147,12 +145,14 @@ int main() {
         helene.bind();
         
 
+
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(0.0f, 0.0f, 0.0f));
+        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+        //std::cout << "W = " << vec.w << "  X = " << vec.x << "  Y = " << vec.y << "  Z = " << vec.z << std::endl;
+
         unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-
-
-        trans = glm::rotate(trans, glm::radians(2.0f), glm::vec3(0.0, 0.0, 1.0));
-        //std::cout << "W = " << vec.w << "  X = " << vec.x << "  Y = " << vec.y << "  Z = " << vec.z << std::endl;
 
 
 

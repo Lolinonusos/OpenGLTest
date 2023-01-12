@@ -2,6 +2,7 @@
 #define SHADER_H
 
 #include <glad/glad.h>
+#include <glm/glm.hpp>
 
 #include <string>
 #include <fstream>
@@ -28,6 +29,22 @@ public:
 	void setFloat(const std::string& name, float value) const {
 		glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 	}
+
+	void setVec2(const std::string &name, const glm::vec2 &value);
+	void setVec2(const std::string& name, float x, float y);
+
+
+
+
+
+
+
+
+
+
+
+
+
 	void remove() {
 		glDeleteProgram(ID);
 	}
