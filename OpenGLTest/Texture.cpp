@@ -49,7 +49,7 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
 
 }
 
-void Texture::texUnit(Shader shader, const char* uniform, unsigned int unit) {
+void Texture::texUnit(Shader &shader, const char* uniform, unsigned int unit) {
     glUniform1i(glGetUniformLocation(shader.ID, uniform), unit);
     // Use our shader program
     shader.use();

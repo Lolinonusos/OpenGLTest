@@ -18,14 +18,18 @@ out vec2 texCoord;
 
 uniform mat4 transform;
 
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
 void main()
 {
     // Outputs the positions/ coordinates of all vertices
-    gl_Position = transform * vec4(aPos, 1.0);
+    gl_Position = projection * view * model * vec4(aPos, 1.0);
 
     // Assigns the colours from the vertec data to "ourColour"
     ourColour = aColour;
-
+    
     // Assigns the texture coordinates from the vertex data to "texCoord"
     texCoord = vec2(aTexCoord.x, aTexCoord.y);
 }
