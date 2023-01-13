@@ -5,6 +5,8 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
     // Assigns texture type to the texture object
     type = texType;
 
+    stbi_set_flip_vertically_on_load(true);
+
     // Image width, height and colour channels
     int imgWidth, imgHeight, numColChannels;
     

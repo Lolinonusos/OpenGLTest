@@ -5,7 +5,7 @@ out vec4 FragColour;
 
 
 // Inputs the colour from the vert shader  
-in vec3 ourColour;
+//in vec3 ourColour;
 
 // Inputs the texture coordinates from the vert shader
 in vec2 texCoord;
