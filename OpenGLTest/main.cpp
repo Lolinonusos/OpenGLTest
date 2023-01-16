@@ -21,13 +21,48 @@
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 800;
 
+
+// Time
+float deltaTime = 0.0f; // Time between current and last frame
+float lastFrame = 0.0f;
+
+
 float mixValue = 0.2f;
+
+
+// Camera stuff
+glm::vec3 camPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 camFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 camUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+float yaw{ -90.0f }; // Starts looking rowards negative z-axis
+float pitch{};
+float roll{};
+float lastX = SCR_WIDTH / 2;
+float lastY = SCR_HEIGHT / 2;
+bool firstMouse = true;
+
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow* window) {
+    const float camSpeed = 2.0f * deltaTime;
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // FORWARD
+        camPos += camSpeed * camFront;
+    }
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) { // BACKWARD
+        camPos -= camSpeed * camFront;
+    }
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) { // RIGHT
+        camPos += glm::normalize(glm::cross(camFront, camUp)) * camSpeed;
+    }
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) { // LEFT
+        camPos -= glm::normalize(glm::cross(camFront, camUp)) * camSpeed;
+    }
+
 
     /*if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
         mixValue += 0.001f;
@@ -41,6 +76,40 @@ void processInput(GLFWwindow* window) {
             mixValue = 0.0f;
         }
     }*/
+}
+
+void mouse_callback(GLFWwindow*, double xPos, double yPos) {
+    std::cout << "Mouse x:" << xPos << "    y:" << yPos << std::endl;
+    if (firstMouse) {
+        lastX = xPos;
+        lastY = yPos;
+        firstMouse = false;
+    }
+
+    float xOffset = xPos - lastX;
+    float yOffset = lastY - yPos;// reversed since y-coordinates range from bottom to top
+    lastX = xPos;
+    lastY = yPos;
+
+    const float sensitivity = 0.01;
+    xOffset *= sensitivity;
+    yOffset *= sensitivity;
+
+    yaw += xOffset;
+    pitch += yOffset;
+
+    if (pitch > 89.0f) {
+        pitch = 89.0f;
+    }
+    if (pitch < -89.0) {
+        pitch = -89.0;
+    }
+
+    glm::vec3 direction;
+    direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    direction.y = sin(glm::radians(pitch));
+    direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    camFront = glm::normalize(direction);
 }
 
 
@@ -80,6 +149,9 @@ int main() {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+
+    // Captures the mouse cursor within the center the window 
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // build and compile our shader program
     // ------------------------------------
@@ -192,6 +264,9 @@ int main() {
     //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Full triangles
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wire-Frame
     
+    // Projection is how much "zoomed" out the camera should be
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
+    ourShader.setMat4("projection", projection);
     //glm::vec4 vec(1.0, 0.0f, 0.0f, 0.0f);
     
     glEnable(GL_DEPTH_TEST);
@@ -199,9 +274,17 @@ int main() {
     // render loop
     while (!glfwWindowShouldClose(window))
     {
+        float currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame; // Time between current frame and last frame
+        lastFrame = currentFrame; // Time of last frame
+     
+
+        
         // input
         processInput(window);
     
+        glfwSetCursorPosCallback(window, mouse_callback);
+
         // Background colour
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         // Clean the back buffer and assign the new color to it
@@ -222,18 +305,31 @@ int main() {
     
         // Initialize the matrixes to be an identity matrix 
         glm::mat4 view = glm::mat4(1.0f);
-        glm::mat4 projection = glm::mat4(1.0f);
         
-        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+        // Positive x is to the right on the the screen
+        // Positive Y is upwards on the screen
+        // Positive Z is out from the screen
+        //view = glm::translate(view, glm::vec3(0.0f, 0.0f, -30.0f));
         //view = glm::rotate(view, glm::radians(-35.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
-        projection = glm::perspective(glm::radians(45.0f), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
-    
-        int modelLoc = glGetUniformLocation(ourShader.ID, "model");
-        int viewLoc = glGetUniformLocation(ourShader.ID, "view");
-        int projectionLoc = glGetUniformLocation(ourShader.ID, "projection");
+        
+        // This block makes camere move in a circle around 0x, 0y, 0z.
+        //const float radius{ 10.0f }; // How big circle the camera should spin in
+        //float camX = sin(glfwGetTime()) * radius;
+        //float camY = cos(glfwGetTime()) * radius;
+        //view = glm::lookAt(glm::vec3(camX, 0.0f, camY),
+        //                   glm::vec3(0.0f, 0.0f, 0.0f),
+        //                   glm::vec3(0.0f, 1.0f, 0.0f));
 
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+        view = glm::lookAt(camPos, camPos + camFront, camUp);
+
+        //int modelLoc = glGetUniformLocation(ourShader.ID, "model");
+        //int viewLoc = glGetUniformLocation(ourShader.ID, "view");
+        //int projectionLoc = glGetUniformLocation(ourShader.ID, "projection");
+
+        ourShader.setMat4("view", view);
+
+        //glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+        //glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
         //ourShader.setMat4("projection", projection);
 
 
@@ -260,6 +356,9 @@ int main() {
         //ourShader.setFloat("mixValue", mixValue); // Expose the variable to the shader files
         
         // Binds texture so that it appears in render
+
+
+
         
         boxVAO.bind();
         
@@ -268,7 +367,8 @@ int main() {
             model = glm::translate(model, cubePositions[i]);
             float angle = 20.0f * 1 + i * 2;
             model = glm::rotate(model, (float)glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            ourShader.setMat4("model", model);
+            //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
