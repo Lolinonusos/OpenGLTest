@@ -206,6 +206,7 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         // Clean the back buffer and assign the new color to it
         glClear(GL_COLOR_BUFFER_BIT);
+        // Clear depth buffer
         glClear(GL_DEPTH_BUFFER_BIT);
         // Can be written together like this
          
@@ -224,6 +225,7 @@ int main() {
         glm::mat4 projection = glm::mat4(1.0f);
         
         view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+        //view = glm::rotate(view, glm::radians(-35.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
         projection = glm::perspective(glm::radians(45.0f), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
     
         int modelLoc = glGetUniformLocation(ourShader.ID, "model");
