@@ -12,7 +12,6 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
     
     // Read image from file
     unsigned char* bytes = stbi_load(image, &imgWidth, &imgHeight, &numColChannels, 0);
-
     
     // Generates an OpenGL texture object
     glGenTextures(1, &ID);

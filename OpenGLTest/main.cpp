@@ -253,7 +253,7 @@ int main() {
     //vbo.unbind();
     //ebo.unbind();
     // 
-    Texture helene("Helene.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+    Texture helene("skeet (1).png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
     ourShader.use();
     ourShader.setInt("tex0", 0);
     

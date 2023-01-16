@@ -183,7 +183,7 @@
   <ItemGroup>
     <Image Include="awesomeface.png" />
     <Image Include="Helene.png" />
-    <Image Include="PANOPTICON.png" />
+    <Image Include="skeet (1).png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

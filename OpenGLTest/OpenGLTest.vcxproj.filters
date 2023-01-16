@@ -105,7 +105,7 @@
     <Image Include="Helene.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
-    <Image Include="PANOPTICON.png">
+    <Image Include="skeet (1).png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
   </ItemGroup>
