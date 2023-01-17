@@ -41,10 +41,9 @@ float roll{};
 float lastX = SCR_WIDTH / 2;
 float lastY = SCR_HEIGHT / 2;
 bool firstMouse = true;
-
+float fov{ 45.0f };
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow* window) {
     const float camSpeed = 2.0f * deltaTime;
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -113,6 +112,19 @@ void mouse_callback(GLFWwindow*, double xPos, double yPos) {
 }
 
 
+void scroll_callback(GLFWwindow* window, double xOffset, double yOffset) {
+    fov -= (float)yOffset;
+    if (fov < 1.0f)
+        fov = 1.0f;
+    if (fov > 45.0f) {
+        fov = 45.0f;
+         std::cout << "Scrollin'" << std::endl;
+    }
+}
+    
+
+
+
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     // make sure the viewport matches the new window dimensions; note that width and 
@@ -142,6 +154,11 @@ int main() {
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
+
+    // Captures the mouse cursor within the center the window 
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // glad: load all OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -150,8 +167,6 @@ int main() {
         return -1;
     }
 
-    // Captures the mouse cursor within the center the window 
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // build and compile our shader program
     // ------------------------------------
@@ -265,7 +280,8 @@ int main() {
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wire-Frame
     
     // Projection is how much "zoomed" out the camera should be
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
+    // fov starts at 45.0 radians
+    glm::mat4 projection = glm::perspective(glm::radians(fov), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
     ourShader.setMat4("projection", projection);
     //glm::vec4 vec(1.0, 0.0f, 0.0f, 0.0f);
     
@@ -282,8 +298,6 @@ int main() {
         
         // input
         processInput(window);
-    
-        glfwSetCursorPosCallback(window, mouse_callback);
 
         // Background colour
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
