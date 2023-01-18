@@ -6,16 +6,20 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
+
 #include <iostream>
 #include <cmath>
 
 #include "shader.h"
-#include "Texture.h"
+#include "texture.h"
 #include "VAO.h"
 #include "VBO.h"
 #include "EBO.h"
 
-#include "vertex.h"
 
 // settings
 const unsigned int SCR_WIDTH = 800;
@@ -33,6 +37,7 @@ float mixValue = 0.2f;
 // Camera stuff
 glm::vec3 camPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 camFront = glm::vec3(0.0f, 0.0f, -1.0f);
+
 glm::vec3 camUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
 float yaw{ -90.0f }; // Starts looking rowards negative z-axis
@@ -243,10 +248,12 @@ int main() {
     glm::vec3(-1.3f,  1.0f, -1.5f)
     };
 
+    
+
     VAO boxVAO;
     boxVAO.bind();
 
-    VBO boxVBO(boxVerts, sizeof(boxVerts));
+    VBO boxVBO(boxVerts);
    
     boxVAO.linkAttrib(boxVBO, 0, 3, GL_FLOAT, 5 * sizeof(float), (void*)0);
     boxVAO.linkAttrib(boxVBO, 1, 2, GL_FLOAT, 5 * sizeof(float), (void*)(3 * sizeof(float)));
