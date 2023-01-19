@@ -14,12 +14,8 @@
 #include <iostream>
 #include <cmath>
 
+#include "mesh.h"
 #include "shader.h"
-#include "texture.h"
-#include "VAO.h"
-#include "VBO.h"
-#include "EBO.h"
-
 
 // settings
 const unsigned int SCR_WIDTH = 800;
@@ -192,34 +188,108 @@ int main() {
     //     0, 2, 1,
     //     0, 3, 2
     //};
+    Vertex vert1;
+    Vertex vert2;
+    Vertex vert3;
+    Vertex vert4;
+    Vertex vert5;
+    Vertex vert6;
+
+    Vertex vert7;
+    Vertex vert8;
+    Vertex vert9;
+    Vertex vert10;
+    Vertex vert11;
+    Vertex vert12;
+
+    Vertex vert13;
+    Vertex vert14;
+    Vertex vert15;
+    Vertex vert16;
+    Vertex vert17;
+    Vertex vert18;
+
+    Vertex vert19;
+    Vertex vert20;
+    Vertex vert21;
+    Vertex vert22;
+    Vertex vert23;
+    Vertex vert24;
+
+    Vertex vert25;
+    Vertex vert26;
+    Vertex vert27;
+    Vertex vert28;
+    Vertex vert29;
+    Vertex vert30;
+
+    Vertex vert31;
+    Vertex vert32;
+    Vertex vert33;
+    Vertex vert34;
+    Vertex vert35;
+    Vertex vert36;
+
+     vert1.position = glm::vec3(-0.5f, -0.5f, -0.5f);     vert1.normal = glm::vec3(0.0f, 1.0f, 0.0f);     vert1.texCoord = glm::vec2(0.0f, 0.0f);
+     vert2.position = glm::vec3( 0.5f, -0.5f, -0.5f);     vert2.normal = glm::vec3(0.0f, 1.0f, 0.0f);     vert2.texCoord = glm::vec2(1.0f, 0.0f);
+     vert3.position = glm::vec3( 0.5f,  0.5f, -0.5f);     vert3.normal = glm::vec3(0.0f, 1.0f, 0.0f);     vert3.texCoord = glm::vec2(1.0f, 1.0f);
+     vert4.position = glm::vec3( 0.5f,  0.5f, -0.5f);     vert4.normal = glm::vec3(0.0f, 1.0f, 0.0f);     vert4.texCoord = glm::vec2(1.0f, 1.0f);
+     vert5.position = glm::vec3(-0.5f,  0.5f, -0.5f);     vert5.normal = glm::vec3(0.0f, 1.0f, 0.0f);     vert5.texCoord = glm::vec2(0.0f, 1.0f);
+     vert6.position = glm::vec3(-0.5f, -0.5f, -0.5f);     vert6.normal = glm::vec3(0.0f, 1.0f, 0.0f);     vert6.texCoord = glm::vec2(0.0f, 0.0f);
+                                                          
+     vert7.position = glm::vec3(-0.5f, -0.5f,  0.5f);     vert7.normal = glm::vec3(0.0f, 1.0f, 0.0f);    vert7.texCoord = glm::vec2(0.0f, 0.0f);
+     vert8.position = glm::vec3( 0.5f, -0.5f,  0.5f);     vert8.normal = glm::vec3(0.0f, 1.0f, 0.0f);    vert8.texCoord = glm::vec2(1.0f, 0.0f);
+     vert9.position = glm::vec3( 0.5f,  0.5f,  0.5f);     vert9.normal = glm::vec3(0.0f, 1.0f, 0.0f);    vert9.texCoord = glm::vec2(1.0f, 1.0f);
+    vert10.position = glm::vec3( 0.5f,  0.5f,  0.5f);    vert10.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert10.texCoord = glm::vec2(1.0f, 1.0f);
+    vert11.position = glm::vec3(-0.5f,  0.5f,  0.5f);    vert11.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert11.texCoord = glm::vec2(0.0f, 1.0f);
+    vert12.position = glm::vec3(-0.5f, -0.5f,  0.5f);    vert12.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert12.texCoord = glm::vec2(0.0f, 0.0f);
+
+    vert13.position = glm::vec3(-0.5f,  0.5f,  0.5f);    vert13.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert13.texCoord = glm::vec2(1.0f, 0.0f);
+    vert14.position = glm::vec3(-0.5f,  0.5f, -0.5f);    vert14.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert14.texCoord = glm::vec2(1.0f, 1.0f);
+    vert15.position = glm::vec3(-0.5f, -0.5f, -0.5f);    vert15.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert15.texCoord = glm::vec2(0.0f, 1.0f);
+    vert16.position = glm::vec3(-0.5f, -0.5f, -0.5f);    vert16.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert16.texCoord = glm::vec2(0.0f, 1.0f);
+    vert17.position = glm::vec3(-0.5f, -0.5f,  0.5f);    vert17.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert17.texCoord = glm::vec2(0.0f, 0.0f);
+    vert18.position = glm::vec3(-0.5f,  0.5f,  0.5f);    vert18.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert18.texCoord = glm::vec2(1.0f, 0.0f);
+
+    vert19.position = glm::vec3( 0.5f,  0.5f,  0.5f);    vert19.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert19.texCoord = glm::vec2(1.0f, 0.0f);
+    vert20.position = glm::vec3( 0.5f,  0.5f, -0.5f);    vert20.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert20.texCoord = glm::vec2(1.0f, 1.0f);
+    vert21.position = glm::vec3( 0.5f, -0.5f, -0.5f);    vert21.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert21.texCoord = glm::vec2(0.0f, 1.0f);
+    vert22.position = glm::vec3( 0.5f, -0.5f, -0.5f);    vert22.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert22.texCoord = glm::vec2(0.0f, 1.0f);
+    vert23.position = glm::vec3( 0.5f, -0.5f,  0.5f);    vert23.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert23.texCoord = glm::vec2(0.0f, 0.0f);
+    vert24.position = glm::vec3( 0.5f,  0.5f,  0.5f);    vert24.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert24.texCoord = glm::vec2(1.0f, 0.0f);
+    
+    vert25.position = glm::vec3(-0.5f, -0.5f, -0.5f);    vert25.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert25.texCoord = glm::vec2(0.0f, 1.0f);
+    vert26.position = glm::vec3( 0.5f, -0.5f, -0.5f);    vert26.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert26.texCoord = glm::vec2(1.0f, 1.0f);
+    vert27.position = glm::vec3( 0.5f, -0.5f,  0.5f);    vert27.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert27.texCoord = glm::vec2(1.0f, 0.0f);
+    vert28.position = glm::vec3( 0.5f, -0.5f,  0.5f);    vert28.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert28.texCoord = glm::vec2(1.0f, 0.0f);
+    vert29.position = glm::vec3(-0.5f, -0.5f,  0.5f);    vert29.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert29.texCoord = glm::vec2(0.0f, 0.0f);
+    vert30.position = glm::vec3(-0.5f, -0.5f, -0.5f);    vert30.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert30.texCoord = glm::vec2(0.0f, 1.0f);
+    
+    vert31.position = glm::vec3(-0.5f,  0.5f, -0.5f);    vert31.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert31.texCoord = glm::vec2(0.0f, 1.0f);
+    vert32.position = glm::vec3( 0.5f,  0.5f, -0.5f);    vert32.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert32.texCoord = glm::vec2(1.0f, 1.0f);
+    vert33.position = glm::vec3( 0.5f,  0.5f,  0.5f);    vert33.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert33.texCoord = glm::vec2(1.0f, 0.0f);
+    vert34.position = glm::vec3( 0.5f,  0.5f,  0.5f);    vert34.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert34.texCoord = glm::vec2(1.0f, 0.0f);
+    vert35.position = glm::vec3(-0.5f,  0.5f,  0.5f);    vert35.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert35.texCoord = glm::vec2(0.0f, 0.0f);
+    vert36.position = glm::vec3(-0.5f,  0.5f, -0.5f);    vert36.normal = glm::vec3(0.0f, 1.0f, 0.0f);   vert36.texCoord = glm::vec2(0.0f, 1.0f);
+
+
+std::vector<Vertex> verts = {
+    vert1, vert2, vert3, vert4, vert5, vert6,
+
+    vert7, vert8,  vert9, vert10, vert11, vert12,
+
+    vert13, vert14, vert15, vert16, vert17, vert18,
+
+    vert19, vert20, vert21, vert22, vert23, vert24,
+
+    vert25, vert26, vert27, vert28, vert29, vert30,
+
+    vert31, vert32, vert33, vert34, vert35, vert36
+
+
+    };
     float boxVerts[] = {
-        -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-         0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
-         0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-         0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-        -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-
-        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-        0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-        0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-        0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-        -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-
-        -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-        -0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-        -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-
-        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-        0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-        0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-        0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+  
 
         -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
         0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
@@ -248,15 +318,16 @@ int main() {
     glm::vec3(-1.3f,  1.0f, -1.5f)
     };
 
-    
+    Mesh mesh();
 
     VAO boxVAO;
     boxVAO.bind();
 
-    VBO boxVBO(boxVerts);
+    VBO boxVBO(verts);
    
-    boxVAO.linkAttrib(boxVBO, 0, 3, GL_FLOAT, 5 * sizeof(float), (void*)0);
-    boxVAO.linkAttrib(boxVBO, 1, 2, GL_FLOAT, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    boxVAO.linkAttrib(boxVBO, 0, 3, GL_FLOAT, sizeof(Vertex), (void*)0);
+    boxVAO.linkAttrib(boxVBO, 1, 3, GL_FLOAT, sizeof(Vertex), (void*)(3 * sizeof(float)));
+    boxVAO.linkAttrib(boxVBO, 1, 2, GL_FLOAT, sizeof(Vertex), (void*)(6 * sizeof(float)));
     
    /* boxVAO.unbind();
     boxVBO.unbind();*/

@@ -22,15 +22,16 @@ const float ZOOM = 45.0f;
 
 
 class Camera{
+	// Camera position and movement
 	glm::vec3 position;
 	glm::vec3 front;
 	glm::vec3 up; // y is up direction
 	glm::vec3 right;//
 	glm::vec3 worldUp;
-
+	// Euler angles; camera rotation
 	float yaw;
 	float pitch;
-
+	// Camera options
 	float movementSpeed;
 	float mouseSensitivity;
 	float zoom;
@@ -41,6 +42,55 @@ class Camera{
 		worldUp = inUp;
 		yaw = inYaw;
 		pitch = inPitch;
+	}
+
+	glm::mat4 getViewMatrix();
+
+	void processKeyboard(Camera_Movement direction, float deltaTime) {
+		float velocity = movementSpeed * deltaTime;
+		if (direction == FORWARD) {
+			position += front * velocity;
+		}
+		if (direction == BACKWARD) {
+			position -= front * velocity;
+		}
+		if (direction == RIGHT) {
+			position += right * velocity;
+		}
+		if (direction == LEFT) {
+			position -= right * velocity;
+		}
+	}
+
+	void processMouseMovement(float xOffset, float yOffset) {
+
+		xOffset *= mouseSensitivity;
+		yOffset *= mouseSensitivity;
+
+		yaw += xOffset;
+		pitch += yOffset;
+
+		if (pitch > 89.0f) {
+			pitch = 89.0;
+		}
+		if (pitch < -89.0f) {
+			pitch = -89.0;
+		}
+
+		uptadeCameraVectors();
+	}
+
+	void uptadeCameraVectors() {
+		glm::vec3 newFront;
+
+		newFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+		newFront.y = sin(glm::radians(pitch));
+		newFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+
+		front = glm::normalize(newFront);
+
+		right = glm::normalize(glm::cross(front, worldUp));
+		up = glm::normalize(glm::cross(right, front));
 	}
 };
 
