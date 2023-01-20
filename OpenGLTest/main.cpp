@@ -346,7 +346,7 @@ std::vector<Vertex> verts = {
     //vbo.unbind();
     //ebo.unbind();
     // 
-    Texture helene("skeet (1).png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+    Texture helene("Helene.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
     ourShader.use();
     ourShader.setInt("tex0", 0);
     

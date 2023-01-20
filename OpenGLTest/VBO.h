@@ -17,7 +17,6 @@ class VBO {
 public:
 	unsigned int ID;
 	VBO(std::vector<Vertex> &vertices);
-	//VBO(std::vector<float> vertices, GLsizeiptr size); // Using vertex class
 
 
 	void bind();
