@@ -1,14 +1,32 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-class Shape {
+#include <vector>
+#include "VAO.h"
 
-	void graph();
-	void plane();
-	void tetraeder();
-	void cube();
+class Axes {
 
+	Axes(std::vector<Vertex> &vertices);
+};
 
+class Graph {
+
+	Graph(std::vector<Vertex>& vertices);
+};
+
+class Plane {
+
+	Plane(std::vector<Vertex>& vertices);
+};
+
+class Tetraeder {
+
+	Tetraeder(std::vector<Vertex>& vertices);
+};
+
+class Cube {
+public:
+	Cube(std::vector<Vertex>& vertices);
 };
 
 #endif
