@@ -20,6 +20,7 @@
 #include <map>
 #include <vector>
 
+unsigned int textureFromFile(const char* path, const std::string& directory, bool gamma = false);
 
 class Model {
 public:

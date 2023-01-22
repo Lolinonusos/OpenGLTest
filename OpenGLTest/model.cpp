@@ -85,3 +85,27 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 
 	return Mesh(vertices, indices, textures);
 }
+
+std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
+{
+	std::vector<Texture> textures;
+	for (unsigned int i = 0; i < mat->GetTextureCount(type); i++) {
+		aiString str;
+		mat->GetTexture(type, i, &str);
+		bool skip = false;
+		for (unsigned int j = 0; j < textures_loaded.size(); j++) {
+
+		}
+
+		Texture texture;
+		texture.ID = textureFromFile(str.C_Str(), directory);
+		texture.type = typeName;
+		texture.path = str.C_Str();
+		textures.push_back(texture);
+	}
+
+	return std::vector<Texture>();
+}
+unsigned int textureFromFile(const char* path, const std::string& directory, bool gamma) {
+
+}
