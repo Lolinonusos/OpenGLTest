@@ -50,7 +50,7 @@ Plane::Plane(std::vector<Vertex>& vertices) {
     vertices.push_back(vert6);
 }
 
-Tetraeder::Tetraeder(std::vector<Vertex>& vertices) {
+Tetrahedon::Tetrahedon(std::vector<Vertex>& vertices) {
     Vertex vert1;
     Vertex vert2;
     Vertex vert3;
@@ -116,7 +116,7 @@ Tetraeder::Tetraeder(std::vector<Vertex>& vertices) {
     vertices.push_back(vert18);       
 }                                         
 
-Cube::Cube(std::vector<Vertex>& vertices) {
+Cube::Cube(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices) {
     Vertex vert1;
     Vertex vert2;
     Vertex vert3;

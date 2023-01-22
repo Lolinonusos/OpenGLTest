@@ -20,14 +20,14 @@ class Plane {
 	Plane(std::vector<Vertex>& vertices);
 };
 
-class Tetraeder {
+class Tetrahedon {
 
-	Tetraeder(std::vector<Vertex>& vertices);
+	Tetrahedon(std::vector<Vertex>& vertices);
 };
 
 class Cube {
 public:
-	Cube(std::vector<Vertex>& vertices);
+	Cube(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices);
 };
 
 #endif

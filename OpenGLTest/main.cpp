@@ -12,7 +12,7 @@
 #include <iostream>
 #include <cmath>
 
-#include "mesh.h"
+#include "model.h"
 #include "shader.h"
 
 #include "shape.h"
@@ -170,7 +170,6 @@ int main() {
 
 
     // build and compile our shader program
-    // ------------------------------------
     //Shader ourShader("firstTexVertShader.vs", "firstTexFragShader.fs"); // you can name your shader files however you like
     Shader ourShader("rotate.vs", "firstTexFragShader.fs"); // you can name your shader files however you like
 
@@ -189,9 +188,9 @@ int main() {
     //     0, 3, 2
     //};
 
-    std::vector<Vertex> verts;
+    //std::vector<Vertex> verts;
 
-    Cube cube1(verts);
+    //Cube cube1(verts);
 
 
     glm::vec3 cubePositions[] = {
@@ -209,15 +208,15 @@ int main() {
 
     //Mesh mesh();
 
-    VAO boxVAO;
-    boxVAO.bind();
+    //VAO boxVAO;
+    //boxVAO.bind();
 
-    VBO boxVBO((verts.size() * sizeof(Vertex)), verts.data());
+    //VBO boxVBO((verts.size() * sizeof(Vertex)), verts.data());
    
-    boxVAO.linkAttrib(boxVBO, 0, 3, GL_FLOAT, sizeof(Vertex), (void*)0);
-    boxVAO.linkAttrib(boxVBO, 1, 3, GL_FLOAT, sizeof(Vertex), (void*)(3 * sizeof(float)));
-    boxVAO.linkAttrib(boxVBO, 1, 2, GL_FLOAT, sizeof(Vertex), (void*)(6 * sizeof(float)));
-    
+    //boxVAO.linkAttrib(boxVBO, 0, 3, GL_FLOAT, sizeof(Vertex), (void*)0);
+    //boxVAO.linkAttrib(boxVBO, 1, 3, GL_FLOAT, sizeof(Vertex), (void*)(3 * sizeof(float)));
+    //boxVAO.linkAttrib(boxVBO, 1, 2, GL_FLOAT, sizeof(Vertex), (void*)(6 * sizeof(float)));
+    //
    /* boxVAO.unbind();
     boxVBO.unbind();*/
 
@@ -234,10 +233,10 @@ int main() {
     //vao.unbind();
     //vbo.unbind();
     //ebo.unbind();
-    // 
-    oldTexture helene("Helene.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-    ourShader.use();
-    ourShader.setInt("tex0", 0);
+
+    //oldTexture helene("Helene.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+    //ourShader.use();
+    //ourShader.setInt("tex0", 0);
     
     //helene.texUnit(ourShader, "texture0", 0);
     
@@ -277,7 +276,7 @@ int main() {
         //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glActiveTexture(GL_TEXTURE0);
-        helene.bind();
+        //helene.bind();
       
         // Which shader program we will use
         ourShader.use();
@@ -341,7 +340,7 @@ int main() {
 
 
         
-        boxVAO.bind();
+        //boxVAO.bind();
         
         for (int i = 0; i < 10; i++) {
             glm::mat4 model = glm::mat4(1.0f);
@@ -364,8 +363,8 @@ int main() {
     }
     
     // optional: de-allocate all resources once they've outlived their purpose:
-    boxVAO.remove();
-    boxVBO.remove();
+ /*   boxVAO.remove();
+    boxVBO.remove();*/
     
     
   /*  vao.remove();
@@ -373,7 +372,7 @@ int main() {
     ebo.remove();*/
     
     // Texture
-    helene.remove();
+   // helene.remove();
     
     // Shader program
     ourShader.remove();

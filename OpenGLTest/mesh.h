@@ -1,14 +1,15 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <glad/glad.h> // holds all OpenGL type declarations
 
 #include <glm/glm.hpp>
-
-#include <vector>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "shader.h"
+
+#include <string>
+#include <vector>
 
 
 class Vertex {
