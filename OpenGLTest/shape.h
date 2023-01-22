@@ -2,7 +2,8 @@
 #define SHAPE_H
 
 #include <vector>
-#include "VAO.h"
+#include "mesh.h"
+
 
 class Axes {
 

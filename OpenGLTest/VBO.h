@@ -6,18 +6,15 @@
 
 #include <vector>
 
-class Vertex {
-public:
-	glm::vec3 position; // XYZ coordinates
-	glm::vec3 normal; // RGB values
-	glm::vec2 texCoord; // UV coordinates
-};
+
 
 class VBO {
 public:
 	unsigned int ID;
-	VBO(std::vector<Vertex> &vertices);
+	//VBO(std::vector<Vertex> &vertices);
 
+
+	VBO(float* vertices, GLsizeiptr size);
 
 	void bind();
 	void unbind();

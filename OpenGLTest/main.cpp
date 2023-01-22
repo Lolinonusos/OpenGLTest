@@ -6,9 +6,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
+
 
 
 #include <iostream>
@@ -209,12 +207,12 @@ int main() {
     glm::vec3(-1.3f,  1.0f, -1.5f)
     };
 
-    Mesh mesh();
+    //Mesh mesh();
 
     VAO boxVAO;
     boxVAO.bind();
 
-    VBO boxVBO(verts);
+    VBO boxVBO((verts.size() * sizeof(Vertex)), verts.data());
    
     boxVAO.linkAttrib(boxVBO, 0, 3, GL_FLOAT, sizeof(Vertex), (void*)0);
     boxVAO.linkAttrib(boxVBO, 1, 3, GL_FLOAT, sizeof(Vertex), (void*)(3 * sizeof(float)));
@@ -237,7 +235,7 @@ int main() {
     //vbo.unbind();
     //ebo.unbind();
     // 
-    Texture helene("Helene.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+    oldTexture helene("Helene.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
     ourShader.use();
     ourShader.setInt("tex0", 0);
     

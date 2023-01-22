@@ -1,6 +1,6 @@
 #include "texture.h"
 
-Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType) {
+oldTexture::oldTexture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType) {
 	
     // Assigns texture type to the texture object
     type = texType;
@@ -50,7 +50,7 @@ Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, 
 
 }
 
-void Texture::texUnit(Shader &shader, const char* uniform, unsigned int unit) {
+void oldTexture::texUnit(Shader &shader, const char* uniform, unsigned int unit) {
     glUniform1i(glGetUniformLocation(shader.ID, uniform), unit);
     // Use our shader program
     shader.use();
@@ -67,14 +67,14 @@ void Texture::texUnit(Shader &shader, const char* uniform, unsigned int unit) {
     //glUniform1i(texUni, unit);
 }
 
-void Texture::bind() {
+void oldTexture::bind() {
     glBindTexture(type, ID);
 }
 
-void Texture::unbind() {
+void oldTexture::unbind() {
     glBindTexture(type, 0);
 }
 
-void Texture::remove() {
+void oldTexture::remove() {
     glDeleteTextures(1, &ID);
 }
