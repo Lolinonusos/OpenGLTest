@@ -160,7 +160,7 @@ int main() {
     
     Cube xyz;
 
-    xyz.init();
+    //xyz.init();
 
     // render loop
     while (!glfwWindowShouldClose(window))
