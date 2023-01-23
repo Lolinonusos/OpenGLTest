@@ -14,7 +14,7 @@ public:
 	// same as GLuint
 	unsigned int ID;
 
-	Shader(const char* vertexPath, const char* fragmentPath);
+	Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr);
 
 	void use();
 	void remove();

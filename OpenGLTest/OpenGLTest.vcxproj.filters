@@ -19,6 +19,9 @@
     <Filter Include="Resource Files\Textures">
       <UniqueIdentifier>{70ea70ec-4b2a-42da-b1a7-3cca1ab9ff4e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="school files">
+      <UniqueIdentifier>{b1cb7ab8-5f71-4ef8-89a2-226914d6907a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -57,6 +60,12 @@
     <ClCompile Include="shape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="xyz.cpp">
+      <Filter>school files</Filter>
+    </ClCompile>
+    <ClCompile Include="visObject.cpp">
+      <Filter>school files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h">
@@ -88,6 +97,15 @@
     </ClInclude>
     <ClInclude Include="shape.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xyz.h">
+      <Filter>school files</Filter>
+    </ClInclude>
+    <ClInclude Include="visObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex.h">
+      <Filter>school files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
