@@ -113,6 +113,9 @@
     <ClInclude Include="cube.h">
       <Filter>school files</Filter>
     </ClInclude>
+    <ClInclude Include="learnOpenGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="first.vs">

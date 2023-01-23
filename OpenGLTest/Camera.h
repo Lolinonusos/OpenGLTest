@@ -7,6 +7,8 @@
 
 #include <vector>
 
+// This camera is from learnOpenGL.com 
+
 enum Camera_Movement {
 	FORWARD,
 	BACKWARD,
@@ -22,6 +24,7 @@ const float ZOOM = 45.0f;
 
 
 class Camera{
+public:
 	// Camera position and movement
 	glm::vec3 position;
 	glm::vec3 front;
@@ -42,9 +45,12 @@ class Camera{
 		worldUp = inUp;
 		yaw = inYaw;
 		pitch = inPitch;
+		updateCameraVectors();
 	}
 
-	glm::mat4 getViewMatrix();
+	glm::mat4 getViewMatrix() {
+		return glm::lookAt(position, position + front, up);
+	}
 
 	void processKeyboard(Camera_Movement direction, float deltaTime) {
 		float velocity = movementSpeed * deltaTime;
@@ -77,10 +83,21 @@ class Camera{
 			pitch = -89.0;
 		}
 
-		uptadeCameraVectors();
+		updateCameraVectors();
 	}
 
-	void uptadeCameraVectors() {
+	// processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
+	void ProcessMouseScroll(float yOffset)
+	{
+		zoom -= (float)yOffset;
+		if (zoom < 1.0f)
+			zoom = 1.0f;
+		if (zoom > 45.0f)
+			zoom = 45.0f;
+	}
+
+private:
+	void updateCameraVectors() {
 		glm::vec3 newFront;
 
 		newFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
