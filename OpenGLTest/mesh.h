@@ -7,17 +7,18 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "shader.h"
+#include "vertex.h"
 
 #include <string>
 #include <vector>
 
 
-class Vertex {
-public:
-	glm::vec3 position; // XYZ coordinates
-	glm::vec3 normal; // RGB values
-	glm::vec2 texCoord; // UV coordinates
-};
+//class Vertex {
+//public:
+//	glm::vec3 position; // XYZ coordinates
+//	glm::vec3 normal; // RGB values
+//	glm::vec2 texCoord; // UV coordinates
+//};
 
 class Texture {
 public:

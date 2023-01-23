@@ -4,6 +4,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <vector>
 
 #include "vertex.h"
@@ -17,8 +21,9 @@ public:
 
 	// Virtual
 	// Lar klasser som arver lage en override av funksjonen
-	virtual void init();
-	// Pure virtual??????????????
+	virtual void init(int inMatrixUniform);
+
+	// Pure virtual
 	// Får det ved å skrive = 0 etter funksjonen
 	// Tvinger alle klasser som arver fra denne til å ha sin egen override av funksjonen
 	virtual void draw() = 0; 
@@ -27,7 +32,7 @@ protected:
 	unsigned int VAO{};
 	unsigned int VBO{};
 
-	GLint matrixUniform{};
+	int matrixUniform{};
 
 	glm::mat4 matrix;
 };

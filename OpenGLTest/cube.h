@@ -1,12 +1,12 @@
-#ifndef XYZ_H
-#define XYZ_H
+#ifndef CUBE_H
+#define CUBE_H
 
 #include "visObject.h"
 
-class XYZ : public visObject {
+class Cube : public visObject {
 public:
-	XYZ();
-	~XYZ();
+	Cube();
+	~Cube();
 	void init(int inMatrixUniform) override;
 	void draw() override;
 };

@@ -66,6 +66,9 @@
     <ClCompile Include="visObject.cpp">
       <Filter>school files</Filter>
     </ClCompile>
+    <ClCompile Include="cube.cpp">
+      <Filter>school files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h">
@@ -105,6 +108,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vertex.h">
+      <Filter>school files</Filter>
+    </ClInclude>
+    <ClInclude Include="cube.h">
       <Filter>school files</Filter>
     </ClInclude>
   </ItemGroup>
