@@ -191,6 +191,8 @@
     <None Include="firstTexVertShader.vs" />
     <None Include="mixTexture.fs" />
     <None Include="rotate.vs" />
+    <None Include="SkolFrag.fs" />
+    <None Include="SkolVert.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="awesomeface.png" />

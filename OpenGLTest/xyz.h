@@ -7,7 +7,7 @@ class XYZ : public visObject {
 public:
 	XYZ();
 	~XYZ();
-	void init(int inMatrixUniform) override;
+	void init(int inMmatrixUniform) override;
 	void draw() override;
 };
 

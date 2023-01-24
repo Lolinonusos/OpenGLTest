@@ -136,6 +136,12 @@
     <None Include="rotate.vs">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+    <None Include="SkolVert.vs">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="SkolFrag.fs">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="awesomeface.png">

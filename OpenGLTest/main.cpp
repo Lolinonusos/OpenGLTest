@@ -147,15 +147,6 @@ int main() {
 
 
     
-    
-    // Change how triangles are drawn
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Full triangles
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wire-Frame
-    
-    // Projection is how much "zoomed" out the camera should be
-    // fov starts at 45.0 radians
-    //glm::vec4 vec(1.0, 0.0f, 0.0f, 0.0f);
-    
     glEnable(GL_DEPTH_TEST);
     
     Cube xyz;
@@ -198,16 +189,18 @@ int main() {
         glm::mat4 view = camera.getViewMatrix();
         ourShader.setMat4("view", view);
         
+        //int ma
 
         for (int i = 0; i < 10; i++) {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, cubePositions[i]);
             float angle = 20.0f * 1 + i * 2;
             model = glm::rotate(model, (float)glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
-            ourShader.setMat4("model", model);
+            ourShader.setMat4("matrix", model);
             //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-            glDrawArrays(GL_TRIANGLES, 0, 36);
+            //gldrawarrays(gl_triangles, 0, 36);
+            xyz.draw();
         }
     
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
