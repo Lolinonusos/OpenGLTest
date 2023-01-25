@@ -69,6 +69,12 @@
     <ClCompile Include="cube.cpp">
       <Filter>school files</Filter>
     </ClCompile>
+    <ClCompile Include="triangleSurface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tetrahedon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h">
@@ -114,6 +120,12 @@
       <Filter>school files</Filter>
     </ClInclude>
     <ClInclude Include="learnOpenGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="triangleSurface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tetrahedon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -161,7 +161,9 @@
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="shape.cpp" />
     <ClCompile Include="stb.cpp" />
+    <ClCompile Include="tetrahedon.cpp" />
     <ClCompile Include="texture.cpp" />
+    <ClCompile Include="triangleSurface.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
     <ClCompile Include="visObject.cpp" />
@@ -172,6 +174,8 @@
     <ClInclude Include="cube.h" />
     <ClInclude Include="EBO.h" />
     <ClInclude Include="learnOpenGL.h" />
+    <ClInclude Include="tetrahedon.h" />
+    <ClInclude Include="triangleSurface.h" />
     <ClInclude Include="vertex.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="model.h" />

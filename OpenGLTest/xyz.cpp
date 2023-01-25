@@ -15,13 +15,19 @@ XYZ::~XYZ() {
 }
 
 void XYZ::init(int inMatrixUniform) {
+
+	matrixUniform = inMatrixUniform;
+
+	// Generating and binding Vertex Array Object
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
+	// Generating and binding Vertex Buffer Object
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
 
+	// Vertex Buffer Object 
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
 
 	// Set vertex attribute pointers
 	// Vertex positions
@@ -39,6 +45,7 @@ void XYZ::init(int inMatrixUniform) {
 
 void XYZ::draw() {
 	glBindVertexArray(VAO);
-	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	
+	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
 	glDrawArrays(GL_LINES, 0, vertices.size());
 }

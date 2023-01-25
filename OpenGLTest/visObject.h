@@ -8,9 +8,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <iostream>
 #include <vector>
 
 #include "vertex.h"
+#include "shader.h"
 
 // Hensikten med denne klassen er at vi skal tegne alle 3d objeket
 // gjennom klasser som arver fra denne
@@ -29,12 +31,23 @@ public:
 	virtual void draw() = 0; 
 protected:
 	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
+
 	unsigned int VAO{};
 	unsigned int VBO{};
 
 	int matrixUniform{};
-
 	glm::mat4 matrix;
+
+
+
+	glm::mat4 position;
+	glm::mat4 rotation;
+	glm::mat4 scale;
+
+
+
+
 };
 
 #endif

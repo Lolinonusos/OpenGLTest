@@ -104,9 +104,6 @@ class LearnOGL {
 
     glEnable(GL_DEPTH_TEST);
 
-    Cube xyz;
-
-    //xyz.init();
 
     // render loop
     while (!glfwWindowShouldClose(window))
@@ -135,8 +132,6 @@ class LearnOGL {
 
         // Which shader program we will use
         ourShader.use();
-
-        xyz.draw();
 
         // Initialize the matrixes to be an identity matrix 
         glm::mat4 view = glm::mat4(1.0f);

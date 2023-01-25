@@ -128,7 +128,7 @@ int main() {
 
     // build and compile our shader program
     //Shader ourShader("firstTexVertShader.vs", "firstTexFragShader.fs"); // you can name your shader files however you like
-    Shader ourShader("rotate.vs", "firstTexFragShader.fs"); // you can name your shader files however you like
+    Shader ourShader("SkolVert.vs", "SkolFrag.fs"); // you can name your shader files however you like
 
 
 
@@ -149,9 +149,9 @@ int main() {
     
     glEnable(GL_DEPTH_TEST);
     
-    Cube xyz;
+    Cube cube;
 
-    //xyz.init();
+    cube.init(1);
 
     // render loop
     while (!glfwWindowShouldClose(window))
@@ -196,11 +196,11 @@ int main() {
             model = glm::translate(model, cubePositions[i]);
             float angle = 20.0f * 1 + i * 2;
             model = glm::rotate(model, (float)glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
-            ourShader.setMat4("matrix", model);
+            ourShader.setMat4("model", model);
             //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
             //gldrawarrays(gl_triangles, 0, 36);
-            xyz.draw();
+            cube.draw();
         }
     
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -208,7 +208,7 @@ int main() {
         glfwPollEvents();
     }
     
-
+    cube.~Cube();
     
     // Shader program
     ourShader.remove();
