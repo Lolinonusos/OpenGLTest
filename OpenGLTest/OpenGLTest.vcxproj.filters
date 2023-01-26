@@ -75,6 +75,9 @@
     <ClCompile Include="tetrahedon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="graph.cpp">
+      <Filter>school files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="tetrahedon.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="graph.h">
+      <Filter>school files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -32,7 +32,7 @@ void TriangleSurface::readFile(std::string fileName) {
 		
 		vertices.reserve(n);
 		for (int i = 0; i < n; i++) {
-			in >> vertex;
+			//in >> vertex;
 			vertices.push_back(vertex);
 		}
 		in.close();

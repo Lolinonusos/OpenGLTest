@@ -37,8 +37,8 @@ void XYZ::init(int inMatrixUniform) {
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
 	// Vertex texture coords
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+	//glEnableVertexAttribArray(2);
+	//glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
 
 	glBindVertexArray(0);
 }
@@ -46,6 +46,6 @@ void XYZ::init(int inMatrixUniform) {
 void XYZ::draw() {
 	glBindVertexArray(VAO);
 	
-	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
 	glDrawArrays(GL_LINES, 0, vertices.size());
 }

@@ -15,6 +15,8 @@
 
 #include "xyz.h"
 #include "cube.h"
+#include "graph.h"
+
 
 // settings
 const unsigned int SCR_WIDTH = 800;
@@ -149,7 +151,7 @@ int main() {
     
     glEnable(GL_DEPTH_TEST);
     
-    Cube cube;
+    Graph cube;
 
     cube.init(1);
 
@@ -208,7 +210,7 @@ int main() {
         glfwPollEvents();
     }
     
-    cube.~Cube();
+    cube.~Graph();
     
     // Shader program
     ourShader.remove();
