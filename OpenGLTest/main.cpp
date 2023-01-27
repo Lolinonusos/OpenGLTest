@@ -16,7 +16,7 @@
 #include "xyz.h"
 #include "cube.h"
 #include "graph.h"
-
+#include "triangleSurface.h"
 
 // settings
 const unsigned int SCR_WIDTH = 800;
@@ -147,7 +147,9 @@ int main() {
     glm::vec3(-1.3f,  1.0f, -1.5f)
     };
 
+    TriangleSurface trir;
 
+    trir.readFile("Data.txt");
     
     glEnable(GL_DEPTH_TEST);
     

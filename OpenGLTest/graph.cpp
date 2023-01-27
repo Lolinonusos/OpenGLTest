@@ -1,11 +1,11 @@
 #include "graph.h"
 
+#define _USE_MATH_DEFINES
 #include <cmath>
 
 Graph::Graph() {
 
 
-	float func{};
 
 	float h = 0.25f;
 	
@@ -17,21 +17,29 @@ Graph::Graph() {
 
 
 	float z{};
-	for (float x = 0; x < xmax; x += h) {
-		for (float y = 0; y < ymax; y += h) {
-			
-			z = sin(3.14f * x) * sin(3.14f * y);
-			vertices.push_back(Vertex{glm::vec3(x, y, z), glm::vec3(x, y, z)});
-			z = sin(3.14f * (x + h)) * sin(3.14f * y);
-			vertices.push_back(Vertex{ glm::vec3(x + h, y, z), glm::vec3(x, y, z) });
-			z = sin(3.14f * x) * sin(3.14f * (y + h));
-			vertices.push_back(Vertex{ glm::vec3(x, y + h, z), glm::vec3(x, y, z) });
-			vertices.push_back(Vertex{ glm::vec3(x, y + h, z), glm::vec3(x, y, z) });
-			z = sin(3.14f * (x + h)) * sin(3.14f * y);
-			vertices.push_back(Vertex{ glm::vec3(x + h, y, z), glm::vec3(x, y, z) });
-			z = sin(3.14 * (x + h)) * sin(3.14f * (y + h));
-			vertices.push_back(Vertex{ glm::vec3(x + h, y + h, z), glm::vec3(x, y, z )});
+	for (float x = 0; x < 1; x += h) {
+		
+		//float z = 5 * sin(x);
+		//vertices.push_back(Vertex{glm::vec3(x, 0, z), glm::vec3(x, 0, z)});
 
+
+		for (float y = 0; y < 1; y += h) {
+			
+			//float func{ 3 * x - x * 3 - 3 *x * y * 2 };
+			
+
+
+			z = sin(glm::pi<float>() * x) * sin(glm::pi<float>() * y);
+			vertices.push_back(Vertex{glm::vec3(x, y, z), glm::vec3(x, y, z)});
+			z = sin(glm::pi<float>() * (x + h)) * sin(glm::pi<float>() * y);
+			vertices.push_back(Vertex{ glm::vec3(x + h, y, z), glm::vec3(x, y, z) });
+			z = sin(glm::pi<float>() * x) * sin(glm::pi<float>() * (y + h));
+			vertices.push_back(Vertex{ glm::vec3(x, y + h, z), glm::vec3(x, y, z) });
+			vertices.push_back(Vertex{ glm::vec3(x, y + h, z), glm::vec3(x, y, z) });
+			z = sin(glm::pi<float>() * (x + h)) * sin(glm::pi<float>() * y);
+			vertices.push_back(Vertex{ glm::vec3(x + h, y, z), glm::vec3(x, y, z) });
+			z = sin(glm::pi<float>() * (x + h)) * sin(glm::pi<float>() * (y + h));
+			vertices.push_back(Vertex{ glm::vec3(x + h, y + h, z), glm::vec3(x, y, z )});
 		}
 	}
 }
@@ -70,4 +78,6 @@ void Graph::draw() {
 }
 
 // GL_TRIANGLES
+// GL_LINES
+// GL_LINE_LOOP
 // GL_POINTS

@@ -78,6 +78,9 @@
     <ClCompile Include="graph.cpp">
       <Filter>school files</Filter>
     </ClCompile>
+    <ClCompile Include="fileReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h">
@@ -134,6 +137,9 @@
     <ClInclude Include="graph.h">
       <Filter>school files</Filter>
     </ClInclude>
+    <ClInclude Include="fileReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="first.vs">
@@ -171,5 +177,10 @@
     <Image Include="skeet (1).png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Data.txt">
+      <Filter>Resource Files\Textures</Filter>
+    </Text>
   </ItemGroup>
 </Project>

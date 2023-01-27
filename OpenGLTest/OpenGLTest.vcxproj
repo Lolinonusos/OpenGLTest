@@ -154,6 +154,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cube.cpp" />
     <ClCompile Include="EBO.cpp" />
+    <ClCompile Include="fileReader.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="graph.cpp" />
     <ClCompile Include="main.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="cube.h" />
     <ClInclude Include="EBO.h" />
+    <ClInclude Include="fileReader.h" />
     <ClInclude Include="graph.h" />
     <ClInclude Include="learnOpenGL.h" />
     <ClInclude Include="tetrahedon.h" />
@@ -204,6 +206,9 @@
     <Image Include="awesomeface.png" />
     <Image Include="Helene.png" />
     <Image Include="skeet (1).png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Data.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

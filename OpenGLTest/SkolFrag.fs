@@ -5,6 +5,6 @@ in vec4 color;              //color received from the pipeline (and vertex shade
 
 void main() {
    //color given to current fragment (pixel)
+   //fragmentColor = vec4(1,0,0,0);
    fragmentColor = color;   
-   fragmentColor = vec4(1,0,0,0);
 }

@@ -2,6 +2,7 @@
 #define TRIANGLESURFACE_H
 
 #include "visObject.h"
+#include "fstream"
 
 class TriangleSurface : public visObject {
 public:

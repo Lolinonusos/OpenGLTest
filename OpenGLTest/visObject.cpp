@@ -23,7 +23,6 @@ void visObject::init(int inMatrixUniform) {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
 
-
 	// Set vertex attribute pointers
 	// Vertex positions
 	glEnableVertexAttribArray(0);
