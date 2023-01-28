@@ -116,9 +116,6 @@
     <ClInclude Include="xyz.h">
       <Filter>school files</Filter>
     </ClInclude>
-    <ClInclude Include="visObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="vertex.h">
       <Filter>school files</Filter>
     </ClInclude>
@@ -139,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="fileReader.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="visObject.h">
+      <Filter>school files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
