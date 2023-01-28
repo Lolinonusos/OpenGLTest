@@ -159,6 +159,7 @@
     <ClCompile Include="graph.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="MObligEnOppgTo.cpp" />
     <ClCompile Include="model.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="shape.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="fileReader.h" />
     <ClInclude Include="graph.h" />
     <ClInclude Include="learnOpenGL.h" />
+    <ClInclude Include="MObligEnOppgTo.h" />
     <ClInclude Include="tetrahedon.h" />
     <ClInclude Include="triangleSurface.h" />
     <ClInclude Include="vertex.h" />
@@ -209,6 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Data.txt" />
+    <Text Include="Data2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

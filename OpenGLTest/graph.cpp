@@ -7,7 +7,7 @@ Graph::Graph() {
 
 
 
-	float h = 0.25f;
+	float h = 0.12f;
 	
 	float xmin = 0.0f;
 	float xmax = 1.0f;
@@ -17,29 +17,33 @@ Graph::Graph() {
 
 
 	float z{};
-	for (float x = 0; x < 1; x += h) {
+	for (float x = 0; x < 2; x += h) {
 		
-		//float z = 5 * sin(x);
-		//vertices.push_back(Vertex{glm::vec3(x, 0, z), glm::vec3(x, 0, z)});
+		
 
-
-		for (float y = 0; y < 1; y += h) {
-			
-			//float func{ 3 * x - x * 3 - 3 *x * y * 2 };
-			
-
+		for (float y = 0; y < 2; y += h) {
 
 			z = sin(glm::pi<float>() * x) * sin(glm::pi<float>() * y);
 			vertices.push_back(Vertex{glm::vec3(x, y, z), glm::vec3(x, y, z)});
+			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
+
 			z = sin(glm::pi<float>() * (x + h)) * sin(glm::pi<float>() * y);
 			vertices.push_back(Vertex{ glm::vec3(x + h, y, z), glm::vec3(x, y, z) });
+			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
+			
 			z = sin(glm::pi<float>() * x) * sin(glm::pi<float>() * (y + h));
 			vertices.push_back(Vertex{ glm::vec3(x, y + h, z), glm::vec3(x, y, z) });
+			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
 			vertices.push_back(Vertex{ glm::vec3(x, y + h, z), glm::vec3(x, y, z) });
+			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
+
 			z = sin(glm::pi<float>() * (x + h)) * sin(glm::pi<float>() * y);
 			vertices.push_back(Vertex{ glm::vec3(x + h, y, z), glm::vec3(x, y, z) });
+			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
+
 			z = sin(glm::pi<float>() * (x + h)) * sin(glm::pi<float>() * (y + h));
 			vertices.push_back(Vertex{ glm::vec3(x + h, y + h, z), glm::vec3(x, y, z )});
+			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
 		}
 	}
 }
@@ -55,7 +59,6 @@ void Graph::init(int inMatrixUniform) {
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
-
 
 	// Set vertex attribute pointers
 	// Vertex positions

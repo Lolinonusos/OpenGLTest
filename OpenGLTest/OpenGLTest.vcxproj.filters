@@ -81,6 +81,9 @@
     <ClCompile Include="fileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MObligEnOppgTo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h">
@@ -140,6 +143,9 @@
     <ClInclude Include="visObject.h">
       <Filter>school files</Filter>
     </ClInclude>
+    <ClInclude Include="MObligEnOppgTo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="first.vs">
@@ -180,6 +186,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Data.txt">
+      <Filter>Resource Files\Textures</Filter>
+    </Text>
+    <Text Include="Data2.txt">
       <Filter>Resource Files\Textures</Filter>
     </Text>
   </ItemGroup>

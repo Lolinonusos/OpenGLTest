@@ -133,7 +133,6 @@ int main() {
     Shader ourShader("SkolVert.vs", "SkolFrag.fs"); // you can name your shader files however you like
 
 
-
     glm::vec3 cubePositions[] = {
     glm::vec3(0.0f,  0.0f,  0.0f),
     glm::vec3(2.0f,  5.0f, -15.0f),
@@ -146,16 +145,20 @@ int main() {
     glm::vec3(1.5f,  0.2f, -1.5f),
     glm::vec3(-1.3f,  1.0f, -1.5f)
     };
+   
 
-    TriangleSurface trir;
-
-    trir.readFile("Data.txt");
+    //trir.readFile("Data.txt");
     
     glEnable(GL_DEPTH_TEST);
     
-    Graph cube;
+    //Graph graph;
+    //graph.init(1);
+
+    TriangleSurface cube("Data2.txt");
 
     cube.init(1);
+
+    //cube.readFile("Data.txt");
 
     // render loop
     while (!glfwWindowShouldClose(window))
@@ -163,8 +166,6 @@ int main() {
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame; // Time between current frame and last frame
         lastFrame = currentFrame; // Time of last frame
-     
-
         
         // input
         processInput(window);
@@ -205,6 +206,7 @@ int main() {
 
             //gldrawarrays(gl_triangles, 0, 36);
             cube.draw();
+            //graph.draw();
         }
     
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -212,7 +214,7 @@ int main() {
         glfwPollEvents();
     }
     
-    cube.~Graph();
+    cube.~TriangleSurface();
     
     // Shader program
     ourShader.remove();

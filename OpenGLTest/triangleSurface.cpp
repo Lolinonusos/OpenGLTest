@@ -13,8 +13,6 @@ TriangleSurface::TriangleSurface() :visObject() {
 
 TriangleSurface::TriangleSurface(std::string fileName) : visObject() {
 	readFile(fileName);
-
-
 }
 
 TriangleSurface::~TriangleSurface() {
@@ -30,10 +28,10 @@ void TriangleSurface::readFile(std::string fileName) {
 		int n;
 		Vertex vertex;
 		in >> n; // Antall linjer
-		std::cout << " Hello :)" << n << std::endl;
 		vertices.reserve(n);
 		for (int i = 0; i < n; i++) {
 			in >> vertex;
+			std::cout << "I read that file a million times" << i << std::endl;
 			vertices.push_back(vertex);
 		}
 		in.close();
@@ -44,10 +42,32 @@ void TriangleSurface::readFile(std::string fileName) {
 	}
 }
 
-void TriangleSurface::init(int shader)
-{
+void TriangleSurface::init(int shader) {
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
+
+
+	// Set vertex attribute pointers
+	// Vertex positions
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+	// Vertex normals
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+	// Vertex texture coords
+	//glEnableVertexAttribArray(2);
+	//glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+
+	glBindVertexArray(0);
 }
 
 void TriangleSurface::draw()
 {
+	glBindVertexArray(VAO);
+	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	glDrawArrays(GL_LINES, 0, vertices.size());// vertices.size());
 }
