@@ -22,6 +22,9 @@
     <Filter Include="school files">
       <UniqueIdentifier>{b1cb7ab8-5f71-4ef8-89a2-226914d6907a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\txt files">
+      <UniqueIdentifier>{f5507038-9d7f-4eab-bed3-02b2c904aa31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -69,6 +72,9 @@
     <ClCompile Include="cube.cpp">
       <Filter>school files</Filter>
     </ClCompile>
+    <ClCompile Include="triangleSurface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="tetrahedon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -78,11 +84,8 @@
     <ClCompile Include="fileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="triangleSurface.cpp">
-      <Filter>school files</Filter>
-    </ClCompile>
     <ClCompile Include="MObligEnOppgTo.cpp">
-      <Filter>school files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +131,12 @@
     <ClInclude Include="learnOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="triangleSurface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tetrahedon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="graph.h">
       <Filter>school files</Filter>
     </ClInclude>
@@ -137,14 +146,8 @@
     <ClInclude Include="visObject.h">
       <Filter>school files</Filter>
     </ClInclude>
-    <ClInclude Include="tetrahedon.h">
-      <Filter>school files</Filter>
-    </ClInclude>
-    <ClInclude Include="triangleSurface.h">
-      <Filter>school files</Filter>
-    </ClInclude>
     <ClInclude Include="MObligEnOppgTo.h">
-      <Filter>school files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,11 +188,11 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Data.txt">
-      <Filter>Resource Files\Textures</Filter>
+    <Text Include="Oppg2.txt">
+      <Filter>Resource Files\txt files</Filter>
     </Text>
-    <Text Include="Data2.txt">
-      <Filter>Resource Files\Textures</Filter>
+    <Text Include="Data.txt">
+      <Filter>Resource Files\txt files</Filter>
     </Text>
   </ItemGroup>
 </Project>

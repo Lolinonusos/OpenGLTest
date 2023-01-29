@@ -7,30 +7,58 @@ Graph::Graph() {
 
 
 
-	float h = 0.12f;
+	float h = 0.1f;
 	
-	float xmin = 0.0f;
-	float xmax = 1.0f;
-	float ymin = 0.0f;
-	float ymax = 1.0f;
-
-
-
+	float min = -20.0f;
+	float max = 20.0f;
+	
+	float x = min;
+	float y{};
 	float z{};
-	for (float x = 0; x < 2; x += h) {
-		
+	for ( x = min; x <= max; x += h) {
 		
 
-		for (float y = 0; y < 2; y += h) {
+			//y = 3 * sin(x * 6);
+			//vertices.push_back(Vertex{glm::vec3(x, y, z), glm::vec3(x, y, z)});
+			////std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
 
-			z = sin(glm::pi<float>() * x) * sin(glm::pi<float>() * y);
-			vertices.push_back(Vertex{glm::vec3(x, y, z), glm::vec3(x, y, z)});
+			//y = 3 * sin((x + h) * 6);
+			//vertices.push_back(Vertex{ glm::vec3(x + h, y, z), glm::vec3(x, y, z) });
+			////std::cout << '(' << x + h << ", " << y << ", " << z << ')' << std::endl;
+			//
+			//y = 3 * sin(x * 6);
+			//vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(x, y, z) });
+			////std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
+
+
+		for (float y = min; y < max; y += h) {
+			//z = ;
+			//vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(x, y, z) });
+			//std::cout << '(' << x << ", " << y << ", " << z << ')' << ' ' << '(' << x << ", " << y << ", " << z << ')' << '(' << 0 << ", " << 0 << ')' << std::endl;
+			//std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
+	/*		vertices.push_back(Vertex{ glm::vec3(x, y + h, z), glm::vec3(x, y, z) });
 			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
 
 			z = sin(glm::pi<float>() * (x + h)) * sin(glm::pi<float>() * y);
 			vertices.push_back(Vertex{ glm::vec3(x + h, y, z), glm::vec3(x, y, z) });
 			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
-			
+
+			z = sin(glm::pi<float>() * (x + h)) * sin(glm::pi<float>() * (y + h));
+			vertices.push_back(Vertex{ glm::vec3(x + h, y + h, z), glm::vec3(x, y, z )});
+			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;*/
+
+		/*	z = 3 * sin(x * 6);
+			vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(x, y, z) });
+			std::cout << '(' << x << ", " << y << ", " << z << ')' << ' ' << '(' << x << ", " << y << ", " << z << ')' << '(' << 0 << ", " << 0 << ')' << std::endl;
+
+			z = sin(glm::pi<float>() * x) * sin(glm::pi<float>() * y);
+			vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(x, y, z) });
+			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
+
+			z = sin(glm::pi<float>() * (x + h)) * sin(glm::pi<float>() * y);
+			vertices.push_back(Vertex{ glm::vec3(x + h, y, z), glm::vec3(x, y, z) });
+			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
+
 			z = sin(glm::pi<float>() * x) * sin(glm::pi<float>() * (y + h));
 			vertices.push_back(Vertex{ glm::vec3(x, y + h, z), glm::vec3(x, y, z) });
 			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
@@ -42,14 +70,29 @@ Graph::Graph() {
 			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
 
 			z = sin(glm::pi<float>() * (x + h)) * sin(glm::pi<float>() * (y + h));
-			vertices.push_back(Vertex{ glm::vec3(x + h, y + h, z), glm::vec3(x, y, z )});
-			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
+			vertices.push_back(Vertex{ glm::vec3(x + h, y + h, z), glm::vec3(x, y, z) });
+			std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;*/
+			
+			float z = x * sin(y);
+			vertices.push_back(Vertex{ x, y, z, x, y, z });
+
+			z = (x + h) * sin(y);
+			vertices.push_back(Vertex{ x + h, y, z, x, y, z });
+
+			z = x * (sin(y + h));
+			vertices.push_back(Vertex{ x, y + h, z, x, y, z });
+			vertices.push_back(Vertex{ x, y + h, z, x, y, z });
+
+			z = (x + h) * sin(y);
+			vertices.push_back(Vertex{ x + h, y, z, x, y, z });
+
+			z = (x + h) * (sin(y + h));
+			vertices.push_back(Vertex{ x + h, y + h, z, x, y, z });
 		}
 	}
 }
 
-Graph::~Graph()
-{
+Graph::~Graph(){
 }
 
 void Graph::init(int inMatrixUniform) {

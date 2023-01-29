@@ -1,21 +1,61 @@
 #include "triangleSurface.h"
 
 TriangleSurface::TriangleSurface() :visObject() {
-	vertices.push_back(Vertex{ glm::vec3(0.0f, 0.0f, 0.0), glm::vec3(1.0f, 0.0f, 0.0) });
-	vertices.push_back(Vertex{ glm::vec3(0.5f, 0.0f, 0.0), glm::vec3(0.0f, 1.0f, 0.0) });
-	vertices.push_back(Vertex{ glm::vec3(0.5f, 0.5f, 0.0), glm::vec3(0.0f, 0.0f, 1.0) });
-	vertices.push_back(Vertex{ glm::vec3(0.0f, 0.0f, 0.0), glm::vec3(0.0f, 0.0f, 1.0) });
-	vertices.push_back(Vertex{ glm::vec3(0.5f, 0.5f, 0.0), glm::vec3(0.0f, 1.0f, 0.0) });
-	vertices.push_back(Vertex{ glm::vec3(0.0f, 0.5f, 0.0), glm::vec3(1.0f, 0.0f, 0.0) });
+
+	float h = 0.005f;
+
+	float min = -2.0f;
+	float max = 2.0f;
+
+	float x = min;
+	float y{};
+	float z{};
+	for (x = min; x <= max; x += h) {
+
+
+		y = 3 * sin(x * 6);
+		vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(x, y, z) });
+		//std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
+
+		y = 3 * sin((x + h) * 6);
+		vertices.push_back(Vertex{ glm::vec3(x + h, y, z), glm::vec3(x, y, z) });
+		//std::cout << '(' << x + h << ", " << y << ", " << z << ')' << std::endl;
+
+		y = 3 * sin(x * 6);
+		vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(x, y, z) });
+		//std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
+	}
 
 	matrix = glm::mat4(1.0f);
 }
 
-TriangleSurface::TriangleSurface(std::string fileName) : visObject() {
+TriangleSurface::TriangleSurface(std::string fileName, bool write) : visObject() {
+	
+	if (write) {
+		writefile(fileName);
+	}
 	readFile(fileName);
 }
 
 TriangleSurface::~TriangleSurface() {
+
+}
+
+void TriangleSurface::writefile(std::string fileName) {
+	std::ofstream out;
+	out.open(fileName.c_str(), std::ofstream::out | std::ofstream::trunc);
+	if (out.is_open()) {
+		auto n = vertices.size();
+		Vertex vertex;
+		out << n << std::endl;
+		for (auto i = vertices.begin(); i  != vertices.end(); i++) {
+			out << *i << std::endl;
+		}
+		out.close();
+	}
+	else {
+	std::cout << "ERROR: Could not find file" << std::endl;
+	}
 
 }
 
@@ -25,9 +65,9 @@ void TriangleSurface::readFile(std::string fileName) {
 	in.open(fileName.c_str());
 
 	if (in.is_open()) {
-		int n;
-		Vertex vertex;
+		unsigned int n;
 		in >> n; // Antall linjer
+		Vertex vertex;
 		vertices.reserve(n);
 		for (int i = 0; i < n; i++) {
 			in >> vertex;
@@ -38,7 +78,6 @@ void TriangleSurface::readFile(std::string fileName) {
 	}
 	else {
 		std::cout << "ERROR: Could not find file" << std::endl;
-
 	}
 }
 
@@ -69,5 +108,5 @@ void TriangleSurface::draw()
 {
 	glBindVertexArray(VAO);
 	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
+	glDrawArrays(GL_LINE_LOOP, 0, vertices.size());// vertices.size());
 }

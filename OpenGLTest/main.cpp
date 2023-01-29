@@ -63,7 +63,7 @@ void mouse_callback(GLFWwindow*, double xPosIn, double yPosIn) {
     float xPos = static_cast<float>(xPosIn);
     float yPos = static_cast<float>(yPosIn);
 
-    std::cout << "Mouse x:" << xPos << "    y:" << yPos << std::endl;
+    //std::cout << "Mouse x:" << xPos << "    y:" << yPos << std::endl;
     if (firstMouse) {
         lastX = xPos;
         lastY = yPos;
@@ -151,12 +151,14 @@ int main() {
     
     glEnable(GL_DEPTH_TEST);
     
-    //Graph graph;
-    //graph.init(1);
+    Graph graph;
+    graph.init(1);
 
-    TriangleSurface cube("Data2.txt");
+    //TriangleSurface cube("Data2.txt", false);
+    //cube.writefile("Data2.txt");
 
-    cube.init(1);
+    //cube.init(1);
+
 
     //cube.readFile("Data.txt");
 
@@ -205,8 +207,8 @@ int main() {
             //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
             //gldrawarrays(gl_triangles, 0, 36);
-            cube.draw();
-            //graph.draw();
+            //cube.draw();
+            graph.draw();
         }
     
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -214,7 +216,7 @@ int main() {
         glfwPollEvents();
     }
     
-    cube.~TriangleSurface();
+    //cube.~TriangleSurface();
     
     // Shader program
     ourShader.remove();
