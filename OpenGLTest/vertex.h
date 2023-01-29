@@ -28,14 +28,9 @@ private:
 
 public:
 
-	glm::vec3 position;
-	glm::vec3 normal;
-	glm::vec2 texCoord;
-
-	//float position[3];
-	//float normal[3];
-	//float texCoord[2];
-
+	glm::vec3 position{0};
+	glm::vec3 normal{0};
+	glm::vec2 texCoord{0};
 
 	// This is overloading
 	Vertex() {
@@ -43,10 +38,14 @@ public:
 	};
 	Vertex(glm::vec3 xyz) {
 		position = xyz;
+		normal = glm::vec3(0.0f, 0.0f, 0.0f);
+		texCoord = glm::vec2(0.0f, 0.0f);
+
 	};
 	Vertex(glm::vec3 xyz, glm::vec3 rgb) {
 		position = xyz;
 		normal = rgb;
+		texCoord = glm::vec2(0.0f, 0.0f);
 	};
 	Vertex(glm::vec3 xyz, glm::vec3 rgb, glm::vec2 uv) {
 		position = xyz;
@@ -56,11 +55,14 @@ public:
 
 	Vertex(float x, float y, float z) {
 		position = glm::vec3(x, y, z);
+		normal = glm::vec3(0.0f, 0.0f, 0.0f);
+		texCoord = glm::vec2(0.0f, 0.0f);
 	};
 
 	Vertex(float x, float y, float z, float r, float g, float b) {
 		position = glm::vec3(x, y, z);
 		normal = glm::vec3(r, g, b); 
+		texCoord = glm::vec2(0.0f, 0.0f);
 	};
 
 	Vertex(float x, float y, float z, float r, float g, float b, float u, float v) {

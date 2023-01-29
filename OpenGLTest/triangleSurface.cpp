@@ -45,9 +45,9 @@ void TriangleSurface::writefile(std::string fileName) {
 	std::ofstream out;
 	out.open(fileName.c_str(), std::ofstream::out | std::ofstream::trunc);
 	if (out.is_open()) {
-		auto n = vertices.size();
+		auto n = vertices.size(); // Totale mengder vertex punkter
 		Vertex vertex;
-		out << n << std::endl;
+		out << n << std::endl; // Skriver inn inn totale mengden punkter øverst på fila
 		for (auto i = vertices.begin(); i  != vertices.end(); i++) {
 			out << *i << std::endl;
 		}
