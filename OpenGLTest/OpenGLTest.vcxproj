@@ -157,6 +157,7 @@
     <ClCompile Include="fileReader.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="graph.cpp" />
+    <ClCompile Include="linusCam.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="MObligEnOppgTo.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="fileReader.h" />
     <ClInclude Include="graph.h" />
     <ClInclude Include="learnOpenGL.h" />
+    <ClInclude Include="linusCam.h" />
     <ClInclude Include="MObligEnOppgTo.h" />
     <ClInclude Include="tetrahedon.h" />
     <ClInclude Include="triangleSurface.h" />

@@ -87,6 +87,9 @@
     <ClCompile Include="MObligEnOppgTo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="linusCam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h">
@@ -147,6 +150,9 @@
       <Filter>school files</Filter>
     </ClInclude>
     <ClInclude Include="MObligEnOppgTo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linusCam.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

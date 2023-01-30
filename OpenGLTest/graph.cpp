@@ -5,8 +5,6 @@
 
 Graph::Graph() {
 
-
-
 	float h = 0.1f;
 	
 	float min = -1.0f;
@@ -31,7 +29,7 @@ Graph::Graph() {
 			////std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
 
 
-		for (float y = min; y < max; y += h) {
+		for (float y = min; y <= max; y += h) {
 			//z = ;
 			//vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(x, y, z) });
 			//std::cout << '(' << x << ", " << y << ", " << z << ')' << ' ' << '(' << x << ", " << y << ", " << z << ')' << '(' << 0 << ", " << 0 << ')' << std::endl;
