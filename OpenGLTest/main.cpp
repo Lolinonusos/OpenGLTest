@@ -17,6 +17,7 @@
 #include "cube.h"
 #include "graph.h"
 #include "triangleSurface.h"
+#include "interactive.h"
 
 // settings
 const unsigned int SCR_WIDTH = 800;
@@ -37,12 +38,33 @@ float lastX = SCR_WIDTH / 2;
 float lastY = SCR_HEIGHT / 2;
 bool firstMouse = true;
 
+// Interactive object
+Interactive intObj;
+
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 void processInput(GLFWwindow* window) {
     const float camSpeed = 2.0f * deltaTime;
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
+    // Interact object here
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) { // FORWARD
+        intObj.move(0.0f, 1.0f, 0.0f, deltaTime);
+    }
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) { // BACKWARD
+        intObj.move(0.0f, -1.0f, 0.0f, deltaTime);
+
+    }
+    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) { // RIGHT
+        intObj.move(1.0f, 0.0f, 0.0f, deltaTime);
+
+    }
+    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) { // LEFT
+        intObj.move(-1.0f, 0.0f, 0.0f, deltaTime);
+
+    }
+
+    // Camera here
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // FORWARD
         //camPos += camSpeed * camFront;
         camera.processKeyboard(FORWARD, deltaTime);
@@ -159,6 +181,7 @@ int main() {
 
     cube.init(1);
 
+    intObj.init(1);
     
     //cube.readFile("Data.txt");
     
@@ -207,8 +230,9 @@ int main() {
             //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
             //gldrawarrays(gl_triangles, 0, 36);
-            cube.draw();
+            //cube.draw();
             //graph.draw();
+            intObj.draw();
         }
     
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
