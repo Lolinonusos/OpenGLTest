@@ -153,15 +153,15 @@ int main() {
     
     Graph graph;
     graph.init(1);
-
+       
     TriangleSurface cube("Oppg2.txt", false);
     //cube.writefile("Data2.txt");
 
     cube.init(1);
 
-
+    
     //cube.readFile("Data.txt");
-
+    
     // render loop
     while (!glfwWindowShouldClose(window))
     {
@@ -184,7 +184,7 @@ int main() {
 
         //glActiveTexture(GL_TEXTURE0);
         //helene.bind();
-      
+        
         // Which shader program we will use
         ourShader.use();
     
