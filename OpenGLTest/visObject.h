@@ -37,21 +37,15 @@ protected:
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 
-	unsigned int VAO{};
-	unsigned int VBO{};
+	unsigned int VAO{0};
+	unsigned int VBO{0};
 
-	int matrixUniform{};
+	int matrixUniform{0};
 	glm::mat4 matrix;
-
-
 
 	glm::mat4 position;
 	glm::mat4 rotation;
 	glm::mat4 scale;
-
-
-
-
 };
 
 #endif
