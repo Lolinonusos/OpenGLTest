@@ -78,10 +78,7 @@
     <ClCompile Include="fileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MObligEnOppgTo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="linusCam.cpp">
+    <ClCompile Include="editorCam.cpp">
       <Filter>school files</Filter>
     </ClCompile>
     <ClCompile Include="tetrahedon.cpp">
@@ -92,6 +89,15 @@
     </ClCompile>
     <ClCompile Include="interactive.cpp">
       <Filter>school files</Filter>
+    </ClCompile>
+    <ClCompile Include="octahedronBall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="moveComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="positionComponent.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,19 +152,25 @@
     <ClInclude Include="visObject.h">
       <Filter>school files</Filter>
     </ClInclude>
-    <ClInclude Include="MObligEnOppgTo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tetrahedon.h">
       <Filter>school files</Filter>
     </ClInclude>
-    <ClInclude Include="linusCam.h">
+    <ClInclude Include="editorCam.h">
       <Filter>school files</Filter>
     </ClInclude>
     <ClInclude Include="triangleSurface.h">
       <Filter>school files</Filter>
     </ClInclude>
     <ClInclude Include="interactive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="octahedronBall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="moveComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="positionComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

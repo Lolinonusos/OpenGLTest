@@ -45,7 +45,6 @@ void Interactive::draw() {
 }
 
 void Interactive::move(float inX, float inY, float inZ, float deltaTime) {
-
 	position = glm::vec3(inX, inY, inZ) * deltaTime;
 	matrix = glm::translate(matrix, position);
 }

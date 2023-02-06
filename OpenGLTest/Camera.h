@@ -5,8 +5,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <vector>
-
 // This camera is from learnOpenGL.com 
 
 enum Camera_Movement {
@@ -76,11 +74,11 @@ public:
 		yaw += xOffset;
 		pitch += yOffset;
 
-		if (pitch > 89.0f) {
-			pitch = 89.0;
+		if (pitch > 89.9f) {
+			pitch = 89.9;
 		}
-		if (pitch < -89.0f) {
-			pitch = -89.0;
+		if (pitch < -89.9f) {
+			pitch = -89.9;
 		}
 
 		updateCameraVectors();

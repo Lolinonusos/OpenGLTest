@@ -185,6 +185,11 @@ int main() {
     
     //cube.readFile("Data.txt");
     
+    // Initializing render matrixes as identity matrixes
+    glm::mat4 projection = glm::mat4(1.0f);
+    glm::mat4 view = glm::mat4(1.0f);
+    glm::mat4 model = glm::mat4(1.0f);
+
     // render loop
     while (!glfwWindowShouldClose(window))
     {
@@ -211,18 +216,20 @@ int main() {
         // Which shader program we will use
         ourShader.use();
     
-        glm::mat4 projection = glm::perspective(glm::radians(camera.zoom), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
+        // Projection matrix
+        projection = glm::perspective(glm::radians(camera.zoom), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
         ourShader.setMat4("projection", projection);
         
     
-        // Initialize the matrixes to be an identity matrix 
-        glm::mat4 view = camera.getViewMatrix();
+        // View matrix
+        view = camera.getViewMatrix();
         ourShader.setMat4("view", view);
         
         //int ma
 
         for (int i = 0; i < 10; i++) {
-            glm::mat4 model = glm::mat4(1.0f);
+            // Model matrix
+            model = glm::mat4(1.0f);
             model = glm::translate(model, cubePositions[i]);
             float angle = 20.0f * 1 + i * 2;
             model = glm::rotate(model, (float)glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
