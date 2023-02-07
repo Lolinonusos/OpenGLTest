@@ -5,7 +5,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-class EditorCam {
+#include "positionComponent.h"
+
+class EditorCam : public PositionComponent {
 public:
 	glm::mat4 position = glm::mat4(1.0f);
 

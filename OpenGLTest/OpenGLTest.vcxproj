@@ -170,6 +170,7 @@
     <ClCompile Include="stb.cpp" />
     <ClCompile Include="tetrahedon.cpp" />
     <ClCompile Include="texture.cpp" />
+    <ClCompile Include="transform.cpp" />
     <ClCompile Include="triangleSurface.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="octahedronBall.h" />
     <ClInclude Include="positionComponent.h" />
     <ClInclude Include="tetrahedon.h" />
+    <ClInclude Include="transform.h" />
     <ClInclude Include="triangleSurface.h" />
     <ClInclude Include="vertex.h" />
     <ClInclude Include="mesh.h" />
