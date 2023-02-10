@@ -39,13 +39,10 @@ protected:
 
 	unsigned int VAO{0};
 	unsigned int VBO{0};
+	unsigned int EBO{ 0 };
 
 	int matrixUniform{0};
 	glm::mat4 matrix;
-
-	glm::mat4 position;
-	glm::mat4 rotation;
-	glm::mat4 scale;
 };
 
 #endif

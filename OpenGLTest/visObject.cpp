@@ -5,14 +5,13 @@
 visObject::visObject() {
 	// set to matrixes to be identity Matrixes
 	matrix = glm::mat4(1.0f);
-	position = glm::mat4(1.0f);
-	rotation = glm::mat4(1.0f);
-	scale = glm::mat4(1.0f);
 }
 
 visObject::~visObject() {
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+
 }
 
 void visObject::init(int inMatrixUniform) {
