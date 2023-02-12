@@ -51,9 +51,11 @@ Cube::~Cube() {
 }
 
 void Cube::init(int inMatrixUniform) {
-	glGenVertexArrays(1, &VAO);
+    //Vertex Array Object - VAO
+    glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
+    //Vertex Buffer Object - VBO
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
@@ -76,5 +78,5 @@ void Cube::init(int inMatrixUniform) {
 void Cube::draw() {
 	glBindVertexArray(VAO);
 	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-    glDrawArrays(GL_TRIANGLES, 0, 36);// vertices.size());
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 }

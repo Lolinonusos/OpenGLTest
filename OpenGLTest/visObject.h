@@ -15,12 +15,13 @@
 #include <string>
 #include <vector>
 
+#include "positionComponent.h"
 #include "vertex.h"
 #include "shader.h"
 
 // Hensikten med denne klassen er at vi skal tegne alle 3d objeket
 // gjennom klasser som arver fra denne
-class visObject {
+class visObject : public PositionComponent {
 public:
 	visObject();
 	~visObject();
@@ -37,11 +38,11 @@ protected:
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 
-	unsigned int VAO{0};
-	unsigned int VBO{0};
+	unsigned int VAO{ 0 };
+	unsigned int VBO{ 0 };
 	unsigned int EBO{ 0 };
+	int matrixUniform{ 0 };
 
-	int matrixUniform{0};
 	glm::mat4 matrix;
 };
 
