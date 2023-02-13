@@ -154,7 +154,6 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cube.cpp" />
     <ClCompile Include="disc.cpp" />
-    <ClCompile Include="EBO.cpp" />
     <ClCompile Include="fileReader.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="graph.cpp" />
@@ -173,8 +172,6 @@
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="transform.cpp" />
     <ClCompile Include="triangleSurface.cpp" />
-    <ClCompile Include="VAO.cpp" />
-    <ClCompile Include="VBO.cpp" />
     <ClCompile Include="visObject.cpp" />
     <ClCompile Include="xyz.cpp" />
   </ItemGroup>
@@ -182,12 +179,13 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="cube.h" />
     <ClInclude Include="disc.h" />
-    <ClInclude Include="EBO.h" />
     <ClInclude Include="fileReader.h" />
     <ClInclude Include="graph.h" />
     <ClInclude Include="interactive.h" />
     <ClInclude Include="learnOpenGL.h" />
     <ClInclude Include="editorCam.h" />
+    <ClInclude Include="matteModus.h" />
+    <ClInclude Include="MatteObligTo.h" />
     <ClInclude Include="moveComponent.h" />
     <ClInclude Include="octahedronBall.h" />
     <ClInclude Include="positionComponent.h" />
@@ -201,8 +199,6 @@
     <ClInclude Include="shape.h" />
     <ClInclude Include="Test1.h" />
     <ClInclude Include="texture.h" />
-    <ClInclude Include="VAO.h" />
-    <ClInclude Include="VBO.h" />
     <ClInclude Include="visObject.h" />
     <ClInclude Include="xyz.h" />
   </ItemGroup>

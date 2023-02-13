@@ -34,6 +34,10 @@ public:
 	// Får det ved å skrive = 0 etter funksjonen
 	// Tvinger alle klasser som arver fra denne til å ha sin egen override av funksjonen
 	virtual void draw() = 0; 
+
+	// Alle klasser som arver kan skrive til fil
+	void writeFile(std::string adress);
+	// Men bare en skal trenge å lese
 protected:
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
