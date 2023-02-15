@@ -96,6 +96,9 @@
     <ClCompile Include="disc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="matteModus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h">
@@ -171,6 +174,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="matteModus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

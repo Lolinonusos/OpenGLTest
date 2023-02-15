@@ -160,6 +160,7 @@
     <ClCompile Include="interactive.cpp" />
     <ClCompile Include="editorCam.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="matteModus.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="model.cpp" />
     <ClCompile Include="moveComponent.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="interactive.h" />
     <ClInclude Include="learnOpenGL.h" />
     <ClInclude Include="editorCam.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="matteModus.h" />
     <ClInclude Include="MatteObligTo.h" />
     <ClInclude Include="moveComponent.h" />

@@ -1,23 +1,4 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <stb/stb_image.h>
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-#include <iostream>
-
-#include "shader.h"
-#include "camera.h"
-#include "model.h"
-
-
-#include "xyz.h"
-#include "cube.h"
-#include "graph.h"
-#include "triangleSurface.h"
-#include "interactive.h"
+#include "main.h"
 
 // settings
 const unsigned int SCR_WIDTH = 800;
@@ -168,6 +149,54 @@ int main() {
     glm::vec3(-1.3f,  1.0f, -1.5f)
     };
    
+    //// Matte oblig
+
+    //blaze::DynamicMatrix<float, blaze::columnMajor> A{
+    //{1.0f, 1.0f},
+    //{2.0f, 1.0f},
+    //{3.0f, 1.0f},
+    //{4.0f, 1.0f},
+    //{5.0f, 1.0f},
+    //{6.0f, 1.0f},
+    //{7.0f, 1.0f},
+    //{8.0f, 1.0f}
+    //};
+
+    //// Inverted of A
+    //blaze::DynamicMatrix<float, blaze::rowMajor> AT = blaze::trans(A);
+    //// 1 2 3 4 5 6 7 8
+    //// 1 1 1 1 1 1 1 1
+
+    //float a{};
+    //float b{};
+
+    //blaze::DynamicMatrix<float, blaze::columnMajor> x{
+    //    {a},
+    //    {b}
+    //};
+
+
+    //blaze::DynamicMatrix<float, blaze::columnMajor> y{
+    //    {2.0f},
+    //    {1.0f},
+    //    {2.5f},
+    //    {4.5f},
+    //    {3.0f},
+    //    {4.0f},
+    //    {5.0f},
+    //    {6.5f}
+    //};
+
+    //blaze::DynamicMatrix<float, blaze::columnMajor> B = AT * A;
+    //blaze::DynamicMatrix<float, blaze::columnMajor> Binv = blaze::inv(B);
+
+    //blaze::DynamicMatrix<float, blaze::columnMajor> C = AT * y;
+    //blaze::DynamicMatrix<float, blaze::columnMajor> Cinv = blaze::inv(C);
+
+    ////x = Binv * C;
+
+    //// Matte oblig slutt
+
 
     //trir.readFile("Data.txt");
     
