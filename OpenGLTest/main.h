@@ -20,4 +20,6 @@
 #include "triangleSurface.h"
 #include "interactive.h"
 
-#include <blaze/Blaze.h>
+#include <Eigen/Core>
+
+//#include <blaze/Blaze.h>
