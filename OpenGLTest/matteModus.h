@@ -1,5 +1,7 @@
 #pragma once
 
+
+#include <Eigen/Eigen>
 //#include <vector>
 
 class Matrise {
@@ -20,7 +22,7 @@ class Matrise {
 	// B = AT * A
 	// C = AT * y
 	Matrise();
-
+	Eigen::Matrix<float, 8, 2>;
 
 	void leastSquaresMethod() {
 		for (int i = 0; i < 8; i++) {
