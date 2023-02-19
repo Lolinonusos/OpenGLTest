@@ -195,6 +195,8 @@ int main() {
 
     ////x = Binv * C;
 
+    Matrise oblig2;
+
     //// Matte oblig slutt
 
 
