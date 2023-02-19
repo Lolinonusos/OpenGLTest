@@ -66,16 +66,15 @@ public:
 	}
 
 
-
-	void leastSquaresMethod() {
-		for (int i = 0; i < 8; i++) {
-
-		}
+	// Oppgave 4.4.4
+	void FireFireFire() {
+		// f(x) = a * x^2 + b * x 
 
 
 	}
 
-	void matMultiply(Matrise) {
+	// Oppgave 4.6.10
+	void FireSeksTi() {
 
 	}
 };
