@@ -22,7 +22,7 @@
     <Filter Include="school files">
       <UniqueIdentifier>{b1cb7ab8-5f71-4ef8-89a2-226914d6907a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\txt files">
+    <Filter Include="Resource Files\Vertex Positions">
       <UniqueIdentifier>{f5507038-9d7f-4eab-bed3-02b2c904aa31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -97,6 +97,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="matteModus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="point.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,6 +182,12 @@
     <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fileWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="first.vs">
@@ -219,10 +228,16 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Oppg2.txt">
-      <Filter>Resource Files\txt files</Filter>
+      <Filter>Resource Files\Vertex Positions</Filter>
     </Text>
     <Text Include="Data.txt">
-      <Filter>Resource Files\txt files</Filter>
+      <Filter>Resource Files\Vertex Positions</Filter>
+    </Text>
+    <Text Include="Oppg444.txt">
+      <Filter>Resource Files\Vertex Positions</Filter>
+    </Text>
+    <Text Include="Oppg4610.txt">
+      <Filter>Resource Files\Vertex Positions</Filter>
     </Text>
   </ItemGroup>
 </Project>

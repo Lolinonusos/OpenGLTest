@@ -149,57 +149,40 @@ int main() {
     glm::vec3(-1.3f,  1.0f, -1.5f)
     };
    
-    //// Matte oblig
+    XYZ xyz;
 
-    //blaze::DynamicMatrix<float, blaze::columnMajor> A{
-    //{1.0f, 1.0f},
-    //{2.0f, 1.0f},
-    //{3.0f, 1.0f},
-    //{4.0f, 1.0f},
-    //{5.0f, 1.0f},
-    //{6.0f, 1.0f},
-    //{7.0f, 1.0f},
-    //{8.0f, 1.0f}
-    //};
+    std::vector<Point> points;
 
-    //// Inverted of A
-    //blaze::DynamicMatrix<float, blaze::rowMajor> AT = blaze::trans(A);
-    //// 1 2 3 4 5 6 7 8
-    //// 1 1 1 1 1 1 1 1
+    //// Matte oblig 2
+    // 4.4.4
+    //points.push_back(Point{ 10, 1.0f, 2.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    //points.push_back(Point{ 10, 2.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    //points.push_back(Point{ 10, 3.0f, 2.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    //points.push_back(Point{ 10, 4.0f, 4.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    //points.push_back(Point{ 10, 5.0f, 3.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    //points.push_back(Point{ 10, 6.0f, 4.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    //points.push_back(Point{ 10, 7.0f, 5.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    //points.push_back(Point{ 10, 8.0f, 6.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    // 4.6.10
+    points.push_back(Point{ 10, 1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
+    points.push_back(Point{ 10, 3.0f, 1.5f, 0.0f, 0.0f, 0.0f, 1.0f } );
+    points.push_back(Point{ 10, 4.0f, 5.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
+    points.push_back(Point{ 10, 6.0f, 2.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
 
-    //float a{};
-    //float b{};
-
-    //blaze::DynamicMatrix<float, blaze::columnMajor> x{
-    //    {a},
-    //    {b}
-    //};
-
-
-    //blaze::DynamicMatrix<float, blaze::columnMajor> y{
-    //    {2.0f},
-    //    {1.0f},
-    //    {2.5f},
-    //    {4.5f},
-    //    {3.0f},
-    //    {4.0f},
-    //    {5.0f},
-    //    {6.5f}
-    //};
-
-    //blaze::DynamicMatrix<float, blaze::columnMajor> B = AT * A;
-    //blaze::DynamicMatrix<float, blaze::columnMajor> Binv = blaze::inv(B);
-
-    //blaze::DynamicMatrix<float, blaze::columnMajor> C = AT * y;
-    //blaze::DynamicMatrix<float, blaze::columnMajor> Cinv = blaze::inv(C);
-
-    ////x = Binv * C;
+    for (int i = 0; i < points.size(); i++) {
+        points[i].init(1);
+    }
+    xyz.init(1);
 
     Matrise oblig2;
+    oblig2.FireFireFire();
+    oblig2.FireSeksTi();
+    //// Matte oblig 2 slutt
 
-    //// Matte oblig slutt
-
-
+    TriangleSurface matteFireFireFire("Oppg444.txt", false);
+    TriangleSurface matteFireSeksTi("Oppg4610.txt", false);
+    matteFireFireFire.init(1);
+    matteFireSeksTi.init(1);
     //trir.readFile("Data.txt");
     
     glEnable(GL_DEPTH_TEST);
@@ -270,9 +253,18 @@ int main() {
             //gldrawarrays(gl_triangles, 0, 36);
             //cube.draw();
             //graph.draw();
-            intObj.draw();
+            //intObj.draw();
         }
-    
+
+        for (int i = 0; i < points.size(); i++) {
+            points[i].draw();
+        }
+        
+        xyz.draw();
+        //matteFireFireFire.draw();
+        matteFireSeksTi.draw();
+
+
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         glfwSwapBuffers(window);
         glfwPollEvents();

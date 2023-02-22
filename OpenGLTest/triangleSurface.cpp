@@ -71,7 +71,6 @@ void TriangleSurface::readFile(std::string fileName) {
 		vertices.reserve(n);
 		for (int i = 0; i < n; i++) {
 			in >> vertex;
-			//std::cout << "I read that file a million times " << i << std::endl;
 			vertices.push_back(vertex);
 		}
 		in.close();
@@ -108,5 +107,5 @@ void TriangleSurface::draw()
 {
 	glBindVertexArray(VAO);
 	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	glDrawArrays(GL_LINE_LOOP, 0, vertices.size());// vertices.size());
+	glDrawArrays(GL_LINE_STRIP, 0, vertices.size());// vertices.size());
 }

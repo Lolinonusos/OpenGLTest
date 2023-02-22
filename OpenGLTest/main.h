@@ -24,6 +24,7 @@
 #include "graph.h"
 #include "triangleSurface.h"
 #include "interactive.h"
+#include "point.h"
 
 // Ultra matte bibliotek
 #include <Eigen/Core>
