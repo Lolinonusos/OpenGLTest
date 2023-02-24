@@ -14,12 +14,18 @@ public:
 	float yaw{ 0 };
 	float pitch{ 0 };
 
+	glm::vec3 front;
+	glm::vec3 up;
+	glm::vec3 right;
+
+
 	EditorCam();
 
 	void lookAt();
 
 	void move();
 
+private:
 
 };
 
