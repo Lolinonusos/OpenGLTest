@@ -18,6 +18,11 @@
 #include "camera.h"
 #include "model.h"
 
+// Ultra matte bibliotek
+#include <Eigen/Core>
+
+// Mine egne headere
+
 // 3D programmering obliger
 #include "xyz.h"
 #include "cube.h"
@@ -25,11 +30,7 @@
 #include "triangleSurface.h"
 #include "interactive.h"
 #include "point.h"
-
-// Ultra matte bibliotek
-#include <Eigen/Core>
+#include "octahedronBall.h"
 
 // Matte obliger
 #include "matteModus.h"
-
-//#include <blaze/Blaze.h>

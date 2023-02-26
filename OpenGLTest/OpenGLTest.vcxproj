@@ -167,6 +167,7 @@
     <ClCompile Include="octahedronBall.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="positionComponent.cpp" />
+    <ClCompile Include="renderLoop.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="shape.cpp" />
     <ClCompile Include="stb.cpp" />
@@ -189,11 +190,11 @@
     <ClInclude Include="editorCam.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="matteModus.h" />
-    <ClInclude Include="MatteObligTo.h" />
     <ClInclude Include="moveComponent.h" />
     <ClInclude Include="octahedronBall.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="positionComponent.h" />
+    <ClInclude Include="renderLoop.h" />
     <ClInclude Include="tetrahedon.h" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="triangleSurface.h" />

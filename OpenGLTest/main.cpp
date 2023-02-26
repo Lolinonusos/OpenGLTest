@@ -152,7 +152,7 @@ int main() {
     XYZ xyz;
 
     std::vector<Point> points;
-
+    /*
     //// Matte oblig 2
     // 4.4.4
     glPointSize(10);
@@ -181,6 +181,10 @@ int main() {
     oblig2.FireFireFire();
     oblig2.FireSeksTi();
     //// Matte oblig 2 slutt
+    */
+
+    OctahedronBall octa(6);
+    octa.init(1);
 
     TriangleSurface matteFireFireFire("Oppg444.txt", false);
     TriangleSurface matteFireSeksTi("Oppg4610.txt", false);
@@ -263,6 +267,7 @@ int main() {
             points[i].draw();
         }
         
+        octa.draw();
         xyz.draw();
         matteFireFireFire.draw();
         matteFireSeksTi.draw();

@@ -102,6 +102,9 @@
     <ClCompile Include="point.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="renderLoop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h">
@@ -173,9 +176,6 @@
     <ClInclude Include="disc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MatteObligTo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="matteModus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -186,6 +186,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderLoop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

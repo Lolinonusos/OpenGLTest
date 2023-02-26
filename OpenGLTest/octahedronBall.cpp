@@ -41,13 +41,12 @@ void OctahedronBall::draw() {
 }
 
 void OctahedronBall::octahedronUnitBall() {
-	glm::vec3 v0 { glm::vec3(0.0f, 0.0f, 1.0f) };
-	glm::vec3 v1 { glm::vec3(1.0f, 0.0f, 0.0f) };
-	glm::vec3 v2 { glm::vec3(0.0f, 1.0f, 0.0f) };
-	glm::vec3 v3 { glm::vec3(-1.0f, 0.0f, 0.0f) };
-	glm::vec3 v4 { glm::vec3(0.0f, -1.0f, 0.0f) };
-	glm::vec3 v5 { glm::vec3(0.0f, 0.0f, -1.0f) };
-
+	glm::vec3 v0 { glm::vec3( 0.0f,  0.0f,  1.0f) };
+	glm::vec3 v1 { glm::vec3( 1.0f,  0.0f,  0.0f) };
+	glm::vec3 v2 { glm::vec3( 0.0f,  1.0f,  0.0f) };
+	glm::vec3 v3 { glm::vec3(-1.0f,  0.0f,  0.0f) };
+	glm::vec3 v4 { glm::vec3( 0.0f, -1.0f,  0.0f) };
+	glm::vec3 v5 { glm::vec3( 0.0f,  0.0f, -1.0f) };
 
 	subdivide(v0, v1, v2, recursions);
 	subdivide(v0, v2, v3, recursions);
@@ -72,14 +71,16 @@ void OctahedronBall::subdivide(const glm::vec3& a, const glm::vec3& b, const glm
 	if (n > 0) {
 		glm::vec3 v1 = a + b;
 		glm::normalize(v1);
+		
 		glm::vec3 v2 = a + c;
 		glm::normalize(v2);
+		
 		glm::vec3 v3 = c + b;
 		glm::normalize(v3);
 
 		subdivide(a, v1, v2, n - 1);
-		subdivide(b, v2, v3, n - 1);
-		subdivide(c, v3, v1, n - 1);
+		subdivide(c, v2, v3, n - 1);
+		subdivide(b, v3, v1, n - 1);
 		subdivide(v3, v2, v1, n - 1);
 	}
 	else {
