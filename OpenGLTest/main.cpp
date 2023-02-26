@@ -155,19 +155,22 @@ int main() {
 
     //// Matte oblig 2
     // 4.4.4
-    //points.push_back(Point{ 10, 1.0f, 2.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    //points.push_back(Point{ 10, 2.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    //points.push_back(Point{ 10, 3.0f, 2.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    //points.push_back(Point{ 10, 4.0f, 4.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    //points.push_back(Point{ 10, 5.0f, 3.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    //points.push_back(Point{ 10, 6.0f, 4.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    //points.push_back(Point{ 10, 7.0f, 5.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    //points.push_back(Point{ 10, 8.0f, 6.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    glPointSize(10);
+
+
+    points.push_back(Point{ 1.0f, 2.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    points.push_back(Point{ 2.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    points.push_back(Point{ 3.0f, 2.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    points.push_back(Point{ 4.0f, 4.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    points.push_back(Point{ 5.0f, 3.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    points.push_back(Point{ 6.0f, 4.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    points.push_back(Point{ 7.0f, 5.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
+    points.push_back(Point{ 8.0f, 6.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
     // 4.6.10
-    points.push_back(Point{ 10, 1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
-    points.push_back(Point{ 10, 3.0f, 1.5f, 0.0f, 0.0f, 0.0f, 1.0f } );
-    points.push_back(Point{ 10, 4.0f, 5.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
-    points.push_back(Point{ 10, 6.0f, 2.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
+    points.push_back(Point{ 1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
+    points.push_back(Point{ 3.0f, 1.5f, 0.0f, 0.0f, 0.0f, 1.0f } );
+    points.push_back(Point{ 4.0f, 5.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
+    points.push_back(Point{ 6.0f, 2.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
 
     for (int i = 0; i < points.size(); i++) {
         points[i].init(1);
@@ -261,7 +264,7 @@ int main() {
         }
         
         xyz.draw();
-        //matteFireFireFire.draw();
+        matteFireFireFire.draw();
         matteFireSeksTi.draw();
 
 

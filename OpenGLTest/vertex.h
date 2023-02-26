@@ -33,9 +33,8 @@ public:
 	glm::vec2 texCoord{0};
 
 	// This is overloading
-	Vertex() {
+	Vertex() {};
 
-	};
 	Vertex(glm::vec3 xyz) {
 		position = xyz;
 		normal = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -58,13 +57,11 @@ public:
 		normal = glm::vec3(0.0f, 0.0f, 0.0f);
 		texCoord = glm::vec2(0.0f, 0.0f);
 	};
-
 	Vertex(float x, float y, float z, float r, float g, float b) {
 		position = glm::vec3(x, y, z);
 		normal = glm::vec3(r, g, b); 
 		texCoord = glm::vec2(0.0f, 0.0f);
 	};
-
 	Vertex(float x, float y, float z, float r, float g, float b, float u, float v) {
 		position = glm::vec3(x, y, z);
 		normal = glm::vec3(r, g, b);

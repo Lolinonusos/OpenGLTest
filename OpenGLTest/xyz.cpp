@@ -1,13 +1,13 @@
 #include "xyz.h"
 
 XYZ::XYZ() {
-	vertices.push_back(Vertex{ glm::vec3(-10, 0, 0), glm::vec3(1, 0, 0) });
-	vertices.push_back(Vertex{ glm::vec3(10, 0, 0), glm::vec3(1, 0, 0) });
-	vertices.push_back(Vertex{ glm::vec3(0, -10, 0), glm::vec3(0, 1, 0) });
-	vertices.push_back(Vertex{ glm::vec3(0, 10, 0), glm::vec3(0, 1, 0) });
-	vertices.push_back(Vertex{ glm::vec3(0, 0, -10), glm::vec3(0, 0, 1) });
-	vertices.push_back(Vertex{ glm::vec3(0, 0, 10), glm::vec3(0, 0, 1) });
-
+	float size = 10.f;
+	vertices.push_back(Vertex{ glm::vec3(-size, 0, 0), glm::vec3(1, 0, 0) });
+	vertices.push_back(Vertex{ glm::vec3(size, 0, 0), glm::vec3(1, 0, 0) });
+	vertices.push_back(Vertex{ glm::vec3(0, -size, 0), glm::vec3(0, 1, 0) });
+	vertices.push_back(Vertex{ glm::vec3(0, size, 0), glm::vec3(0, 1, 0) });
+	vertices.push_back(Vertex{ glm::vec3(0, 0, -size), glm::vec3(0, 0, 1) });
+	vertices.push_back(Vertex{ glm::vec3(0, 0, size), glm::vec3(0, 0, 1) });
 }
 
 XYZ::~XYZ() {

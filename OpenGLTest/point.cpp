@@ -1,14 +1,12 @@
 #include "point.h"
 
-Point::Point(int pointSize, float x, float y, float z, float r, float g, float b) {
-	glPointSize(pointSize);
+Point::Point(float x, float y, float z, float r, float g, float b) {
 	vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(r, g, b) });
 	//vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(x, y, z) });
 	//vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(x, y, z) });
 }
 
-Point::~Point()
-{
+Point::~Point() {
 }
 
 void Point::init(int shader) {

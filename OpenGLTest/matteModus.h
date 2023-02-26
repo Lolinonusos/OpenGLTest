@@ -9,9 +9,6 @@
 
 class Matrise {
 public:
-	//std::vector<std::vector <float>> vectorVector[2];
-	//std::vector<float> matSize;
-
 	// Koordinatene til punktene er:
 	// 1.0f, 2.0f
 	// 2.0f, 1.0f
