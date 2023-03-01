@@ -15,7 +15,7 @@ public:
 			camera->setPosition(this->position);
 		}
 		else {
-			camera->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+			camera->setPosition(glm::vec3(0.0f, 0.0f, 3.0f));
 		}
 	}
 
