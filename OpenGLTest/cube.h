@@ -3,7 +3,7 @@
 
 #include "visObject.h"
 
-class Cube : public visObject {
+class Cube : public VisObject {
 public:
 	Cube();
 	~Cube();

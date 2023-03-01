@@ -3,7 +3,7 @@
 
 #include "visobject.h"
 
-class Tetrahedon : public visObject {
+class Tetrahedon : public VisObject {
 public:
 	Tetrahedon();
 	~Tetrahedon();

@@ -2,19 +2,20 @@
 
 
 
-visObject::visObject() {
+VisObject::VisObject() {
 	// set to matrixes to be identity Matrixes
+
 	matrix = glm::mat4(1.0f);
 }
 
-visObject::~visObject() {
+VisObject::~VisObject() {
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 
 }
 
-void visObject::init(int inMatrixUniform) {
+void VisObject::init(int inMatrixUniform) {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
@@ -35,3 +36,9 @@ void visObject::init(int inMatrixUniform) {
 
 	glBindVertexArray(0);
 }
+
+void VisObject::setRenderStyle(int i) {
+	renderVal = i;
+}
+
+

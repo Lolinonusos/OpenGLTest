@@ -1,4 +1,3 @@
-
 #ifndef VISOBJECT_H
 #define VISOBJECT_H
 
@@ -19,12 +18,13 @@
 #include "vertex.h"
 #include "shader.h"
 
+
 // Hensikten med denne klassen er at vi skal tegne alle 3d objeket
 // gjennom klasser som arver fra denne
-class visObject : public PositionComponent {
+class VisObject : public PositionComponent {
 public:
-	visObject();
-	~visObject();
+	VisObject();
+	~VisObject();
 
 	// Virtual
 	// Lar klasser som arver lage en override av funksjonen
@@ -35,9 +35,27 @@ public:
 	// Tvinger alle klasser som arver fra denne til å ha sin egen override av funksjonen
 	virtual void draw() = 0; 
 
+	void setRenderStyle(int i);
+
 	// Alle klasser som arver kan skrive til fil
 	void writeFile(std::string adress);
 	// Men bare en skal trenge å lese
+	
+
+
+	void collider(float inRadius = 1.0f) {
+		radius = inRadius;
+	}
+	virtual void checkCollision(VisObject* other) {
+		//const glm::vec3 you = this->position;
+		float dist = glm::distance(this->position, other->position);
+		if (dist < this->radius + other->radius) {
+			std::cout << "collision" << std::endl;
+		}
+	}
+
+	float radius{};
+
 protected:
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
@@ -47,7 +65,14 @@ protected:
 	unsigned int EBO{ 0 };
 	int matrixUniform{ 0 };
 
-	glm::mat4 matrix;
+	enum RenderStyle {
+		SOLID,
+		WIREFRAME,
+		HIDDEN
+	};
+	int renderVal;
+
+	// Collision
 };
 
 #endif

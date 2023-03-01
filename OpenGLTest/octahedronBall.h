@@ -2,7 +2,7 @@
 
 #include "visObject.h"
 
-class OctahedronBall : visObject {
+class OctahedronBall : public VisObject {
 public:
 	OctahedronBall(int n = 0);
 	~OctahedronBall();

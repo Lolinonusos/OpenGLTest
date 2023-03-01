@@ -1,6 +1,6 @@
 #include "interactive.h"
 
-Interactive::Interactive() : position(glm::vec3(0.0f, 0.0f, 0.0f)) {
+Interactive::Interactive() {
     //glm::vec3 inPosition = glm::vec3(0.0f, 0.0f, 0.0f)
     //vecPosition = inPosition;
     
@@ -40,11 +40,11 @@ void Interactive::init(int shader)
 
 void Interactive::draw() {
 	glBindVertexArray(VAO);
-	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(getTranslateMatrix()));
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
 }
 
-void Interactive::move(float inX, float inY, float inZ, float deltaTime) {
-	position = glm::vec3(inX, inY, inZ) * deltaTime;
-	matrix = glm::translate(matrix, position);
-}
+//void Interactive::move(float inX, float inY, float inZ, float deltaTime) {
+//	position = glm::vec3(inX, inY, inZ) * deltaTime;
+//	matrix = glm::translate(matrix, position);
+//}

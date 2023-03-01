@@ -2,7 +2,7 @@
 
 #include "visObject.h"
 
-class Disc : public visObject {
+class Disc : public VisObject {
 public:
 	Disc();
 	~Disc();

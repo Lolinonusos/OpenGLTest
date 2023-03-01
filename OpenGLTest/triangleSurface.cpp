@@ -1,6 +1,6 @@
 #include "triangleSurface.h"
 
-TriangleSurface::TriangleSurface() :visObject() {
+TriangleSurface::TriangleSurface() :VisObject() {
 
 	float h = 0.005f;
 
@@ -29,7 +29,7 @@ TriangleSurface::TriangleSurface() :visObject() {
 	matrix = glm::mat4(1.0f);
 }
 
-TriangleSurface::TriangleSurface(std::string fileName, bool write) : visObject() {
+TriangleSurface::TriangleSurface(std::string fileName, bool write) : VisObject() {
 	
 	if (write) {
 		writefile(fileName);
@@ -106,6 +106,6 @@ void TriangleSurface::init(int shader) {
 void TriangleSurface::draw()
 {
 	glBindVertexArray(VAO);
-	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(getTranslateMatrix()));
 	glDrawArrays(GL_LINE_STRIP, 0, vertices.size());// vertices.size());
 }

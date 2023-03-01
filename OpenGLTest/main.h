@@ -22,8 +22,9 @@
 #include <Eigen/Core>
 
 // Mine egne headere
+#include "Enum.h"
 
-// 3D programmering obliger
+#include "positionComponent.h"
 #include "xyz.h"
 #include "cube.h"
 #include "graph.h"
@@ -31,6 +32,10 @@
 #include "interactive.h"
 #include "point.h"
 #include "octahedronBall.h"
+
+// 3D programmering obliger
+#include "changeScene.h"
+#include "trophy.h"
 
 // Matte obliger
 #include "matteModus.h"

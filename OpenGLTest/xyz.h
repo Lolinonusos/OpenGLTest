@@ -3,7 +3,7 @@
 
 #include "visObject.h"
 
-class XYZ : public visObject {
+class XYZ : public VisObject {
 public:
 	XYZ();
 	~XYZ();

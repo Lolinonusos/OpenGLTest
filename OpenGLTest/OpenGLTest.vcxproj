@@ -152,6 +152,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="changeScene.cpp" />
+    <ClCompile Include="collider.cpp" />
     <ClCompile Include="cube.cpp" />
     <ClCompile Include="disc.cpp" />
     <ClCompile Include="fileReader.cpp" />
@@ -175,13 +177,16 @@
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="transform.cpp" />
     <ClCompile Include="triangleSurface.cpp" />
+    <ClCompile Include="trophy.cpp" />
     <ClCompile Include="visObject.cpp" />
     <ClCompile Include="xyz.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="collider.h" />
     <ClInclude Include="cube.h" />
     <ClInclude Include="disc.h" />
+    <ClInclude Include="Enum.h" />
     <ClInclude Include="fileReader.h" />
     <ClInclude Include="fileWriter.h" />
     <ClInclude Include="graph.h" />
@@ -195,9 +200,11 @@
     <ClInclude Include="point.h" />
     <ClInclude Include="positionComponent.h" />
     <ClInclude Include="renderLoop.h" />
+    <ClInclude Include="changeScene.h" />
     <ClInclude Include="tetrahedon.h" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="triangleSurface.h" />
+    <ClInclude Include="trophy.h" />
     <ClInclude Include="vertex.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="model.h" />

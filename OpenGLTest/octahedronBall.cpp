@@ -1,6 +1,6 @@
 #include "octahedronBall.h"
 
-OctahedronBall::OctahedronBall(int n) : recursions(n), indices(0), visObject() {
+OctahedronBall::OctahedronBall(int n) : recursions(n), indices(0), VisObject() {
 	vertices.reserve(3 * 8 * pow(4, recursions));
 	octahedronUnitBall();
 }
@@ -36,8 +36,25 @@ void OctahedronBall::init(int matrixUniform) {
 
 void OctahedronBall::draw() {
 	glBindVertexArray(VAO);
-	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(getTranslateMatrix()));
+	
+	//const int i = SOLID;
+
+	switch (RenderStyle(renderVal)) {
+	case SOLID:
+		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+		break;
+	case WIREFRAME:
+		glDrawArrays(GL_LINES, 0, vertices.size());
+		break;
+	case HIDDEN:
+
+		break;
+	default:
+		std::cout << "ERROR::INVALID_RENDER_METHOD" << std::endl;
+		break;
+	}
+	//glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 }
 
 void OctahedronBall::octahedronUnitBall() {
@@ -59,24 +76,20 @@ void OctahedronBall::octahedronUnitBall() {
 }
 
 void OctahedronBall::makeTriangle(const glm::vec3& v1, const glm::vec3& v2, const glm::vec3& v3) {
-	Vertex v{ v1.x, v1.y, v1.z, v1.r, v1.g, v1.b };
+	Vertex v{ v1.x, v1.y, v1.z, v1.x, v1.y, v1.z };
 	vertices.push_back(v);
-	v = Vertex{ v2.x, v2.y, v2.z, v2.r, v2.g, v2.b };
+	v = Vertex{ v2.x, v2.y, v2.z, v2.x, v2.y, v2.z };
 	vertices.push_back(v);
-	v = Vertex{ v3.x, v3.y, v3.z, v3.r, v3.g, v3.b };
+	v = Vertex{ v3.x, v3.y, v3.z, v3.x, v3.y, v3.z };
 	vertices.push_back(v);
 }
 
 void OctahedronBall::subdivide(const glm::vec3& a, const glm::vec3& b, const glm::vec3& c, int n) {
 	if (n > 0) {
-		glm::vec3 v1 = a + b;
-		glm::normalize(v1);
-		
-		glm::vec3 v2 = a + c;
-		glm::normalize(v2);
-		
-		glm::vec3 v3 = c + b;
-		glm::normalize(v3);
+		// BALLIN!
+		glm::vec3 v1 = glm::normalize(a + b);
+		glm::vec3 v2 = glm::normalize(a + c);
+		glm::vec3 v3 = glm::normalize(c + b);
 
 		subdivide(a, v1, v2, n - 1);
 		subdivide(c, v2, v3, n - 1);

@@ -3,7 +3,7 @@
 
 #include "visObject.h"
 
-class Graph : public visObject{
+class Graph : public VisObject{
 public:
 	Graph();
 	~Graph();

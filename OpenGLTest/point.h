@@ -2,7 +2,7 @@
 
 #include "visObject.h"
 
-class Point : public visObject {
+class Point : public VisObject {
 public:
 	Point(float x, float y, float z, float r, float g, float b);
 	~Point();

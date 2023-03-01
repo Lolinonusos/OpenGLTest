@@ -3,7 +3,7 @@
 
 #include "visObject.h"
 
-class TriangleSurface : public visObject {
+class TriangleSurface : public VisObject {
 public:
 	TriangleSurface();
 	TriangleSurface(std::string fileName, bool write);

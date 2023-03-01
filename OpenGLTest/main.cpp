@@ -30,25 +30,28 @@ void processInput(GLFWwindow* window) {
 
     // Interact object here
     if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) { // FORWARD
-        intObj.move(0.0f, 1.0f, 0.0f, deltaTime);
+        //intObj.move(0.0f, 1.0f, 0.0f, deltaTime);
+        intObj.translate(UP, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) { // BACKWARD
-        intObj.move(0.0f, -1.0f, 0.0f, deltaTime);
+        //intObj.move(0.0f, -1.0f, 0.0f, deltaTime);
 
+        intObj.translate(DOWN, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) { // RIGHT
-        intObj.move(1.0f, 0.0f, 0.0f, deltaTime);
+        //intObj.move(1.0f, 0.0f, 0.0f, deltaTime);
 
+        intObj.translate(RIGHT, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) { // LEFT
-        intObj.move(-1.0f, 0.0f, 0.0f, deltaTime);
-
+        //intObj.move(-1.0f, 0.0f, 0.0f, deltaTime);
+        intObj.translate(LEFT, deltaTime);
     }
 
     // Camera here
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // FORWARD
         //camPos += camSpeed * camFront;
-        camera.processKeyboard(FORWARD, deltaTime);
+        camera.translate(FORWARD, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) { // BACKWARD
         camera.processKeyboard(BACKWARD, deltaTime);
@@ -183,7 +186,7 @@ int main() {
     //// Matte oblig 2 slutt
     */
 
-    OctahedronBall octa(6);
+    OctahedronBall octa(3);
     octa.init(1);
 
     TriangleSurface matteFireFireFire("Oppg444.txt", false);
@@ -204,6 +207,10 @@ int main() {
 
     intObj.init(1);
     
+    // Oblig 2
+    changeScene cs;
+    cs.init(1);
+    cs.setPosition(glm::vec3(1.0f, 0.0f, 0.0f));
     //cube.readFile("Data.txt");
     
     // Initializing render matrixes as identity matrixes
@@ -253,25 +260,32 @@ int main() {
             model = glm::mat4(1.0f);
             model = glm::translate(model, cubePositions[i]);
             float angle = 20.0f * 1 + i * 2;
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+            model = glm::rotate(model, ((float)glfwGetTime() * glm::radians(angle)), glm::vec3(0.5f, 1.0f, 0.0f));
             ourShader.setMat4("model", model);
             //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
             //gldrawarrays(gl_triangles, 0, 36);
             //cube.draw();
             //graph.draw();
-            //intObj.draw();
+            intObj.draw();
         }
 
         for (int i = 0; i < points.size(); i++) {
             points[i].draw();
         }
-        
-        octa.draw();
-        xyz.draw();
-        matteFireFireFire.draw();
-        matteFireSeksTi.draw();
+        //octa.renderVal = 0;
 
+        //octa.draw();
+        //xyz.draw();
+        //matteFireFireFire.draw();
+        //matteFireSeksTi.draw();
+        std::cout << intObj.position.x << " " << intObj.position.y << " " << intObj.position.z << std::endl;
+
+        intObj.collider();
+        //octa.collider();
+        //intObj.checkCollision(&octa);
+        cs.draw();
+        cs.checkCollision(&intObj, &camera);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         glfwSwapBuffers(window);

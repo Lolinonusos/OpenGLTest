@@ -5,14 +5,17 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "positionComponent.h"
+//#include "Enum.h"
+
 // This camera is from learnOpenGL.com 
 
-enum Camera_Movement {
-	FORWARD,
-	BACKWARD,
-	LEFT,
-	RIGHT
-};
+//enum Camera_Movement {
+//	FORWARD,
+//	BACKWARD,
+//	LEFT,
+//	RIGHT
+//};
 
 const float YAW = -90.0f;
 const float PITCH = 0.0f;
@@ -21,10 +24,10 @@ const float SENSITIVITY = 0.1f; // Mouse sensitivity
 const float ZOOM = 45.0f;
 
 
-class Camera{
+class Camera : public PositionComponent{
 public:
 	// Camera position and movement
-	glm::vec3 position;
+	//glm::vec3 position;
 	glm::vec3 front;
 	glm::vec3 up; // y is up direction
 	glm::vec3 right;//
@@ -50,7 +53,7 @@ public:
 		return glm::lookAt(position, position + front, up);
 	}
 
-	void processKeyboard(Camera_Movement direction, float deltaTime) {
+	void processKeyboard(Direction direction, float deltaTime) {
 		float velocity = movementSpeed * deltaTime;
 		if (direction == FORWARD) {
 			position += front * velocity;
