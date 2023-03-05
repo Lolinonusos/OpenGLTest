@@ -87,6 +87,7 @@ void PositionComponent::translate(float inX, float inY, float inZ, float deltaTi
 
 void PositionComponent::setPosition(glm::vec3 offset) {
 	position = offset;
+	matrix = getTranslateMatrix();
 }
 
 void PositionComponent::setRotation(float angle, glm::vec3)

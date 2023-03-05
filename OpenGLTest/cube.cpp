@@ -1,7 +1,7 @@
 #include "cube.h"
 
 Cube::Cube() {
-    // Positions                    // Normals                   // Texture coordinates
+                               // Positions                    // Normals                   // Texture coordinates
     // Front plane
     vertices.push_back(Vertex{ glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0.0f, 0.0f) });
     vertices.push_back(Vertex{ glm::vec3(0.5f, -0.5f, -0.5f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(1.0f, 0.0f) });
@@ -82,6 +82,7 @@ void Cube::draw() {
     switch (RenderStyle(renderVal)) {
     case SOLID:
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        setPosition(glm::vec3(1.0f, 0.0f, 0.0f));
         break;
     case WIREFRAME:
         glDrawArrays(GL_LINES, 0, vertices.size());
@@ -89,6 +90,7 @@ void Cube::draw() {
     case HIDDEN:
         std::cout << "Set hidden" << std::endl;
         glDrawArrays(GL_POINTS, 0, vertices.size());
+
         break;
     default:
         std::cout << "ERROR::INVALID_RENDER_METHOD" << std::endl;
