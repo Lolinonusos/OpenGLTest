@@ -36,9 +36,12 @@ public:
 	void translateLocal(Direction direction);
 	void translateLocal(glm::vec3 offset, float deltaTime);
 	void translate(Direction direction, float deltaTime);
-	
+	void translate(float inX, float inY, float inZ, float deltaTime);
+
 	// Set position
 	void setPosition(glm::vec3 offset);
+
+	void setRotation(float angle, glm::vec3 axis);
 
 	float moveSpeed{};
 	bool useLocal{ true };

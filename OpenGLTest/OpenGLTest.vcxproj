@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bezierCurve.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="changeScene.cpp" />
     <ClCompile Include="collider.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="xyz.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bezierCurve.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="collider.h" />
     <ClInclude Include="cube.h" />

@@ -28,24 +28,29 @@ void processInput(GLFWwindow* window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
+    //float z = 2 * cos(intObj.position.x) * sin(intObj.position.y);
+
     // Interact object here
     if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) { // FORWARD
         //intObj.move(0.0f, 1.0f, 0.0f, deltaTime);
         intObj.translate(UP, deltaTime);
+        //intObj.translate(0.0f, 1.0f, z, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) { // BACKWARD
         //intObj.move(0.0f, -1.0f, 0.0f, deltaTime);
-
         intObj.translate(DOWN, deltaTime);
+        //intObj.translate(0.0f, -1.0, z, deltaTime);
+
     }
     if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) { // RIGHT
         //intObj.move(1.0f, 0.0f, 0.0f, deltaTime);
-
         intObj.translate(RIGHT, deltaTime);
+        //intObj.translate(1.0f, 0.0f, z, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) { // LEFT
         //intObj.move(-1.0f, 0.0f, 0.0f, deltaTime);
         intObj.translate(LEFT, deltaTime);
+        //intObj.translate(-1.0f, 0.0f, z, deltaTime);
     }
 
     // Camera here
@@ -207,12 +212,20 @@ int main() {
 
     intObj.init(1);
     
+
     // Oblig 2
     changeScene cs;
     cs.init(1);
     cs.setPosition(glm::vec3(1.0f, 0.0f, 0.0f));
     //cube.readFile("Data.txt");
+
+    std::vector<Trophy> collision;
+    collision.push_back(Trophy{});
+    for (int i = 0; i < collision.size(); i++) {
+        collision[i].init(1);
+    }
     
+
     // Initializing render matrixes as identity matrixes
     glm::mat4 projection = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
@@ -266,26 +279,31 @@ int main() {
 
             //gldrawarrays(gl_triangles, 0, 36);
             //cube.draw();
-            //graph.draw();
-            intObj.draw();
         }
+        intObj.draw();
+        // graph.draw();
 
-        for (int i = 0; i < points.size(); i++) {
-            points[i].draw();
-        }
+        //for (int i = 0; i < points.size(); i++) {
+        //    //points[i].draw();
+        //}
         //octa.renderVal = 0;
 
         //octa.draw();
         //xyz.draw();
         //matteFireFireFire.draw();
         //matteFireSeksTi.draw();
-        std::cout << intObj.position.x << " " << intObj.position.y << " " << intObj.position.z << std::endl;
+        //std::cout << intObj.position.x << " " << intObj.position.y << " " << intObj.position.z << std::endl;
 
         intObj.collider();
         //octa.collider();
         //intObj.checkCollision(&octa);
-        cs.draw();
-        cs.checkCollision(&intObj, &camera);
+        //cs.draw();
+        for (int i = 0; i < collision.size(); i++) {
+            collision[i].checkCollision(&intObj);
+            collision[i].draw();
+        }
+
+        //cs.checkCollision(&intObj, &camera);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         glfwSwapBuffers(window);

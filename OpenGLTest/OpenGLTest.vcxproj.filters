@@ -114,6 +114,9 @@
     <ClCompile Include="changeScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bezierCurve.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h">
@@ -206,10 +209,13 @@
     <ClInclude Include="Enum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="changeScene.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="trophy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bezierCurve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="changeScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

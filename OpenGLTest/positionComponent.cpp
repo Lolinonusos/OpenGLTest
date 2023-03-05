@@ -80,6 +80,15 @@ void PositionComponent::translate(Direction direction, float deltaTime) {
 	}
 }
 
+void PositionComponent::translate(float inX, float inY, float inZ, float deltaTime) {
+	//inZ = 2 * cos(position.x) * sin(position.y);
+	position += glm::vec3(inX, inY, inZ) * deltaTime;
+}
+
 void PositionComponent::setPosition(glm::vec3 offset) {
 	position = offset;
+}
+
+void PositionComponent::setRotation(float angle, glm::vec3)
+{
 }

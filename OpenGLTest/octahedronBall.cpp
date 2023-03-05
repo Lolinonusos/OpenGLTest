@@ -19,7 +19,6 @@ void OctahedronBall::init(int matrixUniform) {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
 
-
 	// Set vertex attribute pointers
 	// Vertex positions
 	glEnableVertexAttribArray(0);
@@ -51,7 +50,7 @@ void OctahedronBall::draw() {
 
 		break;
 	default:
-		std::cout << "ERROR::INVALID_RENDER_METHOD" << std::endl;
+		std::cout << "ERROR::INVALID_RENDER_VALUE" << std::endl;
 		break;
 	}
 	//glDrawArrays(GL_TRIANGLES, 0, vertices.size());
