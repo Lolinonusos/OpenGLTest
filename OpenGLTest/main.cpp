@@ -59,13 +59,13 @@ void processInput(GLFWwindow* window) {
         camera.translate(FORWARD, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) { // BACKWARD
-        camera.processKeyboard(BACKWARD, deltaTime);
+        camera.translate(BACKWARD, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) { // RIGHT
-        camera.processKeyboard(RIGHT, deltaTime);
+        camera.translate(RIGHT, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) { // LEFT
-        camera.processKeyboard(LEFT, deltaTime);
+        camera.translate(LEFT, deltaTime);
     }
 }
 
@@ -193,6 +193,7 @@ int main() {
 
     OctahedronBall octa(3);
     octa.init(1);
+    int ballPos{};
 
     TriangleSurface matteFireFireFire("Oppg444.txt", false);
     TriangleSurface matteFireSeksTi("Oppg4610.txt", false);
@@ -224,7 +225,7 @@ int main() {
     for (int i = 0; i < collision.size(); i++) {
         collision[i].init(1);
     }
-    
+
 
     // Initializing render matrixes as identity matrixes
     glm::mat4 projection = glm::mat4(1.0f);
@@ -287,10 +288,16 @@ int main() {
         //    //points[i].draw();
         //}
         //octa.renderVal = 0;
+        
 
-        //octa.draw();
+        if (ballPos < matteFireFireFire.vertexAmount() -2) {
+            octa.setPosition(matteFireFireFire.getVertexPosition(ballPos));
+            ballPos++;
+        }
+
+        octa.draw();
         //xyz.draw();
-        //matteFireFireFire.draw();
+        matteFireFireFire.draw();
         //matteFireSeksTi.draw();
         //std::cout << intObj.position.x << " " << intObj.position.y << " " << intObj.position.z << std::endl;
 

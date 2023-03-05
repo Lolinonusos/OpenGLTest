@@ -41,7 +41,13 @@ public:
 	void writeFile(std::string adress);
 	// Men bare en skal trenge å lese
 	
+	int vertexAmount() {
+		return vertices.size();
+	}
 
+	glm::vec3 getVertexPosition(int index) {
+		return vertices[index].position;
+	}
 
 	void collider(float inRadius = 1.0f) {
 		radius = inRadius;
