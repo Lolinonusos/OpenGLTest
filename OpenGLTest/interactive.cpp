@@ -43,8 +43,3 @@ void Interactive::draw() {
 	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(getTranslateMatrix()));
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
 }
-
-//void Interactive::move(float inX, float inY, float inZ, float deltaTime) {
-//	position = glm::vec3(inX, inY, inZ) * deltaTime;
-//	matrix = glm::translate(matrix, position);
-//}

@@ -40,6 +40,7 @@ public:
 
 	// Set position
 	void setPosition(glm::vec3 offset);
+	void setPosition(float x, float y, float z);
 
 	void setRotation(float angle, glm::vec3 axis);
 
@@ -54,6 +55,24 @@ public:
 		matrix = glm::scale(matrix, scale);
 		return matrix;*/
 		return glm::lookAt(position, position + worldFront, worldUp);
+	}
+
+	void updateWorldVectors() {
+
+		//worldRight = glm::normalize
+	}
+
+	void updateLocalVectors() {
+		glm::vec3 newFront;
+
+		newFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+		newFront.y = sin(glm::radians(pitch));
+		newFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+
+		front = glm::normalize(newFront);
+
+		right = glm::normalize(glm::cross(front, worldUp));
+		up = glm::normalize(glm::cross(right, front));
 	}
 
 protected:

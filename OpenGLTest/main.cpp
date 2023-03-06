@@ -158,6 +158,7 @@ int main() {
     };
    
     XYZ xyz;
+    xyz.init(1);
 
     std::vector<Point> points;
     /*
@@ -191,9 +192,6 @@ int main() {
     //// Matte oblig 2 slutt
     */
 
-    OctahedronBall octa(3);
-    octa.init(1);
-    int ballPos{};
 
     TriangleSurface matteFireFireFire("Oppg444.txt", false);
     TriangleSurface matteFireSeksTi("Oppg4610.txt", false);
@@ -201,6 +199,12 @@ int main() {
     matteFireSeksTi.init(1);
     //trir.readFile("Data.txt");
     
+    OctahedronBall octa(3);
+    octa.init(1);
+    bool npcLeft = true;
+    int ballIndex{ 0 };
+    int vartAmount = matteFireFireFire.vertexAmount();
+   
     glEnable(GL_DEPTH_TEST);
     
     Graph graph;
@@ -219,6 +223,7 @@ int main() {
     cs.init(1);
     cs.setPosition(glm::vec3(1.0f, 0.0f, 0.0f));
     //cube.readFile("Data.txt");
+
 
     std::vector<Trophy> collision;
     collision.push_back(Trophy{});
@@ -281,7 +286,6 @@ int main() {
             //gldrawarrays(gl_triangles, 0, 36);
             //cube.draw();
         }
-        intObj.draw();
         // graph.draw();
 
         //for (int i = 0; i < points.size(); i++) {
@@ -290,16 +294,29 @@ int main() {
         //octa.renderVal = 0;
         
 
-        if (ballPos < matteFireFireFire.vertexAmount() -2) {
-            octa.setPosition(matteFireFireFire.getVertexPosition(ballPos));
-            ballPos++;
-        }
+        if (ballIndex < vartAmount && npcLeft) {
+            
+            auto temp = matteFireFireFire.getVertexPosition(ballIndex);
+            octa.setPosition(-temp.x, -temp.y, temp.z);
+            std::cout << ballIndex << std::endl;
 
-        octa.draw();
-        //xyz.draw();
-        matteFireFireFire.draw();
-        //matteFireSeksTi.draw();
-        //std::cout << intObj.position.x << " " << intObj.position.y << " " << intObj.position.z << std::endl;
+            ballIndex += 1;
+            if (ballIndex >= vartAmount - 1) {
+                std::cout << "kjør da" << std::endl;
+                //ballIndex = vartAmount;
+                npcLeft = false;
+            }
+            
+        }
+        else if (ballIndex >= 0 && !npcLeft) {
+            auto temp = matteFireFireFire.getVertexPosition(ballIndex);
+            octa.setPosition(-temp.x, -temp.y, temp.z);
+            ballIndex--;
+            if (ballIndex <= 0) {
+                ballIndex = 0;
+                npcLeft = true;
+            }
+        }
 
         intObj.collider();
         //octa.collider();
@@ -307,8 +324,16 @@ int main() {
         //cs.draw();
         for (int i = 0; i < collision.size(); i++) {
             collision[i].checkCollision(&intObj);
-            collision[i].draw();
         }
+
+        intObj.draw();
+        octa.draw();
+        xyz.setPosition(glm::vec3(1.0f, 0.0f, -0.5f));
+        xyz.draw();
+        matteFireFireFire.draw();
+        //matteFireSeksTi.draw();
+        //std::cout << intObj.position.x << " " << intObj.position.y << " " << intObj.position.z << std::endl;
+        collision[0].draw();
 
         //cs.checkCollision(&intObj, &camera);
 

@@ -77,20 +77,17 @@ void Cube::init(int inMatrixUniform) {
 
 void Cube::draw() {
 	glBindVertexArray(VAO);
-	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(getTranslateMatrix()));
 
     switch (RenderStyle(renderVal)) {
     case SOLID:
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-        setPosition(glm::vec3(1.0f, 0.0f, 0.0f));
         break;
     case WIREFRAME:
         glDrawArrays(GL_LINES, 0, vertices.size());
         break;
     case HIDDEN:
-        std::cout << "Set hidden" << std::endl;
         glDrawArrays(GL_POINTS, 0, vertices.size());
-
         break;
     default:
         std::cout << "ERROR::INVALID_RENDER_METHOD" << std::endl;

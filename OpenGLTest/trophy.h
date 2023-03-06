@@ -13,7 +13,9 @@ public:
 			this->setRenderStyle(HIDDEN);
 		}
 		else {
+			setPosition(glm::vec3(1.0f, 0.0f, 0.0f));
 			this->setRenderStyle(SOLID);
+
 		}
 	}
 };
