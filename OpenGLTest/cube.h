@@ -8,7 +8,7 @@ public:
 	Cube();
 	~Cube();
 	void init(int inMatrixUniform) override;
-	void draw() override;
+	void draw(Shader shader) override;
 };
 
 #endif

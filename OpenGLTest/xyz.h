@@ -8,7 +8,7 @@ public:
 	XYZ();
 	~XYZ();
 	void init(int inMmatrixUniform) override;
-	void draw() override;
+	void draw(Shader shader) override;
 };
 
 #endif

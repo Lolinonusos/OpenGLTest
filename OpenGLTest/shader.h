@@ -19,7 +19,8 @@ public:
 	void use();
 	void remove();
 
-	// Utility uniform functions
+	// Utility uniform functions 
+	// Functions to easily expose variables to the shader files
 	void setBool(const std::string& name, bool value) const;
 
 	//--------------------------------------------------------

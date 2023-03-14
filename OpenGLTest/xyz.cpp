@@ -43,8 +43,9 @@ void XYZ::init(int inMatrixUniform) {
 	glBindVertexArray(0);
 }
 
-void XYZ::draw() {
+void XYZ::draw(Shader shader) {
 	glBindVertexArray(VAO);
-	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	shader.setMat4("model", matrix);
 	glDrawArrays(GL_LINES, 0, vertices.size());
 }

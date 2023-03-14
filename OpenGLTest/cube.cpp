@@ -75,9 +75,10 @@ void Cube::init(int inMatrixUniform) {
 	glBindVertexArray(0);
 }
 
-void Cube::draw() {
+void Cube::draw(Shader shader) {
 	glBindVertexArray(VAO);
-	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(getTranslateMatrix()));
+	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+    shader.setMat4("model", matrix);
 
     switch (RenderStyle(renderVal)) {
     case SOLID:

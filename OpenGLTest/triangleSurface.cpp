@@ -103,9 +103,10 @@ void TriangleSurface::init(int shader) {
 	glBindVertexArray(0);
 }
 
-void TriangleSurface::draw()
+void TriangleSurface::draw(Shader shader)
 {
 	glBindVertexArray(VAO);
-	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(getTranslateMatrix()));
+	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(getTranslateMatrix()));
+	shader.setMat4("model", matrix);
 	glDrawArrays(GL_LINE_STRIP, 0, vertices.size());// vertices.size());
 }

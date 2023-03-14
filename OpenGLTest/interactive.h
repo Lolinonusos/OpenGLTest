@@ -7,7 +7,7 @@ public:
 	Interactive();
 	~Interactive();
 	void init(int shader) override;
-	void draw() override;
+	void draw(Shader shader) override;
 
 private:
 	float movementSpeed = 2.0f; // Not in use yet

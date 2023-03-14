@@ -38,8 +38,9 @@ void Interactive::init(int shader)
 	glBindVertexArray(0);
 }
 
-void Interactive::draw() {
+void Interactive::draw(Shader shader) {
 	glBindVertexArray(VAO);
-	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(getTranslateMatrix()));
+	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	shader.setMat4("model", matrix);
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
 }

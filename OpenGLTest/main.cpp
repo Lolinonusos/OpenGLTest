@@ -22,6 +22,9 @@ bool firstMouse = true;
 // Interactive object
 Interactive intObj;
 
+// 3D Oblig 2
+bool graph1 = true;
+
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 void processInput(GLFWwindow* window) {
     const float camSpeed = 2.0f * deltaTime;
@@ -66,6 +69,18 @@ void processInput(GLFWwindow* window) {
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) { // LEFT
         camera.translate(LEFT, deltaTime);
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+        if (graph1) {
+            graph1 = false;
+            std::cout << "false" << std::endl;
+        }
+        else if (!graph1) {
+            graph1 = true;
+            std::cout << "true" << std::endl;
+
+        }
     }
 }
 
@@ -203,6 +218,7 @@ int main() {
     octa.init(1);
     bool npcLeft = true;
     int ballIndex{ 0 };
+    auto temp = glm::vec3(0.0f, 0.0f, 0.0f);
     int vartAmount = matteFireFireFire.vertexAmount();
    
     glEnable(GL_DEPTH_TEST);
@@ -227,10 +243,13 @@ int main() {
 
     std::vector<Trophy> collision;
     collision.push_back(Trophy{});
+    collision.push_back(Trophy{});
+
     for (int i = 0; i < collision.size(); i++) {
         collision[i].init(1);
     }
 
+    collision[1].setPosition(-1.0f, 0.0f, 0.0f);
 
     // Initializing render matrixes as identity matrixes
     glm::mat4 projection = glm::mat4(1.0f);
@@ -274,18 +293,18 @@ int main() {
         
         //int ma
 
-        for (int i = 0; i < 10; i++) {
+        //for (int i = 0; i < 10; i++) {
             // Model matrix
-            model = glm::mat4(1.0f);
+            /*model = glm::mat4(1.0f);
             model = glm::translate(model, cubePositions[i]);
             float angle = 20.0f * 1 + i * 2;
             model = glm::rotate(model, ((float)glfwGetTime() * glm::radians(angle)), glm::vec3(0.5f, 1.0f, 0.0f));
-            ourShader.setMat4("model", model);
+            ourShader.setMat4("model", model);*/
             //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
             //gldrawarrays(gl_triangles, 0, 36);
             //cube.draw();
-        }
+        //}
         // graph.draw();
 
         //for (int i = 0; i < points.size(); i++) {
@@ -293,30 +312,38 @@ int main() {
         //}
         //octa.renderVal = 0;
         
-
         if (ballIndex < vartAmount && npcLeft) {
-            
-            auto temp = matteFireFireFire.getVertexPosition(ballIndex);
+            if (graph1) {
+                temp = matteFireFireFire.getVertexPosition(ballIndex);
+            }
+            else if (!graph1) {
+                temp = matteFireSeksTi.getVertexPosition(ballIndex);
+            }
+
             octa.setPosition(-temp.x, -temp.y, temp.z);
             std::cout << ballIndex << std::endl;
-
             ballIndex += 1;
             if (ballIndex >= vartAmount - 1) {
-                std::cout << "kjør da" << std::endl;
                 //ballIndex = vartAmount;
                 npcLeft = false;
             }
-            
         }
         else if (ballIndex >= 0 && !npcLeft) {
-            auto temp = matteFireFireFire.getVertexPosition(ballIndex);
-            octa.setPosition(-temp.x, -temp.y, temp.z);
-            ballIndex--;
+            if (graph1) {
+                temp = matteFireFireFire.getVertexPosition(ballIndex);
+            }
+            else if (!graph1) {
+                temp = matteFireSeksTi.getVertexPosition(ballIndex);
+            }
+
+        octa.setPosition(-temp.x, -temp.y, temp.z);
+        ballIndex--;
             if (ballIndex <= 0) {
                 ballIndex = 0;
                 npcLeft = true;
             }
         }
+       // }
 
         intObj.collider();
         //octa.collider();
@@ -326,15 +353,16 @@ int main() {
             collision[i].checkCollision(&intObj);
         }
 
-        intObj.draw();
-        octa.draw();
+        intObj.draw(ourShader);
+        octa.draw(ourShader);
         xyz.setPosition(glm::vec3(1.0f, 0.0f, -0.5f));
-        xyz.draw();
-        matteFireFireFire.draw();
-        //matteFireSeksTi.draw();
+        xyz.draw(ourShader);
+        matteFireFireFire.draw(ourShader);
+        matteFireSeksTi.draw(ourShader);
         //std::cout << intObj.position.x << " " << intObj.position.y << " " << intObj.position.z << std::endl;
-        collision[0].draw();
-
+        for (int i = 0; i < collision.size(); i++) {
+            collision[0].draw(ourShader);
+        }
         //cs.checkCollision(&intObj, &camera);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)

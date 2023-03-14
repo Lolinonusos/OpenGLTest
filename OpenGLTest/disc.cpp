@@ -50,8 +50,9 @@ void Disc::init(int shader) {
 	glBindVertexArray(0);
 }
 
-void Disc::draw() {
+void Disc::draw(Shader shader) {
 	glBindVertexArray(VAO);
-	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	shader.setMat4("model", matrix);
 	glDrawElements(GL_TRIANGLE_FAN, vertices.size(), GL_UNSIGNED_INT, 0);
 }

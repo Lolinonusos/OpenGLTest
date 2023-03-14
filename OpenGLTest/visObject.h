@@ -33,7 +33,7 @@ public:
 	// Pure virtual
 	// Får det ved å skrive = 0 etter funksjonen
 	// Tvinger alle klasser som arver fra denne til å ha sin egen override av funksjonen
-	virtual void draw() = 0; 
+	virtual void draw(Shader shader) = 0; 
 
 	void setRenderStyle(int i);
 
@@ -70,12 +70,28 @@ protected:
 	unsigned int VAO{ 0 };
 	unsigned int VBO{ 0 };
 	unsigned int EBO{ 0 };
-	int matrixUniform{ 0 };
+	//int matrixUniform{ 0 };
 
 	enum RenderStyle {
 		SOLID,
 		WIREFRAME,
 		HIDDEN
+	};
+	void drawStyle() {
+		switch (RenderStyle(renderVal)) {
+		case SOLID:
+			glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+			break;
+		case WIREFRAME:
+			glDrawArrays(GL_LINES, 0, vertices.size());
+			break;
+		case HIDDEN:
+
+			break;
+		default:
+			std::cout << "ERROR::INVALID_RENDER_VALUE" << std::endl;
+			break;
+		}
 	};
 	int renderVal;
 

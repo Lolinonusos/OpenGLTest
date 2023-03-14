@@ -7,6 +7,6 @@ public:
 	Point(float x, float y, float z, float r, float g, float b);
 	~Point();
 	void init(int shader) override;
-	void draw() override;
+	void draw(Shader shader) override;
 };
 

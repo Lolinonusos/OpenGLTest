@@ -11,7 +11,7 @@ public:
 	void writefile(std::string fileName);
 	void readFile(std::string fileName);
 	void init(int shader) override;
-	void draw() override;
+	void draw(Shader shader) override;
 	//float construct();
 };
 

@@ -33,26 +33,25 @@ void OctahedronBall::init(int matrixUniform) {
 	glBindVertexArray(0);
 }
 
-void OctahedronBall::draw() {
+void OctahedronBall::draw(Shader shader) {
 	glBindVertexArray(VAO);
-	glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(getTranslateMatrix()));
-	
-	//const int i = SOLID;
+	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
+	shader.setMat4("model", matrix);
+	drawStyle();
+	//switch (RenderStyle(renderVal)) {
+	//case SOLID:
+	//	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+	//	break;
+	//case WIREFRAME:
+	//	glDrawArrays(GL_LINES, 0, vertices.size());
+	//	break;
+	//case HIDDEN:
 
-	switch (RenderStyle(renderVal)) {
-	case SOLID:
-		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-		break;
-	case WIREFRAME:
-		glDrawArrays(GL_LINES, 0, vertices.size());
-		break;
-	case HIDDEN:
-
-		break;
-	default:
-		std::cout << "ERROR::INVALID_RENDER_VALUE" << std::endl;
-		break;
-	}
+	//	break;
+	//default:
+	//	std::cout << "ERROR::INVALID_RENDER_VALUE" << std::endl;
+	//	break;
+	//}
 	//glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 }
 

@@ -172,7 +172,6 @@
     <ClCompile Include="positionComponent.cpp" />
     <ClCompile Include="renderLoop.cpp" />
     <ClCompile Include="shader.cpp" />
-    <ClCompile Include="shape.cpp" />
     <ClCompile Include="stb.cpp" />
     <ClCompile Include="tetrahedon.cpp" />
     <ClCompile Include="texture.cpp" />

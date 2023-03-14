@@ -12,6 +12,6 @@ void Tetrahedon::init(int inMatrixUniform)
 {
 }
 
-void Tetrahedon::draw()
+void Tetrahedon::draw(Shader shader)
 {
 }

@@ -7,7 +7,7 @@ public:
 	OctahedronBall(int n = 0);
 	~OctahedronBall();
 	void init(int matrixUniform) override;
-	void draw();
+	void draw(Shader shader);
 private:
 	int recursions;
 	int indices;
