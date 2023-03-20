@@ -21,7 +21,7 @@ float lastY = SCR_HEIGHT / 2;
 bool firstMouse = true;
 
 // Interactive object
-Interactive intObj;
+//Interactive intObj;
 
 // 3D Oblig 2
 bool graph1 = true;
@@ -37,23 +37,23 @@ void processInput(GLFWwindow* window) {
     // Interact object here
     if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) { // FORWARD
         //intObj.move(0.0f, 1.0f, 0.0f, deltaTime);
-        intObj.translate(UP, deltaTime);
+        //intObj.translate(UP, deltaTime);
         //intObj.translate(0.0f, 1.0f, z, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) { // BACKWARD
         //intObj.move(0.0f, -1.0f, 0.0f, deltaTime);
-        intObj.translate(DOWN, deltaTime);
+        //intObj.translate(DOWN, deltaTime);
         //intObj.translate(0.0f, -1.0, z, deltaTime);
 
     }
     if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) { // RIGHT
         //intObj.move(1.0f, 0.0f, 0.0f, deltaTime);
-        intObj.translate(RIGHT, deltaTime);
+        //intObj.translate(RIGHT, deltaTime);
         //intObj.translate(1.0f, 0.0f, z, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) { // LEFT
         //intObj.move(-1.0f, 0.0f, 0.0f, deltaTime);
-        intObj.translate(LEFT, deltaTime);
+        //intObj.translate(LEFT, deltaTime);
         //intObj.translate(-1.0f, 0.0f, z, deltaTime);
     }
 
@@ -155,32 +155,30 @@ int main() {
     }
 
     renderLoop render;
-
+    render.initialize();
     // build and compile our shader program
     //Shader ourShader("firstTexVertShader.vs", "firstTexFragShader.fs"); 
     // you can name your shader files however you like
-    Shader ourShader("SkolVert.vs", "SkolFrag.fs"); 
+    //Shader ourShader("SkolVert.vs", "SkolFrag.fs"); 
 
 
-    glm::vec3 cubePositions[] = {
-    glm::vec3(0.0f,  0.0f,  0.0f),
-    glm::vec3(2.0f,  5.0f, -15.0f),
-    glm::vec3(-1.5f, -2.2f, -2.5f),
-    glm::vec3(-3.8f, -2.0f, -12.3f),
-    glm::vec3(2.4f, -0.4f, -3.5f),
-    glm::vec3(-1.7f,  3.0f, -7.5f),
-    glm::vec3(1.3f, -2.0f, -2.5f),
-    glm::vec3(1.5f,  2.0f, -2.5f),
-    glm::vec3(1.5f,  0.2f, -1.5f),
-    glm::vec3(-1.3f,  1.0f, -1.5f)
-    };
+    //glm::vec3 cubePositions[] = {
+    //glm::vec3(0.0f,  0.0f,  0.0f),
+    //glm::vec3(2.0f,  5.0f, -15.0f),
+    //glm::vec3(-1.5f, -2.2f, -2.5f),
+    //glm::vec3(-3.8f, -2.0f, -12.3f),
+    //glm::vec3(2.4f, -0.4f, -3.5f),
+    //glm::vec3(-1.7f,  3.0f, -7.5f),
+    //glm::vec3(1.3f, -2.0f, -2.5f),
+    //glm::vec3(1.5f,  2.0f, -2.5f),
+    //glm::vec3(1.5f,  0.2f, -1.5f),
+    //glm::vec3(-1.3f,  1.0f, -1.5f)
+    //};
    
-    XYZ xyz;
-    xyz.init();
 
-    std::vector<Point> points;
-    
-    render.initialize();
+    //std::vector<Point> points;
+    //
+    //render.initialize();
     /*
     //// Matte oblig 2
     // 4.4.4
@@ -204,7 +202,6 @@ int main() {
     for (int i = 0; i < points.size(); i++) {
         points[i].init();
     }
-    xyz.init();
 
     Matrise oblig2;
     oblig2.FireFireFire();
@@ -212,59 +209,60 @@ int main() {
     //// Matte oblig 2 slutt
     */
 
+    //XYZ xyz;
+    //xyz.init();
 
-    TriangleSurface matteFireFireFire("Oppg444.txt", false);
-    TriangleSurface matteFireSeksTi("Oppg4610.txt", false);
-    matteFireFireFire.init();
-    matteFireSeksTi.init();
-    //trir.readFile("Data.txt");
-    
-    OctahedronBall octa(3);
-    octa.init();
-    bool npcLeft = true;
-    int ballIndex{ 0 };
-    auto temp = glm::vec3(0.0f, 0.0f, 0.0f);
-    int vartAmount = matteFireFireFire.vertexAmount();
+    //TriangleSurface matteFireFireFire("Oppg444.txt", false);
+    //TriangleSurface matteFireSeksTi("Oppg4610.txt", false);
+    //matteFireFireFire.init();
+    //matteFireSeksTi.init();
+    ////trir.readFile("Data.txt");
+    //
+    //OctahedronBall octa(3);
+    //octa.init();
+    //bool npcLeft = true;
+    //int ballIndex{ 0 };
+    //auto temp = glm::vec3(0.0f, 0.0f, 0.0f);
+    //int vartAmount = matteFireFireFire.vertexAmount();
    
-    glEnable(GL_DEPTH_TEST);
-    
-    Graph graph;
-    graph.init();
-       
-    TriangleSurface cube("Oppg2.txt", false);
-    //cube.writefile("Data2.txt");
+    //glEnable(GL_DEPTH_TEST);
+    //
+    //Graph graph;
+    //graph.init();
+    //   
+    //TriangleSurface cube("Oppg2.txt", false);
+    ////cube.writefile("Data2.txt");
 
-    cube.init();
+    //cube.init();
 
-    intObj.init();
-    
+    //intObj.init();
+    //
 
-    // Oblig 2
-    changeScene cs;
-    cs.init();
-    cs.setPosition(glm::vec3(1.0f, 0.0f, 0.0f));
-    //cube.readFile("Data.txt");
+    //// Oblig 2
+    //changeScene cs;
+    //cs.init();
+    //cs.setPosition(glm::vec3(1.0f, 0.0f, 0.0f));
+    ////cube.readFile("Data.txt");
 
 
-    std::vector<Trophy> collision;
-    collision.push_back(Trophy{});
-    collision.push_back(Trophy{});
+    //std::vector<Trophy> collision;
+    //collision.push_back(Trophy{});
+    //collision.push_back(Trophy{});
 
-    for (int i = 0; i < collision.size(); i++) {
-        collision[i].init();
-    }
+    //for (int i = 0; i < collision.size(); i++) {
+    //    collision[i].init();
+    //}
 
-    collision[1].setPosition(-1.0f, 0.0f, 0.0f);
+    //collision[1].setPosition(-1.0f, 0.0f, 0.0f);
 
-    // Initializing render matrixes as identity matrixes
-    glm::mat4 projection = glm::mat4(1.0f);
-    glm::mat4 view = glm::mat4(1.0f);
-    glm::mat4 model = glm::mat4(1.0f);
+    //// Initializing render matrixes as identity matrixes
+    //glm::mat4 projection = glm::mat4(1.0f);
+    //glm::mat4 view = glm::mat4(1.0f);
+    //glm::mat4 model = glm::mat4(1.0f);
 
     // render loop
     while (!glfwWindowShouldClose(window))
     {
-        //render.render();
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame; // Time between current frame and last frame
         lastFrame = currentFrame; // Time of last frame
@@ -272,12 +270,13 @@ int main() {
         // input
         processInput(window);
 
+        render.render();
         // Background colour
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        // Clean the back buffer and assign the new color to it
-        glClear(GL_COLOR_BUFFER_BIT);
-        // Clear depth buffer
-        glClear(GL_DEPTH_BUFFER_BIT);
+        //glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        //// Clean the back buffer and assign the new color to it
+        //glClear(GL_COLOR_BUFFER_BIT);
+        //// Clear depth buffer
+        //glClear(GL_DEPTH_BUFFER_BIT);
         // Can be written together like this
         //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -285,16 +284,16 @@ int main() {
         //helene.bind();
         
         // Which shader program we will use
-        ourShader.use();
+        //ourShader.use();
     
         // Projection matrix
-        projection = glm::perspective(glm::radians(camera.zoom), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
-        ourShader.setMat4("projection", projection);
+        //projection = glm::perspective(glm::radians(camera.zoom), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
+        //ourShader.setMat4("projection", projection);
         
     
         // View matrix
-        view = camera.getViewMatrix();
-        ourShader.setMat4("view", view);
+        //view = camera.getViewMatrix();
+        //ourShader.setMat4("view", view);
         
         //int ma
 
@@ -317,57 +316,57 @@ int main() {
         //}
         //octa.renderVal = 0;
         
-        if (ballIndex < vartAmount && npcLeft) {
-            if (graph1) {
-                temp = matteFireFireFire.getVertexPosition(ballIndex);
-            }
-            else if (!graph1) {
-                temp = matteFireSeksTi.getVertexPosition(ballIndex);
-            }
+       // if (ballIndex < vartAmount && npcLeft) {
+       //     if (graph1) {
+       //         temp = matteFireFireFire.getVertexPosition(ballIndex);
+       //     }
+       //     else if (!graph1) {
+       //         temp = matteFireSeksTi.getVertexPosition(ballIndex);
+       //     }
 
-            octa.setPosition(-temp.x, -temp.y, temp.z);
-            std::cout << ballIndex << std::endl;
-            ballIndex += 1;
-            if (ballIndex >= vartAmount - 1) {
-                //ballIndex = vartAmount;
-                npcLeft = false;
-            }
-        }
-        else if (ballIndex >= 0 && !npcLeft) {
-            if (graph1) {
-                temp = matteFireFireFire.getVertexPosition(ballIndex);
-            }
-            else if (!graph1) {
-                temp = matteFireSeksTi.getVertexPosition(ballIndex);
-            }
+       //     octa.setPosition(-temp.x, -temp.y, temp.z);
+       //     std::cout << ballIndex << std::endl;
+       //     ballIndex += 1;
+       //     if (ballIndex >= vartAmount - 1) {
+       //         //ballIndex = vartAmount;
+       //         npcLeft = false;
+       //     }
+       // }
+       // else if (ballIndex >= 0 && !npcLeft) {
+       //     if (graph1) {
+       //         temp = matteFireFireFire.getVertexPosition(ballIndex);
+       //     }
+       //     else if (!graph1) {
+       //         temp = matteFireSeksTi.getVertexPosition(ballIndex);
+       //     }
 
-        octa.setPosition(-temp.x, -temp.y, temp.z);
-        ballIndex--;
-            if (ballIndex <= 0) {
-                ballIndex = 0;
-                npcLeft = true;
-            }
-        }
+       // octa.setPosition(-temp.x, -temp.y, temp.z);
+       // ballIndex--;
+       //     if (ballIndex <= 0) {
+       //         ballIndex = 0;
+       //         npcLeft = true;
+       //     }
+       // }
+       //// }
+
+       // intObj.collider();
+       // //octa.collider();
+       // //intObj.checkCollision(&octa);
+       // //cs.draw();
+       // for (int i = 0; i < collision.size(); i++) {
+       //     collision[i].checkCollision(&intObj);
        // }
 
-        intObj.collider();
-        //octa.collider();
-        //intObj.checkCollision(&octa);
-        //cs.draw();
-        for (int i = 0; i < collision.size(); i++) {
-            collision[i].checkCollision(&intObj);
-        }
-
-        intObj.draw(ourShader);
-        octa.draw(ourShader);
-        //xyz.setPosition(glm::vec3(1.0f, 0.0f, -0.5f));
-        xyz.draw(ourShader);
-        matteFireFireFire.draw(ourShader);
-        matteFireSeksTi.draw(ourShader);
+       // intObj.draw(ourShader);
+       // octa.draw(ourShader);
+       // //xyz.setPosition(glm::vec3(1.0f, 0.0f, -0.5f));
+       // xyz.draw(ourShader);
+       // matteFireFireFire.draw(ourShader);
+       // matteFireSeksTi.draw(ourShader);
         //std::cout << intObj.position.x << " " << intObj.position.y << " " << intObj.position.z << std::endl;
-        for (int i = 0; i < collision.size(); i++) {
+     /*   for (int i = 0; i < collision.size(); i++) {
             collision[0].draw(ourShader);
-        }
+        }*/
         //cs.checkCollision(&intObj, &camera);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -375,12 +374,10 @@ int main() {
         glfwPollEvents();
     }
     
-    cube.~TriangleSurface();
-    
-    render.~renderLoop();
+    //cube.~TriangleSurface();
 
     // Shader program
-    ourShader.remove();
+    //ourShader.remove();
     
     // glfw: terminate, clearing all previously allocated GLFW resources.
     glfwTerminate();

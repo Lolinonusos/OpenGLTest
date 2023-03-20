@@ -229,10 +229,10 @@
     <None Include="first.fs">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="firstTexVertShader.vs">
+    <None Include="firstTex.vs">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="firstTexFragShader.fs">
+    <None Include="firstTex.fs">
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="mixTexture.fs">

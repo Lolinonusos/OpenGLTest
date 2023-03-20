@@ -221,8 +221,8 @@
   <ItemGroup>
     <None Include="first.fs" />
     <None Include="first.vs" />
-    <None Include="firstTexFragShader.fs" />
-    <None Include="firstTexVertShader.vs" />
+    <None Include="firstTex.fs" />
+    <None Include="firstTex.vs" />
     <None Include="mixTexture.fs" />
     <None Include="rotate.vs" />
     <None Include="SkolFrag.fs" />
