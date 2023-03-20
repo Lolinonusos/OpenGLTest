@@ -6,7 +6,7 @@ class OctahedronBall : public VisObject {
 public:
 	OctahedronBall(int n = 0);
 	~OctahedronBall();
-	void init(int matrixUniform) override;
+	void init() override;
 	void draw(Shader shader);
 private:
 	int recursions;

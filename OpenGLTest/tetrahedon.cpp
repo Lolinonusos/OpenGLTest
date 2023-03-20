@@ -8,7 +8,7 @@ Tetrahedon::~Tetrahedon() {
 
 }
 
-void Tetrahedon::init(int inMatrixUniform)
+void Tetrahedon::init()
 {
 }
 

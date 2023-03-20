@@ -6,7 +6,7 @@ class Interactive : public VisObject {
 public:
 	Interactive();
 	~Interactive();
-	void init(int shader) override;
+	void init() override;
 	void draw(Shader shader) override;
 
 private:

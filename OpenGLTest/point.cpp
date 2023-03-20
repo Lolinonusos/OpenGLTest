@@ -9,7 +9,7 @@ Point::Point(float x, float y, float z, float r, float g, float b) {
 Point::~Point() {
 }
 
-void Point::init(int shader) {
+void Point::init() {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 

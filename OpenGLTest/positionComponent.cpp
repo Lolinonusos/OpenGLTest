@@ -94,12 +94,12 @@ void PositionComponent::translate(float inX, float inY, float inZ, float deltaTi
 }
 
 void PositionComponent::setPosition(glm::vec3 offset) {
-	position += offset;
+	position = offset;
 	setPositionMatrix(position);
 }
 
 void PositionComponent::setPosition(float x, float y, float z) {
-	position += glm::vec3(x, y ,z);
+	position = glm::vec3(x, y ,z);
 	setPositionMatrix(position);
 }
 

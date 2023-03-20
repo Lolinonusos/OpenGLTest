@@ -7,7 +7,7 @@ class Tetrahedon : public VisObject {
 public:
 	Tetrahedon();
 	~Tetrahedon();
-	void init(int inMatrixUniform) override;
+	void init() override;
 	void draw(Shader shader) override;
 };
 

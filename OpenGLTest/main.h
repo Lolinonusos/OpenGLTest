@@ -24,6 +24,8 @@
 // Mine egne headere
 #include "Enum.h"
 
+#include "renderLoop.h"
+
 #include "positionComponent.h"
 #include "xyz.h"
 #include "cube.h"

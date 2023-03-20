@@ -26,14 +26,17 @@ public:
 	VisObject();
 	~VisObject();
 
+	void setName(std::string name);
+	std::string getName();
+
 	// Virtual
 	// Lar klasser som arver lage en override av funksjonen
-	virtual void init(int inMatrixUniform);
+	virtual void init();
 
 	// Pure virtual
 	// Får det ved å skrive = 0 etter funksjonen
 	// Tvinger alle klasser som arver fra denne til å ha sin egen override av funksjonen
-	virtual void draw(Shader shader) = 0; 
+	virtual void draw(Shader shader); 
 
 	void setRenderStyle(int i);
 
@@ -41,7 +44,7 @@ public:
 	void writeFile(std::string adress);
 	// Men bare en skal trenge å lese
 	
-	int vertexAmount() {
+	GLsizei vertexAmount() {
 		return vertices.size();
 	}
 
@@ -64,6 +67,9 @@ public:
 	float radius{};
 
 protected:
+	
+	std::string name;
+	
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 

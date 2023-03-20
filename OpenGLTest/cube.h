@@ -7,7 +7,7 @@ class Cube : public VisObject {
 public:
 	Cube();
 	~Cube();
-	void init(int inMatrixUniform) override;
+	void init() override;
 	void draw(Shader shader) override;
 };
 

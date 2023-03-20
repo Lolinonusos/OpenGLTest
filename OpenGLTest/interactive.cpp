@@ -14,7 +14,7 @@ Interactive::~Interactive(){
 
 }
 
-void Interactive::init(int shader)
+void Interactive::init()
 {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);

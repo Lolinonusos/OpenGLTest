@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 800;
@@ -153,10 +154,12 @@ int main() {
         return -1;
     }
 
+    renderLoop render;
 
     // build and compile our shader program
-    //Shader ourShader("firstTexVertShader.vs", "firstTexFragShader.fs"); // you can name your shader files however you like
-    Shader ourShader("SkolVert.vs", "SkolFrag.fs"); // you can name your shader files however you like
+    //Shader ourShader("firstTexVertShader.vs", "firstTexFragShader.fs"); 
+    // you can name your shader files however you like
+    Shader ourShader("SkolVert.vs", "SkolFrag.fs"); 
 
 
     glm::vec3 cubePositions[] = {
@@ -173,15 +176,17 @@ int main() {
     };
    
     XYZ xyz;
-    xyz.init(1);
+    xyz.init();
 
     std::vector<Point> points;
+    
+    render.initialize();
     /*
     //// Matte oblig 2
     // 4.4.4
     glPointSize(10);
 
-
+    
     points.push_back(Point{ 1.0f, 2.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
     points.push_back(Point{ 2.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
     points.push_back(Point{ 3.0f, 2.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
@@ -197,9 +202,9 @@ int main() {
     points.push_back(Point{ 6.0f, 2.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
 
     for (int i = 0; i < points.size(); i++) {
-        points[i].init(1);
+        points[i].init();
     }
-    xyz.init(1);
+    xyz.init();
 
     Matrise oblig2;
     oblig2.FireFireFire();
@@ -210,12 +215,12 @@ int main() {
 
     TriangleSurface matteFireFireFire("Oppg444.txt", false);
     TriangleSurface matteFireSeksTi("Oppg4610.txt", false);
-    matteFireFireFire.init(1);
-    matteFireSeksTi.init(1);
+    matteFireFireFire.init();
+    matteFireSeksTi.init();
     //trir.readFile("Data.txt");
     
     OctahedronBall octa(3);
-    octa.init(1);
+    octa.init();
     bool npcLeft = true;
     int ballIndex{ 0 };
     auto temp = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -224,19 +229,19 @@ int main() {
     glEnable(GL_DEPTH_TEST);
     
     Graph graph;
-    graph.init(1);
+    graph.init();
        
     TriangleSurface cube("Oppg2.txt", false);
     //cube.writefile("Data2.txt");
 
-    cube.init(1);
+    cube.init();
 
-    intObj.init(1);
+    intObj.init();
     
 
     // Oblig 2
     changeScene cs;
-    cs.init(1);
+    cs.init();
     cs.setPosition(glm::vec3(1.0f, 0.0f, 0.0f));
     //cube.readFile("Data.txt");
 
@@ -246,7 +251,7 @@ int main() {
     collision.push_back(Trophy{});
 
     for (int i = 0; i < collision.size(); i++) {
-        collision[i].init(1);
+        collision[i].init();
     }
 
     collision[1].setPosition(-1.0f, 0.0f, 0.0f);
@@ -259,6 +264,7 @@ int main() {
     // render loop
     while (!glfwWindowShouldClose(window))
     {
+        //render.render();
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame; // Time between current frame and last frame
         lastFrame = currentFrame; // Time of last frame
@@ -273,7 +279,6 @@ int main() {
         // Clear depth buffer
         glClear(GL_DEPTH_BUFFER_BIT);
         // Can be written together like this
-         
         //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //glActiveTexture(GL_TEXTURE0);
@@ -355,7 +360,7 @@ int main() {
 
         intObj.draw(ourShader);
         octa.draw(ourShader);
-        xyz.setPosition(glm::vec3(1.0f, 0.0f, -0.5f));
+        //xyz.setPosition(glm::vec3(1.0f, 0.0f, -0.5f));
         xyz.draw(ourShader);
         matteFireFireFire.draw(ourShader);
         matteFireSeksTi.draw(ourShader);
@@ -372,6 +377,8 @@ int main() {
     
     cube.~TriangleSurface();
     
+    render.~renderLoop();
+
     // Shader program
     ourShader.remove();
     

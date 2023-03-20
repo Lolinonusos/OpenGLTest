@@ -7,17 +7,19 @@
 #include "shader.h"
 
 
-class oldTexture{
+class Texture{
 public:
-	unsigned int ID;
-	GLenum type;
-	oldTexture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType);
+	Texture(const char* imageLoc, GLenum texType, GLenum slot, GLenum format, GLenum pixelType);
 
 	// Assigns a texture unit to a texture
 	void texUnit(Shader &shader, const char* uniform, unsigned int unit);
 	void bind();
 	void unbind();
 	void remove();
+
+private:
+	unsigned int ID;
+	GLenum type;
 };
 
 #endif

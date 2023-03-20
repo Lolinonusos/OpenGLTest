@@ -80,7 +80,7 @@ void TriangleSurface::readFile(std::string fileName) {
 	}
 }
 
-void TriangleSurface::init(int shader) {
+void TriangleSurface::init() {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 

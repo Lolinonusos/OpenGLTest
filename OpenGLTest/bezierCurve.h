@@ -5,7 +5,7 @@
 class BezierCurve : public VisObject {
 	BezierCurve();
 
-	void init(int shader) override;
+	void init() override;
 	void draw(Shader shader) override;
 };
 

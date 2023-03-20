@@ -14,7 +14,7 @@ XYZ::~XYZ() {
 
 }
 
-void XYZ::init(int inMatrixUniform) {
+void XYZ::init() {
 
 	//matrixUniform = inMatrixUniform;
 

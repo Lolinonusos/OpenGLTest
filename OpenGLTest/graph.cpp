@@ -110,7 +110,7 @@ Graph::Graph() {
 Graph::~Graph(){
 }
 
-void Graph::init(int inMatrixUniform) {
+void Graph::init() {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 

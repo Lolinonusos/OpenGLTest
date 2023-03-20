@@ -21,7 +21,7 @@ Disc::~Disc() {
 
 }
 
-void Disc::init(int shader) {
+void Disc::init() {
 	//Vertex Array Object - VAO
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);

@@ -1,6 +1,6 @@
 #include "texture.h"
 
-oldTexture::oldTexture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType) {
+Texture::Texture(const char* imageLoc, GLenum texType, GLenum slot, GLenum format, GLenum pixelType) {
 	
     // Assigns texture type to the texture object
     type = texType;
@@ -11,7 +11,7 @@ oldTexture::oldTexture(const char* image, GLenum texType, GLenum slot, GLenum fo
     int imgWidth, imgHeight, numColChannels;
     
     // Read image from file
-    unsigned char* bytes = stbi_load(image, &imgWidth, &imgHeight, &numColChannels, 0);
+    unsigned char* bytes = stbi_load(imageLoc, &imgWidth, &imgHeight, &numColChannels, 0);
     
     // Generates an OpenGL texture object
     glGenTextures(1, &ID);
@@ -34,6 +34,10 @@ oldTexture::oldTexture(const char* image, GLenum texType, GLenum slot, GLenum fo
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+    // unbind the texture
+    glBindTexture(texType, 0);
+
+
     if (bytes) {
         // Assigns the image to the OpenGL Texture object
         glTexImage2D(texType, 0, GL_RGBA, imgWidth, imgHeight, 0, format, pixelType, bytes);
@@ -46,11 +50,11 @@ oldTexture::oldTexture(const char* image, GLenum texType, GLenum slot, GLenum fo
 
     // Freeing image memory
     stbi_image_free(bytes);
-    glBindTexture(texType, ID);
+    //glBindTexture(texType, ID);
 
 }
 
-void oldTexture::texUnit(Shader &shader, const char* uniform, unsigned int unit) {
+void Texture::texUnit(Shader &shader, const char* uniform, unsigned int unit) {
     glUniform1i(glGetUniformLocation(shader.ID, uniform), unit);
     // Use our shader program
     shader.use();
@@ -67,14 +71,13 @@ void oldTexture::texUnit(Shader &shader, const char* uniform, unsigned int unit)
     //glUniform1i(texUni, unit);
 }
 
-void oldTexture::bind() {
+void Texture::bind() {
     glBindTexture(type, ID);
 }
 
-void oldTexture::unbind() {
-    glBindTexture(type, 0);
+void Texture::unbind() {
 }
 
-void oldTexture::remove() {
+void Texture::remove() {
     glDeleteTextures(1, &ID);
 }

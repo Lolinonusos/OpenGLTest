@@ -50,7 +50,7 @@ Cube::~Cube() {
 
 }
 
-void Cube::init(int inMatrixUniform) {
+void Cube::init() {
     //Vertex Array Object - VAO
     glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);

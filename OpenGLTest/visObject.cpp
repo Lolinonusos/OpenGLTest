@@ -15,7 +15,15 @@ VisObject::~VisObject() {
 
 }
 
-void VisObject::init(int inMatrixUniform) {
+void VisObject::setName(std::string inName) {
+	name = inName;
+}
+
+std::string VisObject::getName() {
+	return name;
+}
+
+void VisObject::init() {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
@@ -35,6 +43,12 @@ void VisObject::init(int inMatrixUniform) {
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
 
 	glBindVertexArray(0);
+}
+
+void VisObject::draw(Shader shader) {
+	glBindVertexArray(VAO);
+	shader.setMat4("model", matrix);
+	drawStyle();
 }
 
 void VisObject::setRenderStyle(int i) {

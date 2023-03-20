@@ -8,7 +8,7 @@ public:
 	Graph();
 	~Graph();
 
-	void init(int inMatrixUniform) override;
+	void init() override;
 	void draw(Shader shader) override;
 };
 

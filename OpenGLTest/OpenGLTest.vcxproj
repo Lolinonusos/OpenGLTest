@@ -170,6 +170,7 @@
     <ClCompile Include="octahedronBall.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="positionComponent.cpp" />
+    <ClCompile Include="quadTree.cpp" />
     <ClCompile Include="renderLoop.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="stb.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="octahedronBall.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="positionComponent.h" />
+    <ClInclude Include="quadTree.h" />
     <ClInclude Include="renderLoop.h" />
     <ClInclude Include="changeScene.h" />
     <ClInclude Include="tetrahedon.h" />
