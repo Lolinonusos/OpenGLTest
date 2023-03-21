@@ -135,7 +135,7 @@ void Graph::init() {
 void Graph::draw(Shader shader) {
 	glBindVertexArray(VAO);
 	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	shader.setMat4("model", matrix);
+	shader.setMat4("model", model);
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
 }
 

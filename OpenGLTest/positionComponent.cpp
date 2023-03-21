@@ -2,10 +2,10 @@
 
 PositionComponent::PositionComponent() {
 
-	matrix = glm::mat4(1.0f);
-	matrix = glm::translate(matrix, glm::vec3(0.0f));
-	matrix = glm::rotate(matrix, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	matrix = glm::scale(matrix, glm::vec3(1.0f));
+	model = glm::mat4(1.0f);
+	model = glm::translate(model, glm::vec3(0.0f));
+	model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	model = glm::scale(model, glm::vec3(1.0f));
 
 	updateWorldVectors();
 	updateLocalVectors();

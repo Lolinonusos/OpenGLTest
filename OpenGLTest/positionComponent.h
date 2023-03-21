@@ -27,7 +27,7 @@ public:
 	glm::vec3 scale;
 	
 	// Should these be protected?
-	glm::mat4 matrix{}; // position i guess
+	glm::mat4 model{}; // position i guess
 	//glm::mat4 rotation = glm::mat4(1.0f);
 
 	PositionComponent();
@@ -58,8 +58,8 @@ public:
 	}
 
 	void setPositionMatrix(glm::vec3 position) {
-		matrix = glm::mat4(1.0f);
-		matrix = glm::translate(matrix, position);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, position);
 	}
 
 	void updateWorldVectors() {

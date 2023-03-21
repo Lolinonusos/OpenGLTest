@@ -21,10 +21,7 @@ float lastY = SCR_HEIGHT / 2;
 bool firstMouse = true;
 
 // Interactive object
-//Interactive intObj;
-
-// 3D Oblig 2
-bool graph1 = true;
+Interactive intObj;
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 void processInput(GLFWwindow* window) {
@@ -37,51 +34,39 @@ void processInput(GLFWwindow* window) {
     // Interact object here
     if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) { // FORWARD
         //intObj.move(0.0f, 1.0f, 0.0f, deltaTime);
-        //intObj.translate(UP, deltaTime);
+        intObj.translate(UP, deltaTime);
         //intObj.translate(0.0f, 1.0f, z, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) { // BACKWARD
         //intObj.move(0.0f, -1.0f, 0.0f, deltaTime);
-        //intObj.translate(DOWN, deltaTime);
+        intObj.translate(DOWN, deltaTime);
         //intObj.translate(0.0f, -1.0, z, deltaTime);
 
     }
     if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) { // RIGHT
         //intObj.move(1.0f, 0.0f, 0.0f, deltaTime);
-        //intObj.translate(RIGHT, deltaTime);
+        intObj.translate(RIGHT, deltaTime);
         //intObj.translate(1.0f, 0.0f, z, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) { // LEFT
         //intObj.move(-1.0f, 0.0f, 0.0f, deltaTime);
-        //intObj.translate(LEFT, deltaTime);
+        intObj.translate(LEFT, deltaTime);
         //intObj.translate(-1.0f, 0.0f, z, deltaTime);
     }
 
     // Camera here
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // FORWARD
         //camPos += camSpeed * camFront;
-        camera.translate(FORWARD, deltaTime);
+        //camera.translate(FORWARD, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) { // BACKWARD
-        camera.translate(BACKWARD, deltaTime);
+        //camera.translate(BACKWARD, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) { // RIGHT
-        camera.translate(RIGHT, deltaTime);
+        //camera.translate(RIGHT, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) { // LEFT
-        camera.translate(LEFT, deltaTime);
-    }
-
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-        if (graph1) {
-            graph1 = false;
-            std::cout << "false" << std::endl;
-        }
-        else if (!graph1) {
-            graph1 = true;
-            std::cout << "true" << std::endl;
-
-        }
+        //camera.translate(LEFT, deltaTime);
     }
 }
 
@@ -103,12 +88,12 @@ void mouse_callback(GLFWwindow*, double xPosIn, double yPosIn) {
     lastX = xPos;
     lastY = yPos;
 
-    camera.processMouseMovement(xOffset, yOffset);
+    //camera.processMouseMovement(xOffset, yOffset);
 }
 
 
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset) {
-    camera.ProcessMouseScroll(static_cast<float>(yOffset));
+    //camera.ProcessMouseScroll(static_cast<float>(yOffset));
 }
 
 
@@ -139,13 +124,8 @@ int main() {
         glfwTerminate();
         return -1;
     }
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetCursorPosCallback(window, mouse_callback);
-    glfwSetScrollCallback(window, scroll_callback);
 
-    // Captures the mouse cursor within the center the window 
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwMakeContextCurrent(window);
 
     // glad: load all OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -154,14 +134,22 @@ int main() {
         return -1;
     }
 
-    renderLoop render;
-    render.initialize();
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
+
+    // Captures the mouse cursor within the center the window 
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
     // build and compile our shader program
     //Shader ourShader("firstTexVertShader.vs", "firstTexFragShader.fs"); 
     // you can name your shader files however you like
     //Shader ourShader("SkolVert.vs", "SkolFrag.fs"); 
+    Shader ourShader("firstTex.vs", "firstTex.fs");
 
-
+    Texture helene("Helene.png", GL_TEXTURE_2D);
+    ourShader.use();
+    helene.texUnit(ourShader, "texture0", 0);
     //glm::vec3 cubePositions[] = {
     //glm::vec3(0.0f,  0.0f,  0.0f),
     //glm::vec3(2.0f,  5.0f, -15.0f),
@@ -174,68 +162,17 @@ int main() {
     //glm::vec3(1.5f,  0.2f, -1.5f),
     //glm::vec3(-1.3f,  1.0f, -1.5f)
     //};
-   
+    renderLoop render;
+    render.initialize();
 
-    //std::vector<Point> points;
-    //
-    //render.initialize();
-    /*
-    //// Matte oblig 2
-    // 4.4.4
-    glPointSize(10);
+    XYZ xyz;
+    xyz.init();
 
-    
-    points.push_back(Point{ 1.0f, 2.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    points.push_back(Point{ 2.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    points.push_back(Point{ 3.0f, 2.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    points.push_back(Point{ 4.0f, 4.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    points.push_back(Point{ 5.0f, 3.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    points.push_back(Point{ 6.0f, 4.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    points.push_back(Point{ 7.0f, 5.0f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    points.push_back(Point{ 8.0f, 6.5f, 0.0f, 0.0f, 1.0f, 0.0f } );
-    // 4.6.10
-    points.push_back(Point{ 1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
-    points.push_back(Point{ 3.0f, 1.5f, 0.0f, 0.0f, 0.0f, 1.0f } );
-    points.push_back(Point{ 4.0f, 5.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
-    points.push_back(Point{ 6.0f, 2.0f, 0.0f, 0.0f, 0.0f, 1.0f } );
-
-    for (int i = 0; i < points.size(); i++) {
-        points[i].init();
-    }
-
-    Matrise oblig2;
-    oblig2.FireFireFire();
-    oblig2.FireSeksTi();
-    //// Matte oblig 2 slutt
-    */
-
-    //XYZ xyz;
-    //xyz.init();
-
-    //TriangleSurface matteFireFireFire("Oppg444.txt", false);
-    //TriangleSurface matteFireSeksTi("Oppg4610.txt", false);
-    //matteFireFireFire.init();
-    //matteFireSeksTi.init();
-    ////trir.readFile("Data.txt");
-    //
-    //OctahedronBall octa(3);
-    //octa.init();
-    //bool npcLeft = true;
-    //int ballIndex{ 0 };
-    //auto temp = glm::vec3(0.0f, 0.0f, 0.0f);
-    //int vartAmount = matteFireFireFire.vertexAmount();
-   
-    //glEnable(GL_DEPTH_TEST);
-    //
-    //Graph graph;
-    //graph.init();
-    //   
-    //TriangleSurface cube("Oppg2.txt", false);
-    ////cube.writefile("Data2.txt");
+  
 
     //cube.init();
 
-    //intObj.init();
+    intObj.init();
     //
 
     //// Oblig 2
@@ -255,10 +192,12 @@ int main() {
 
     //collision[1].setPosition(-1.0f, 0.0f, 0.0f);
 
-    //// Initializing render matrixes as identity matrixes
-    //glm::mat4 projection = glm::mat4(1.0f);
-    //glm::mat4 view = glm::mat4(1.0f);
-    //glm::mat4 model = glm::mat4(1.0f);
+    glEnable(GL_DEPTH_TEST);
+
+    // Initializing render matrixes as identity matrixes
+    glm::mat4 projection = glm::mat4(1.0f);
+    glm::mat4 view = glm::mat4(1.0f);
+    glm::mat4 model = glm::mat4(1.0f);
 
     // render loop
     while (!glfwWindowShouldClose(window))
@@ -271,44 +210,35 @@ int main() {
         processInput(window);
 
         render.render();
-        // Background colour
+        
+        //// Background colour
         //glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        //// Clean the back buffer and assign the new color to it
+        ////// Clean the back buffer and assign the new color to it
         //glClear(GL_COLOR_BUFFER_BIT);
-        //// Clear depth buffer
+        ////// Clear depth buffer
         //glClear(GL_DEPTH_BUFFER_BIT);
-        // Can be written together like this
+        //// Can be written together like this
         //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //glActiveTexture(GL_TEXTURE0);
         //helene.bind();
-        
-        // Which shader program we will use
+        ////
+        ////// Which shader program we will use
         //ourShader.use();
     
-        // Projection matrix
+        //// Projection matrix
         //projection = glm::perspective(glm::radians(camera.zoom), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
         //ourShader.setMat4("projection", projection);
-        
+        //
     
-        // View matrix
+        //// View matrix
         //view = camera.getViewMatrix();
         //ourShader.setMat4("view", view);
-        
+        //intObj.draw(ourShader);
+        //xyz.draw(ourShader);
+        //
         //int ma
 
-        //for (int i = 0; i < 10; i++) {
-            // Model matrix
-            /*model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            float angle = 20.0f * 1 + i * 2;
-            model = glm::rotate(model, ((float)glfwGetTime() * glm::radians(angle)), glm::vec3(0.5f, 1.0f, 0.0f));
-            ourShader.setMat4("model", model);*/
-            //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-            //gldrawarrays(gl_triangles, 0, 36);
-            //cube.draw();
-        //}
         // graph.draw();
 
         //for (int i = 0; i < points.size(); i++) {
@@ -357,10 +287,8 @@ int main() {
        //     collision[i].checkCollision(&intObj);
        // }
 
-       // intObj.draw(ourShader);
        // octa.draw(ourShader);
        // //xyz.setPosition(glm::vec3(1.0f, 0.0f, -0.5f));
-       // xyz.draw(ourShader);
        // matteFireFireFire.draw(ourShader);
        // matteFireSeksTi.draw(ourShader);
         //std::cout << intObj.position.x << " " << intObj.position.y << " " << intObj.position.z << std::endl;
@@ -373,11 +301,6 @@ int main() {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    
-    //cube.~TriangleSurface();
-
-    // Shader program
-    //ourShader.remove();
     
     // glfw: terminate, clearing all previously allocated GLFW resources.
     glfwTerminate();

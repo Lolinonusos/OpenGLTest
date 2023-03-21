@@ -20,7 +20,7 @@
 //	glm::vec2 texCoord; // UV coordinates
 //};
 
-class Texture {
+class MeshTexture {
 public:
 	unsigned int ID;
 	std::string type;
@@ -31,11 +31,11 @@ class Mesh {
 public:
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<Texture> textures;
+	std::vector<MeshTexture> textures;
 	unsigned int VAO;
 		
 	// Constructor
-	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<MeshTexture> textures);
 
 	// Render mesh
 	void draw(Shader& shader);

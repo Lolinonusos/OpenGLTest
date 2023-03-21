@@ -5,7 +5,7 @@
 VisObject::VisObject() {
 	// set to matrixes to be identity Matrixes
 
-	matrix = glm::mat4(1.0f);
+	model = glm::mat4(1.0f);
 }
 
 VisObject::~VisObject() {
@@ -47,7 +47,7 @@ void VisObject::init() {
 
 void VisObject::draw(Shader shader) {
 	glBindVertexArray(VAO);
-	shader.setMat4("model", matrix);
+	shader.setMat4("model", model);
 	drawStyle();
 }
 

@@ -26,7 +26,7 @@ TriangleSurface::TriangleSurface() :VisObject() {
 		//std::cout << '(' << x << ", " << y << ", " << z << ')' << std::endl;
 	}
 
-	matrix = glm::mat4(1.0f);
+	model = glm::mat4(1.0f);
 }
 
 TriangleSurface::TriangleSurface(std::string fileName, bool write) : VisObject() {
@@ -107,6 +107,6 @@ void TriangleSurface::draw(Shader shader)
 {
 	glBindVertexArray(VAO);
 	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(getTranslateMatrix()));
-	shader.setMat4("model", matrix);
+	shader.setMat4("model", model);
 	glDrawArrays(GL_LINE_STRIP, 0, vertices.size());// vertices.size());
 }

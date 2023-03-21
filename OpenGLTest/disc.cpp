@@ -53,6 +53,6 @@ void Disc::init() {
 void Disc::draw(Shader shader) {
 	glBindVertexArray(VAO);
 	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	shader.setMat4("model", matrix);
+	shader.setMat4("model", model);
 	glDrawElements(GL_TRIANGLE_FAN, vertices.size(), GL_UNSIGNED_INT, 0);
 }

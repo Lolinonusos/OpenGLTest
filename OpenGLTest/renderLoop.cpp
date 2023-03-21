@@ -11,27 +11,27 @@ renderLoop::renderLoop() {
 		objMap.insert(std::pair<std::string, VisObject*>{(*i)->getName(), (*i)});
 	}
 
-	model = glm::mat4(1.0f);
-	view = glm::mat4(1.0f);
-	projection = glm::mat4(1.0f);
 }
 
 
 void renderLoop::initialize()
 {
+	shaders.push_back(new Shader("firstTex.vs", "firstTex.fs"));
+	//shaders.push_back(new Shader("SkolVert.vs", "SkolFrag.fs"));
+
+	view = glm::mat4(1.0f);
+	projection = glm::mat4(1.0f);
 
 	for (auto i = objMap.begin(); i != objMap.end(); i++) {
 		(*i).second->init();
 	}
 
-	//shaders.push_back(new Shader("SkolVert.vs", "SkolFrag.fs"));
-	shaders.push_back(new Shader("firstTex.vs", "firstTex.fs"));
 
-	textures.push_back(new Texture("Helene.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE));
-
+	textures.push_back(new Texture("Helene.png", GL_TEXTURE_2D));
 	shaders[0]->use();
-	shaders[0]->setInt("tex0", 0);
-	//textures[0]->texUnit(*shaders[0], "tex0", 0);
+	textures[0]->texUnit(*shaders[0], "texture0", 0);
+
+	glEnable(GL_DEPTH_TEST);
 }
 
 void renderLoop::render() {
@@ -43,15 +43,16 @@ void renderLoop::render() {
 	// Clear depth buffer
 	glClear(GL_DEPTH_BUFFER_BIT);
 
+
 	glActiveTexture(GL_TEXTURE0);
-	
-
-	shaders[0]->use();
 	textures[0]->bind();
+	
+	// Which shader program we will use
+	shaders[0]->use();
 
+	// Projection matrix
 	projection = glm::perspective(glm::radians(camera.zoom), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
 	shaders[0]->setMat4("projection", projection);
-
 
 	// View matrix
 	view = camera.getViewMatrix();
@@ -63,6 +64,9 @@ void renderLoop::render() {
 	for (auto& obj : objMap) {
 		obj.second->draw(*shaders[0]);
 	}
+
+	//glfwSwapBuffers(window);
+	//glfwPollEvents();
 }
 
 renderLoop::~renderLoop() {
@@ -70,4 +74,25 @@ renderLoop::~renderLoop() {
 	for (auto& obj : objMap) {
 		delete obj.second;
 	}
+}
+
+void renderLoop::mouse_callback(GLFWwindow*, double xPosIn, double yPosIn) {
+
+	float xPos = static_cast<float>(xPosIn);
+	float yPos = static_cast<float>(yPosIn);
+
+	//std::cout << "Mouse x:" << xPos << "    y:" << yPos << std::endl;
+	if (firstMouse) {
+		lastX = xPos;
+		lastY = yPos;
+		firstMouse = false;
+	}
+
+	float xOffset = xPos - lastX;
+	float yOffset = lastY - yPos;// reversed since y-coordinates range from bottom to top
+
+	lastX = xPos;
+	lastY = yPos;
+
+	camera.processMouseMovement(xOffset, yOffset);
 }

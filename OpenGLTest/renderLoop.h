@@ -1,5 +1,7 @@
 #pragma once
 
+//#include "main.h"
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stb/stb_image.h>
@@ -12,7 +14,6 @@
 #include <vector>
 #include <unordered_map>
 
-//#include "main.h"
 #include "Camera.h"
 
 //#include "shader.h"
@@ -29,13 +30,11 @@ public:
 	//Shader* shaderProgram{ nullptr };
 	//Texture* texture{ nullptr };
 
-	std::vector<Shader*> shaders;
-	std::vector<Texture*> textures;
 
 	const unsigned int SCR_WIDTH = 800;
 	const unsigned int SCR_HEIGHT = 800;
 
-	Camera camera;
+	Camera camera{ glm::vec3(0.0f, 0.0f, 3.0f) };
 
 	renderLoop();
 	~renderLoop();
@@ -45,8 +44,8 @@ public:
 
 	void render();
 
-	std::vector<VisObject*> objVec;
-	std::unordered_map<std::string, VisObject*> objMap;
+	void processInput();
+	void mouse_callback(GLFWwindow*, double xPosIn, double yPosIn);
 
 	// matrixes
 	glm::mat4 model{};
@@ -54,5 +53,15 @@ public:
 	glm::mat4 projection{};
 
 private:
+
+	std::vector<VisObject*> objVec;
+	std::unordered_map<std::string, VisObject*> objMap;
+
+	float lastX = SCR_WIDTH / 2;
+	float lastY = SCR_HEIGHT / 2;
+	bool firstMouse = true;
+
+	std::vector<Shader*> shaders;
+	std::vector<Texture*> textures;
 };
 

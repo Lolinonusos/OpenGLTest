@@ -44,7 +44,7 @@ Texture::Texture(const char* imageLoc, GLenum texType, GLenum slot, GLenum forma
 
     if (bytes) {
         // Assigns the image to the OpenGL Texture object
-        glTexImage2D(texType, 0, GL_RGBA, imgWidth, imgHeight, 0, format, pixelType, bytes);
+        glTexImage2D(texType, 0, format, imgWidth, imgHeight, 0, format, pixelType, bytes);
         // Generates MipMaps
         glGenerateMipmap(texType);
     }

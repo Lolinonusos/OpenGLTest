@@ -36,7 +36,7 @@ void OctahedronBall::init() {
 void OctahedronBall::draw(Shader shader) {
 	glBindVertexArray(VAO);
 	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	shader.setMat4("model", matrix);
+	shader.setMat4("model", model);
 	drawStyle();
 }
 
