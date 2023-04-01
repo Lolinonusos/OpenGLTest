@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bezierCurve.cpp" />
+    <ClCompile Include="bSplineCurve.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="changeScene.cpp" />
     <ClCompile Include="collider.cpp" />
@@ -160,8 +161,10 @@
     <ClCompile Include="fileReader.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="graph.cpp" />
+    <ClCompile Include="heightMap.cpp" />
     <ClCompile Include="interactive.cpp" />
     <ClCompile Include="editorCam.cpp" />
+    <ClCompile Include="light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matteModus.cpp" />
     <ClCompile Include="mesh.cpp" />
@@ -184,6 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bezierCurve.h" />
+    <ClInclude Include="bSplineCurve.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="collider.h" />
     <ClInclude Include="cube.h" />
@@ -192,9 +196,11 @@
     <ClInclude Include="fileReader.h" />
     <ClInclude Include="fileWriter.h" />
     <ClInclude Include="graph.h" />
+    <ClInclude Include="heightMap.h" />
     <ClInclude Include="interactive.h" />
     <ClInclude Include="learnOpenGL.h" />
     <ClInclude Include="editorCam.h" />
+    <ClInclude Include="light.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="matteModus.h" />
     <ClInclude Include="moveComponent.h" />
@@ -229,6 +235,7 @@
     <None Include="SkolVert.vs" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\Norge.png" />
     <Image Include="awesomeface.png" />
     <Image Include="Helene.png" />
     <Image Include="skeet (1).png" />

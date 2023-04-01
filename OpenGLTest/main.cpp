@@ -5,14 +5,12 @@
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 800;
 
-
 // Time
 float deltaTime = 0.0f; // Time between current and last frame
 float lastFrame = 0.0f;
 
 
 float mixValue = 0.2f;
-
 
 // Camera stuff
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f)); // learnopengl camera
@@ -145,11 +143,12 @@ int main() {
     //Shader ourShader("firstTexVertShader.vs", "firstTexFragShader.fs"); 
     // you can name your shader files however you like
     //Shader ourShader("SkolVert.vs", "SkolFrag.fs"); 
-    Shader ourShader("firstTex.vs", "firstTex.fs");
+    //Shader ourShader("firstTex.vs", "firstTex.fs");
+    //Shader lightShader("lightVert.vs", "lightFrag.fs");
 
-    Texture helene("Helene.png", GL_TEXTURE_2D);
-    ourShader.use();
-    helene.texUnit(ourShader, "texture0", 0);
+    //Texture helene("Helene.png", GL_TEXTURE_2D);
+    //ourShader.use();
+    //helene.texUnit(ourShader, "texture0", 0);
     //glm::vec3 cubePositions[] = {
     //glm::vec3(0.0f,  0.0f,  0.0f),
     //glm::vec3(2.0f,  5.0f, -15.0f),
@@ -165,15 +164,15 @@ int main() {
     renderLoop render;
     render.initialize();
 
-    XYZ xyz;
-    xyz.init();
+    //XYZ xyz;
+    //xyz.init();
 
   
 
-    //cube.init();
+    ////cube.init();
 
-    intObj.init();
-    //
+    //intObj.init();
+    ////
 
     //// Oblig 2
     //changeScene cs;

@@ -6,6 +6,7 @@ renderLoop::renderLoop() {
 
 
 	objVec.push_back(new Cube());
+	objVec.push_back(new HeightMap("Norge.png"));
 
 	for (auto i = objVec.begin(); i != objVec.end(); i++) {
 		objMap.insert(std::pair<std::string, VisObject*>{(*i)->getName(), (*i)});
@@ -16,8 +17,8 @@ renderLoop::renderLoop() {
 
 void renderLoop::initialize()
 {
-	shaders.push_back(new Shader("firstTex.vs", "firstTex.fs"));
-	//shaders.push_back(new Shader("SkolVert.vs", "SkolFrag.fs"));
+	shaders.push_back(new Shader("firstTex.vs", "firstTex.fs")); // Index 0 is texture shader
+	shaders.push_back(new Shader("lightVert.vs", "lightFrag.fs")); // Index 1 is light shader
 
 	view = glm::mat4(1.0f);
 	projection = glm::mat4(1.0f);
@@ -25,7 +26,6 @@ void renderLoop::initialize()
 	for (auto i = objMap.begin(); i != objMap.end(); i++) {
 		(*i).second->init();
 	}
-
 
 	textures.push_back(new Texture("Helene.png", GL_TEXTURE_2D));
 	shaders[0]->use();

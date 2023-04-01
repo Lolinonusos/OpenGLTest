@@ -23,6 +23,7 @@
 #include "visObject.h"
 
 #include "cube.h"
+#include "heightMap.h"
 
 
 class renderLoop {
