@@ -85,7 +85,6 @@ void renderLoop::render() {
 }
 
 renderLoop::~renderLoop() {
-
 	for (auto& obj : objectMap) {
 		delete obj.second;
 	}
