@@ -14,7 +14,7 @@ public:
 	// same as GLuint
 	unsigned int ID;
 
-	Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr);
+	Shader(std::string inName, const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr);
 
 	void use();
 	void remove();
@@ -54,9 +54,14 @@ public:
 	void setMat4(const std::string& name, const glm::mat4& mat) const;
 
 
+	std::string getName() {
+		return name;
+	}
 
 private:
-	void checkCompileErrors(unsigned int shader, std::string type);
+	std::string name;
+
+	void checkCompileErrors(unsigned int shader, std::string type, std::string file);
 };
 
 #endif

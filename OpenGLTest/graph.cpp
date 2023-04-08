@@ -3,7 +3,8 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 
-Graph::Graph() {
+Graph::Graph(Shader *inShader) {
+	objShader = inShader;
 
 	float h = 0.1f;
 	
@@ -132,10 +133,11 @@ void Graph::init() {
 	glBindVertexArray(0);
 }
 
-void Graph::draw(Shader shader) {
+void Graph::draw() {
 	glBindVertexArray(VAO);
 	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	shader.setMat4("model", model);
+	objShader->use();
+	objShader->setMat4("model", model);
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
 }
 

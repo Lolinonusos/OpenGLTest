@@ -218,7 +218,6 @@
     <ClInclude Include="mesh.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="shader.h" />
-    <ClInclude Include="shape.h" />
     <ClInclude Include="Test1.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="visObject.h" />
@@ -229,15 +228,19 @@
     <None Include="first.vs" />
     <None Include="firstTex.fs" />
     <None Include="firstTex.vs" />
+    <None Include="height.fs" />
+    <None Include="height.vs" />
+    <None Include="light.fs" />
+    <None Include="light.vs" />
     <None Include="mixTexture.fs" />
     <None Include="rotate.vs" />
     <None Include="SkolFrag.fs" />
     <None Include="SkolVert.vs" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\Norge.png" />
     <Image Include="awesomeface.png" />
     <Image Include="Helene.png" />
+    <Image Include="Norge.png" />
     <Image Include="skeet (1).png" />
   </ItemGroup>
   <ItemGroup>

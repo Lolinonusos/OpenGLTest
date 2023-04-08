@@ -5,7 +5,7 @@
 
 class changeScene : public Cube {
 public:
-	changeScene();
+	changeScene(Shader inShader);
 	~changeScene();
 
 	void checkCollision(VisObject* other, Camera* camera) {

@@ -2,7 +2,8 @@
 #include "visObject.h"
 
 class Light : public VisObject {
-	Light();
+public:
+	Light(Shader *inShader, std::string inName);
 
 	void init();
 

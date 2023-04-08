@@ -5,10 +5,11 @@
 
 class Cube : public VisObject {
 public:
-	Cube();
+
+	Cube(Shader *inShader, std::string inName);
 	~Cube();
 	void init() override;
-	void draw(Shader shader) override;
+	void draw() override;
 };
 
 #endif

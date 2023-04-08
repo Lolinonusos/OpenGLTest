@@ -1,6 +1,10 @@
 #include "heightMap.h"
 
-HeightMap::HeightMap(const char* imgPath) {
+HeightMap::HeightMap(const char* imgPath, Shader *inShader, std::string inName) {
+	objShader = inShader;
+	name = inName;
+
+	setPosition(glm::vec3(0.0f, -10.0f, 0.0f));
 
 	float yScale = 64.0f / 256.0f;
 	float yShift{ 16.0f };
@@ -14,12 +18,16 @@ HeightMap::HeightMap(const char* imgPath) {
 			// Get tex elvation for (i, j) tex coordinate)
 			unsigned char* texEl = data + (j + width * i) * channels;
 			// Raw height at coordinate
-			unsigned char y = texEl[0];
+			unsigned char y = texEl[0]; // Needs correct path to file, gives nullptr if file is not found
 
-			vertices.push_back(Vertex{ (-height / 2.0f + i), ((int)y * yScale - yShift), (-width / 2.0f + j) });
+			vertices.push_back(Vertex{ 
+				(-height / 2.0f + height * i/(float)height), 
+				((int)y * yScale - yShift), 
+				(-width / 2.0f + width * j / (float)width) 
+			});
 		}
 	}
-
+	
 	stbi_image_free(data);
 
 	for (unsigned int i = 0; i < height - 1; i++) {
@@ -30,8 +38,9 @@ HeightMap::HeightMap(const char* imgPath) {
 		}
 	}
 
-	const unsigned int NUM_STRIPS = height - 1;
-	const unsigned int NUM_VERTS_PER_STRIP = width * 2;
+	NUM_STRIPS = height - 1;
+	NUM_VERTS_PER_STRIP = width * 2;
+
 
 }
 
@@ -64,22 +73,29 @@ void HeightMap::init() {
 	glBindVertexArray(0);
 }
 
-void HeightMap::draw(Shader shader) {
+void HeightMap::draw() {
 	glBindVertexArray(VAO);
-	shader.setMat4("model", model);
-	switch (RenderStyle(renderVal)) {
-	case SOLID:
-		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
-		break;
-	case WIREFRAME:
-		glDrawElements(GL_LINES, indices.size(), GL_UNSIGNED_INT, nullptr);
-		break;
-	case HIDDEN:
-		glDrawElements(GL_POINTS, indices.size(), GL_UNSIGNED_INT, nullptr);
-		break;
-	default:
-		std::cout << "ERROR::INVALID_RENDER_METHOD" << std::endl;
-		break;
+
+	objShader->use();
+	objShader->setMat4("model", model);
+
+	for (unsigned int strip = 0; strip < NUM_STRIPS; strip++) {
+		switch (RenderStyle(renderVal)) {
+		case SOLID:
+			//glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
+			glDrawElements(GL_TRIANGLE_STRIP, NUM_VERTS_PER_STRIP, GL_UNSIGNED_INT, (void*)(sizeof(unsigned int) * NUM_VERTS_PER_STRIP * strip));
+
+			break;
+		case WIREFRAME:
+			glDrawElements(GL_LINES, indices.size(), GL_UNSIGNED_INT, nullptr);
+			break;
+		case HIDDEN:
+			glDrawElements(GL_POINTS, indices.size(), GL_UNSIGNED_INT, nullptr);
+			break;
+		default:
+			std::cout << "ERROR::INVALID_RENDER_METHOD" << std::endl;
+			break;
+		}
+		glBindVertexArray(0);
 	}
-	glBindVertexArray(0);
 }

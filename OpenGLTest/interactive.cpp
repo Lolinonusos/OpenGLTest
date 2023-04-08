@@ -1,7 +1,9 @@
 #include "interactive.h"
 
-Interactive::Interactive() {
-    //glm::vec3 inPosition = glm::vec3(0.0f, 0.0f, 0.0f)
+Interactive::Interactive(Shader *inShader) {
+    
+	objShader = inShader;
+	//glm::vec3 inPosition = glm::vec3(0.0f, 0.0f, 0.0f)
     //vecPosition = inPosition;
     
     vertices.push_back(Vertex{ glm::vec3(0.5f, -0.4f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f) });
@@ -38,9 +40,10 @@ void Interactive::init()
 	glBindVertexArray(0);
 }
 
-void Interactive::draw(Shader shader) {
+void Interactive::draw() {
 	glBindVertexArray(VAO);
 	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	shader.setMat4("model", model);
+	objShader->use();
+	objShader->setMat4("model", model);
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
 }

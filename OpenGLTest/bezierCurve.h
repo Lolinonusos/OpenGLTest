@@ -3,9 +3,9 @@
 #include "visObject.h"
 
 class BezierCurve : public VisObject {
-	BezierCurve();
+	BezierCurve(Shader inShader);
 
 	void init() override;
-	void draw(Shader shader) override;
+	void draw() override;
 };
 

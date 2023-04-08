@@ -31,9 +31,10 @@ void Point::init() {
 	glBindVertexArray(0);
 }
 
-void Point::draw(Shader shader) {
+void Point::draw() {
 	glBindVertexArray(VAO);
 	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	shader.setMat4("model", model);
+	objShader->use();
+	objShader->setMat4("model", model);
 	glDrawArrays(GL_POINTS, 0, vertices.size());
 }

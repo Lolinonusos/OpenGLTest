@@ -4,10 +4,10 @@
 
 class Disc : public VisObject {
 public:
-	Disc();
+	Disc(Shader *inShader);
 	~Disc();
 	void init() override;
-	void draw(Shader shader) override;
+	void draw() override;
 
 	void construct();
 

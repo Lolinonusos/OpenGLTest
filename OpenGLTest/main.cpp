@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 800;
@@ -9,17 +8,13 @@ const unsigned int SCR_HEIGHT = 800;
 float deltaTime = 0.0f; // Time between current and last frame
 float lastFrame = 0.0f;
 
-
-float mixValue = 0.2f;
-
 // Camera stuff
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f)); // learnopengl camera
 float lastX = SCR_WIDTH / 2;
 float lastY = SCR_HEIGHT / 2;
 bool firstMouse = true;
 
-// Interactive object
-Interactive intObj;
+renderLoop render;
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 void processInput(GLFWwindow* window) {
@@ -32,39 +27,38 @@ void processInput(GLFWwindow* window) {
     // Interact object here
     if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) { // FORWARD
         //intObj.move(0.0f, 1.0f, 0.0f, deltaTime);
-        intObj.translate(UP, deltaTime);
+        //intObj.translate(UP, deltaTime);
         //intObj.translate(0.0f, 1.0f, z, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) { // BACKWARD
         //intObj.move(0.0f, -1.0f, 0.0f, deltaTime);
-        intObj.translate(DOWN, deltaTime);
+        //intObj.translate(DOWN, deltaTime);
         //intObj.translate(0.0f, -1.0, z, deltaTime);
 
     }
     if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) { // RIGHT
         //intObj.move(1.0f, 0.0f, 0.0f, deltaTime);
-        intObj.translate(RIGHT, deltaTime);
+        //intObj.translate(RIGHT, deltaTime);
         //intObj.translate(1.0f, 0.0f, z, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) { // LEFT
         //intObj.move(-1.0f, 0.0f, 0.0f, deltaTime);
-        intObj.translate(LEFT, deltaTime);
+        //intObj.translate(LEFT, deltaTime);
         //intObj.translate(-1.0f, 0.0f, z, deltaTime);
     }
 
     // Camera here
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // FORWARD
-        //camPos += camSpeed * camFront;
-        //camera.translate(FORWARD, deltaTime);
+        render.camera.translate(FORWARD, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) { // BACKWARD
-        //camera.translate(BACKWARD, deltaTime);
+        render.camera.translate(BACKWARD, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) { // RIGHT
-        //camera.translate(RIGHT, deltaTime);
+        render.camera.translate(RIGHT, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) { // LEFT
-        //camera.translate(LEFT, deltaTime);
+        render.camera.translate(LEFT, deltaTime);
     }
 }
 
@@ -86,6 +80,7 @@ void mouse_callback(GLFWwindow*, double xPosIn, double yPosIn) {
     lastX = xPos;
     lastY = yPos;
 
+    render.camera.processMouseMovement(xOffset, yOffset);
     //camera.processMouseMovement(xOffset, yOffset);
 }
 
@@ -132,6 +127,7 @@ int main() {
         return -1;
     }
 
+
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
@@ -146,33 +142,8 @@ int main() {
     //Shader ourShader("firstTex.vs", "firstTex.fs");
     //Shader lightShader("lightVert.vs", "lightFrag.fs");
 
-    //Texture helene("Helene.png", GL_TEXTURE_2D);
-    //ourShader.use();
-    //helene.texUnit(ourShader, "texture0", 0);
-    //glm::vec3 cubePositions[] = {
-    //glm::vec3(0.0f,  0.0f,  0.0f),
-    //glm::vec3(2.0f,  5.0f, -15.0f),
-    //glm::vec3(-1.5f, -2.2f, -2.5f),
-    //glm::vec3(-3.8f, -2.0f, -12.3f),
-    //glm::vec3(2.4f, -0.4f, -3.5f),
-    //glm::vec3(-1.7f,  3.0f, -7.5f),
-    //glm::vec3(1.3f, -2.0f, -2.5f),
-    //glm::vec3(1.5f,  2.0f, -2.5f),
-    //glm::vec3(1.5f,  0.2f, -1.5f),
-    //glm::vec3(-1.3f,  1.0f, -1.5f)
-    //};
-    renderLoop render;
+
     render.initialize();
-
-    //XYZ xyz;
-    //xyz.init();
-
-  
-
-    ////cube.init();
-
-    //intObj.init();
-    ////
 
     //// Oblig 2
     //changeScene cs;

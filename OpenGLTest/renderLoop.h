@@ -22,8 +22,10 @@
 #include "positionComponent.h"
 #include "visObject.h"
 
+#include "interactive.h"
 #include "cube.h"
 #include "heightMap.h"
+#include "light.h"
 
 
 class renderLoop {
@@ -35,7 +37,7 @@ public:
 	const unsigned int SCR_WIDTH = 800;
 	const unsigned int SCR_HEIGHT = 800;
 
-	Camera camera{ glm::vec3(0.0f, 0.0f, 3.0f) };
+	Camera camera{ glm::vec3(0.0f, 2.0f, 3.0f) };
 
 	renderLoop();
 	~renderLoop();
@@ -55,14 +57,17 @@ public:
 
 private:
 
-	std::vector<VisObject*> objVec;
-	std::unordered_map<std::string, VisObject*> objMap;
-
 	float lastX = SCR_WIDTH / 2;
 	float lastY = SCR_HEIGHT / 2;
 	bool firstMouse = true;
 
+	std::vector<VisObject*> objects;
+	std::unordered_map<std::string, VisObject*> objectMap;
+
 	std::vector<Shader*> shaders;
+	std::unordered_map <std::string, Shader*> shaderMap;
+
 	std::vector<Texture*> textures;
+	std::unordered_map < std::string, Texture*> textureMap;
 };
 

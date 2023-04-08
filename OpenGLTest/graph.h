@@ -5,11 +5,11 @@
 
 class Graph : public VisObject{
 public:
-	Graph();
+	Graph(Shader *inShader);
 	~Graph();
 
 	void init() override;
-	void draw(Shader shader) override;
+	void draw() override;
 };
 
 #endif

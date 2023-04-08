@@ -4,26 +4,33 @@ renderLoop::renderLoop() {
 
 
 
-
-	objVec.push_back(new Cube());
-	objVec.push_back(new HeightMap("Norge.png"));
-
-	for (auto i = objVec.begin(); i != objVec.end(); i++) {
-		objMap.insert(std::pair<std::string, VisObject*>{(*i)->getName(), (*i)});
-	}
-
 }
 
 
 void renderLoop::initialize()
 {
-	shaders.push_back(new Shader("firstTex.vs", "firstTex.fs")); // Index 0 is texture shader
-	shaders.push_back(new Shader("lightVert.vs", "lightFrag.fs")); // Index 1 is light shader
+	shaders.push_back(new Shader("tekstur", "firstTex.vs", "firstTex.fs")); // Index 0 is texture shader
+	shaders.push_back(new Shader("skole","SkolVert.vs", "SkolFrag.fs")); // Index 0 is texture shader
+	shaders.push_back(new Shader("hoyde", "height.vs", "height.fs")); // index 2 is for height map
+	shaders.push_back(new Shader("lysShader", "light.vs", "light.fs")); // Index 3 is light shader
+
+
+	objects.push_back(new Cube{ shaders[0], "Hlene" });
+	objects.push_back(new Cube{ shaders[1], "2"});
+	objects.push_back(new HeightMap{ "Norge.png", shaders[2], "map" });
+	objects.push_back(new Light{ shaders[3], "lys" });
+
+
+	for (auto i = objects.begin(); i != objects.end(); i++) {
+		objectMap.insert(std::pair<std::string, VisObject*>{(*i)->getName(), (*i)});
+		//std::cout << objectMap.size();
+	}
+
 
 	view = glm::mat4(1.0f);
 	projection = glm::mat4(1.0f);
 
-	for (auto i = objMap.begin(); i != objMap.end(); i++) {
+	for (auto i = objectMap.begin(); i != objectMap.end(); i++) {
 		(*i).second->init();
 	}
 
@@ -47,22 +54,30 @@ void renderLoop::render() {
 	glActiveTexture(GL_TEXTURE0);
 	textures[0]->bind();
 	
-	// Which shader program we will use
-	shaders[0]->use();
+	for (unsigned int i = 0; i < shaders.size(); i++) {
+	//for (auto i = shaders.begin(); i != shaders.end(); i++) {
+		
+		// Which shader program we will use
+		shaders[i]->use();
+		
+		// Projection matrix
+		projection = glm::perspective(glm::radians(camera.zoom), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
+		shaders[i]->setMat4("projection", projection);
 
-	// Projection matrix
-	projection = glm::perspective(glm::radians(camera.zoom), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
-	shaders[0]->setMat4("projection", projection);
+		// View matrix
+		view = camera.getViewMatrix();
+		shaders[i]->setMat4("view", view);
 
-	// View matrix
-	view = camera.getViewMatrix();
-	shaders[0]->setMat4("view", view);
+		shaders[i]->setVec3("cameraPosition", camera.position);
 
-	//for (auto i = objMap.begin(); i != objMap.end(); i++) {
-	//	(*i).second->draw(*shaderProgram);
-	//}
-	for (auto& obj : objMap) {
-		obj.second->draw(*shaders[0]);
+	}
+
+	for (auto& obj : objectMap) {
+		obj.second->draw();
+		if (obj.second->getName() == "2") {
+			obj.second->setPosition(glm::vec3(2.0f, 2.0f, 0.0f));
+			//std::cout << "hurrah";
+		}
 	}
 
 	//glfwSwapBuffers(window);
@@ -71,9 +86,14 @@ void renderLoop::render() {
 
 renderLoop::~renderLoop() {
 
-	for (auto& obj : objMap) {
+	for (auto& obj : objectMap) {
 		delete obj.second;
 	}
+}
+
+void renderLoop::processInput()
+{
+
 }
 
 void renderLoop::mouse_callback(GLFWwindow*, double xPosIn, double yPosIn) {

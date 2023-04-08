@@ -5,13 +5,13 @@
 
 class TriangleSurface : public VisObject {
 public:
-	TriangleSurface();
+	TriangleSurface(Shader *inShader);
 	TriangleSurface(std::string fileName, bool write);
 	~TriangleSurface();
 	void writefile(std::string fileName);
 	void readFile(std::string fileName);
 	void init() override;
-	void draw(Shader shader) override;
+	void draw() override;
 	//float construct();
 };
 

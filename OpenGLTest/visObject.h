@@ -26,6 +26,8 @@ public:
 	VisObject();
 	~VisObject();
 
+	Shader *objShader;
+
 	void setName(std::string name);
 	std::string getName();
 
@@ -36,7 +38,7 @@ public:
 	// Pure virtual
 	// Får det ved å skrive = 0 etter funksjonen
 	// Tvinger alle klasser som arver fra denne til å ha sin egen override av funksjonen
-	virtual void draw(Shader shader); 
+	virtual void draw(); 
 
 	void setRenderStyle(int i);
 

@@ -5,10 +5,10 @@
 
 class XYZ : public VisObject {
 public:
-	XYZ();
+	XYZ(Shader *shader);
 	~XYZ();
 	void init() override;
-	void draw(Shader shader) override;
+	void draw() override;
 };
 
 #endif

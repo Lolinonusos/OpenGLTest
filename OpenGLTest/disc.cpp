@@ -1,6 +1,8 @@
 #include "disc.h"
 
-Disc::Disc() {
+Disc::Disc(Shader *inShader) {
+	objShader = inShader;
+
 	vertices.push_back(Vertex{ 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f });
 	for (unsigned int i = 0; i < 13; i++) {
 		double angle = 30 * i * 3.14 / 180;
@@ -50,9 +52,10 @@ void Disc::init() {
 	glBindVertexArray(0);
 }
 
-void Disc::draw(Shader shader) {
+void Disc::draw() {
 	glBindVertexArray(VAO);
 	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	shader.setMat4("model", model);
+	objShader->use();
+	objShader->setMat4("model", model);
 	glDrawElements(GL_TRIANGLE_FAN, vertices.size(), GL_UNSIGNED_INT, 0);
 }

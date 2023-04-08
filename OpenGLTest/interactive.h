@@ -4,10 +4,10 @@
 
 class Interactive : public VisObject {
 public:
-	Interactive();
+	Interactive(Shader *inShader);
 	~Interactive();
 	void init() override;
-	void draw(Shader shader) override;
+	void draw() override;
 
 private:
 	float movementSpeed = 2.0f; // Not in use yet

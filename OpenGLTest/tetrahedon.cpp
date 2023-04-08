@@ -12,6 +12,6 @@ void Tetrahedon::init()
 {
 }
 
-void Tetrahedon::draw(Shader shader)
+void Tetrahedon::draw()
 {
 }

@@ -1,6 +1,8 @@
 #include "shader.h"
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath) {
+Shader::Shader(std::string inName, const char* vertexPath, const char* fragmentPath, const char* geometryPath) {
+	name = inName;
+	
 	// 1. Retrieve the vertex/fragment source code from filepath
 	std::string vertexCode;
 	std::string fragmentCode;
@@ -50,14 +52,14 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geo
 	glShaderSource(vertex, 1, &vShaderCode, NULL);
 	glCompileShader(vertex);
 	// Print compile errors
-	checkCompileErrors(vertex, "VERTEX");
+	checkCompileErrors(vertex, "VERTEX", vertexPath);
 
 	// fragment shader
 	fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment, 1, &fShaderCode, NULL);
 	glCompileShader(fragment);
 	// check for shader compile errors
-	checkCompileErrors(fragment, "FRAGMENT");
+	checkCompileErrors(fragment, "FRAGMENT", fragmentPath);
 
 	// if geometry shader is given, compile geometry shader
 	unsigned int geometry;
@@ -67,7 +69,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geo
 		geometry = glCreateShader(GL_GEOMETRY_SHADER);
 		glShaderSource(geometry, 1, &gShaderCode, NULL);
 		glCompileShader(geometry);
-		checkCompileErrors(geometry, "GEOMETRY");
+		checkCompileErrors(geometry, "GEOMETRY", geometryPath);
 	}
 
 	// Shader program
@@ -76,7 +78,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geo
 	glAttachShader(ID, fragment);
 	glLinkProgram(ID);
 	// Print linking errors if any
-	checkCompileErrors(ID, "PROGRAM");
+	checkCompileErrors(ID, "PROGRAM", name);
 
 	// delete the shaders as they're linked into our program now and no longer necessary
 	glDeleteShader(vertex);
@@ -142,7 +144,7 @@ void Shader::setMat4(const std::string& name, const glm::mat4& mat) const {
 	glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
 
-void Shader::checkCompileErrors(unsigned int shader, std::string type) {
+void Shader::checkCompileErrors(unsigned int shader, std::string type, std::string file) {
 	int success;
 	char infoLog[1024];
 	if (type != "PROGRAM") {
@@ -150,14 +152,14 @@ void Shader::checkCompileErrors(unsigned int shader, std::string type) {
 		if (!success)
 		{
 			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "ERROR::SHADER::" << type << "::COMPILATION_ERROR\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+			std::cout << "ERROR::SHADER::" << type << "::COMPILATION_ERROR::" << name << "\n" << infoLog << "\n-- -------------------------------------------------- - -- " << std::endl;
 		}
 	}
 	else {
 		glGetProgramiv(shader, GL_LINK_STATUS, &success);
 		if (!success) {
 			glGetProgramInfoLog(ID, 512, NULL, infoLog);
-			std::cout << "ERROR::SHADER::" << type << "::LINNKING_ERROR\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+			std::cout << "ERROR::SHADER::" << type << "::LINNKING_ERROR::" << name << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
 		}
 	}
 }

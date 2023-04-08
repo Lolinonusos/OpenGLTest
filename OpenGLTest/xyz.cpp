@@ -1,6 +1,9 @@
 #include "xyz.h"
 
-XYZ::XYZ() {
+XYZ::XYZ(Shader* inShader) {
+	
+	objShader = inShader;
+
 	float size = 10.f;
 	vertices.push_back(Vertex{ glm::vec3(-size, 0, 0), glm::vec3(1, 0, 0) });
 	vertices.push_back(Vertex{ glm::vec3(size, 0, 0), glm::vec3(1, 0, 0) });
@@ -43,9 +46,10 @@ void XYZ::init() {
 	glBindVertexArray(0);
 }
 
-void XYZ::draw(Shader shader) {
+void XYZ::draw() {
 	glBindVertexArray(VAO);
 	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	shader.setMat4("model", model);
+	objShader->use();
+	objShader->setMat4("model", model);
 	glDrawArrays(GL_LINES, 0, vertices.size());
 }

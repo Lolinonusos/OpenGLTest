@@ -8,7 +8,7 @@ public:
 	Tetrahedon();
 	~Tetrahedon();
 	void init() override;
-	void draw(Shader shader) override;
+	void draw() override;
 };
 
 #endif

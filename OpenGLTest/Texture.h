@@ -23,7 +23,15 @@ public:
 	void remove();
 
 	unsigned int ID;
+
+
+	std::string getName() {
+		return name;
+	}
+
 private:
+	std::string name;
+
 	GLenum type;
 };
 

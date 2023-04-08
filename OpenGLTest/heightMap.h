@@ -7,10 +7,13 @@
 
 class HeightMap : public VisObject {
 public:
-	HeightMap(const char* imgPath);
+	HeightMap(const char* imgPath, Shader* inShader, std::string inName);
 
 	void init();
-	void draw(Shader shader);
+	void draw();
+
+private:
+	unsigned int NUM_STRIPS;
+	unsigned int NUM_VERTS_PER_STRIP;
 
 };
-
