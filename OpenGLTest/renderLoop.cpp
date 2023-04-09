@@ -17,7 +17,7 @@ void renderLoop::initialize()
 
 	objects.push_back(new Cube{ shaders[0], "Hlene" });
 	objects.push_back(new Cube{ shaders[1], "2"});
-	objects.push_back(new HeightMap{ "Norge.png", shaders[2], "map" });
+	objects.push_back(new HeightMap{ "Norge.png", shaders[1], "map" });
 	objects.push_back(new Light{ shaders[3], "lys" });
 
 

@@ -4,27 +4,45 @@ HeightMap::HeightMap(const char* imgPath, Shader *inShader, std::string inName) 
 	objShader = inShader;
 	name = inName;
 
-	setPosition(glm::vec3(0.0f, -10.0f, 0.0f));
-
-	float yScale = 64.0f / 256.0f;
-	float yShift{ 16.0f };
-
 	int width, height, channels;
-	unsigned char* data = stbi_load(imgPath, &width, &height, &channels, 0);
+	unsigned char* data = stbi_load(imgPath, &width, &height, &channels, 1);
 
-	for (unsigned int i = 0; i < height; i++) {
-		for (unsigned int j = 0; j < width; j++) {
+	float res = 1;
+	float x{};
+	float y{};
+	float z{};
+	int vert{};
 
+	for (x = -height / 2; x < (height / 2); x += res) {
+		for (z = -height / 2; z < (width / 2); z += res) {
+
+			y = (float)data[vert];
+			vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(x, y, z) });
+
+			y = (float)data[vert+width];
+			vertices.push_back(Vertex{ glm::vec3(x + res, y, z), glm::vec3(x, y, z) });
+
+			y = (float)data[vert+1];
+			vertices.push_back(Vertex{ glm::vec3(x, y, z + res), glm::vec3(x, y, z) });
+			vertices.push_back(Vertex{ glm::vec3(x, y, z + res), glm::vec3(x, y, z) });
+
+			y = (float)data[vert+width];
+			vertices.push_back(Vertex{ glm::vec3(x + res, y, z), glm::vec3(x, y, z) });
+
+			y = (float)data[vert+1+width];
+			vertices.push_back(Vertex{ glm::vec3(x + res, y, z + res), glm::vec3(x, y, z) });
+
+			vert++;
 			// Get tex elvation for (i, j) tex coordinate)
-			unsigned char* texEl = data + (j + width * i) * channels;
+			//unsigned char* texEl = data + (j + width * i) * channels;
 			// Raw height at coordinate
-			unsigned char y = texEl[0]; // Needs correct path to file, gives nullptr if file is not found
+			//unsigned char y = texEl[0]; // Needs correct path to file, gives nullptr if file is not found
 
-			vertices.push_back(Vertex{ 
+		/*	vertices.push_back(Vertex{ 
 				(-height / 2.0f + height * i/(float)height), 
 				((int)y * yScale - yShift), 
 				(-width / 2.0f + width * j / (float)width) 
-			});
+			});*/
 		}
 	}
 	
@@ -37,9 +55,6 @@ HeightMap::HeightMap(const char* imgPath, Shader *inShader, std::string inName) 
 			}
 		}
 	}
-
-	NUM_STRIPS = height - 1;
-	NUM_VERTS_PER_STRIP = width * 2;
 
 
 }
@@ -79,11 +94,13 @@ void HeightMap::draw() {
 	objShader->use();
 	objShader->setMat4("model", model);
 
-	for (unsigned int strip = 0; strip < NUM_STRIPS; strip++) {
 		switch (RenderStyle(renderVal)) {
 		case SOLID:
-			//glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
-			glDrawElements(GL_TRIANGLE_STRIP, NUM_VERTS_PER_STRIP, GL_UNSIGNED_INT, (void*)(sizeof(unsigned int) * NUM_VERTS_PER_STRIP * strip));
+			glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
+			//glDrawElements(GL_TRIANGLE_STRIP, NUM_VERTS_PER_STRIP, GL_UNSIGNED_INT, (void*)(sizeof(unsigned int) * NUM_VERTS_PER_STRIP * strip));
+			glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
+			glDrawArrays(GL_POINTS, 0, vertices.size());// vertices.size());
+
 
 			break;
 		case WIREFRAME:
@@ -97,5 +114,5 @@ void HeightMap::draw() {
 			break;
 		}
 		glBindVertexArray(0);
-	}
+
 }
