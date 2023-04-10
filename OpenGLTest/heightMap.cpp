@@ -38,15 +38,16 @@ HeightMap::HeightMap(const char* imgPath, Shader *inShader, std::string inName) 
 	
 	stbi_image_free(data);
 
-	for (unsigned int i = 0; i < height - 1; i++) {
-		for (unsigned int j = 0; j < width; j++) {
-			for (unsigned int k = 0; k < 2; k++) {
-				indices.push_back(j + width * (i + k));
-			}
-		}
+	// Tror ikke disse funker :)
+	for (unsigned int i = 0; i < vertices.size(); i+= 3) {
+		indices.push_back(i);
+		indices.push_back(i + 1);
+		indices.push_back(i + 2);
+		
+		indices.push_back(i);
+		indices.push_back(i + 2);
+		indices.push_back(i + 3);
 	}
-
-
 }
 
 void HeightMap::init() {
@@ -84,25 +85,23 @@ void HeightMap::draw() {
 	objShader->use();
 	objShader->setMat4("model", model);
 
-		switch (RenderStyle(renderVal)) {
-		case SOLID:
-			//glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
-			//glDrawElements(GL_TRIANGLE_STRIP, NUM_VERTS_PER_STRIP, GL_UNSIGNED_INT, (void*)(sizeof(unsigned int) * NUM_VERTS_PER_STRIP * strip));
-			//glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
-			//glDrawArrays(GL_POINTS, 0, vertices.size());// vertices.size());
-			glDrawArrays(GL_LINE_STRIP, 0, vertices.size());
-
-			break;
-		case WIREFRAME:
-			glDrawElements(GL_LINES, indices.size(), GL_UNSIGNED_INT, nullptr);
-			break;
-		case HIDDEN:
-			glDrawElements(GL_POINTS, indices.size(), GL_UNSIGNED_INT, nullptr);
-			break;
-		default:
-			std::cout << "ERROR::INVALID_RENDER_METHOD" << std::endl;
-			break;
-		}
-		glBindVertexArray(0);
-
+	switch (RenderStyle(renderVal)) {
+	case SOLID:
+		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
+		//glDrawElements(GL_TRIANGLE_STRIP, NUM_VERTS_PER_STRIP, GL_UNSIGNED_INT, (void*)(sizeof(unsigned int) * NUM_VERTS_PER_STRIP * strip));
+		//glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
+		//glDrawArrays(GL_POINTS, 0, vertices.size());// vertices.size());
+		//glDrawArrays(GL_LINE_STRIP, 0, vertices.size());
+		break;
+	case WIREFRAME:
+		glDrawElements(GL_LINES, indices.size(), GL_UNSIGNED_INT, nullptr);
+		break;
+	case HIDDEN:
+		glDrawElements(GL_POINTS, indices.size(), GL_UNSIGNED_INT, nullptr);
+		break;
+	default:
+		std::cout << "ERROR::INVALID_RENDER_METHOD" << std::endl;
+		break;
+	}
+	glBindVertexArray(0);
 }

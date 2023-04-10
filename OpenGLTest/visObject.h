@@ -68,12 +68,17 @@ public:
 
 	float radius{};
 
+	void getNormals();
+
+	void drawNormals();
+
 protected:
 	
 	std::string name;
 	
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
+	std::vector<glm::vec3> vertNormals;
 
 	unsigned int VAO{ 0 };
 	unsigned int VBO{ 0 };
@@ -102,8 +107,6 @@ protected:
 		}
 	};
 	int renderVal;
-
-	// Collision
 };
 
 #endif
