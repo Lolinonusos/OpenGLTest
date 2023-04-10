@@ -8,41 +8,31 @@ HeightMap::HeightMap(const char* imgPath, Shader *inShader, std::string inName) 
 	unsigned char* data = stbi_load(imgPath, &width, &height, &channels, 1);
 
 	float res = 1;
-	float x{};
-	float y{};
-	float z{};
-	int vert{};
+	float x{}; // right / left
+	float y{}; // up / down
+	float z{}; // in / out of screen
+	int vert{}; // run through image data array with this
 
 	for (x = -height / 2; x < (height / 2); x += res) {
-		for (z = -height / 2; z < (width / 2); z += res) {
+		for (z = -width / 2; z < (width / 2); z += res) {
 
 			y = (float)data[vert];
 			vertices.push_back(Vertex{ glm::vec3(x, y, z), glm::vec3(x, y, z) });
 
-			y = (float)data[vert+width];
+			y = (float)data[vert + width];
 			vertices.push_back(Vertex{ glm::vec3(x + res, y, z), glm::vec3(x, y, z) });
 
-			y = (float)data[vert+1];
+			y = (float)data[vert + 1];
 			vertices.push_back(Vertex{ glm::vec3(x, y, z + res), glm::vec3(x, y, z) });
 			vertices.push_back(Vertex{ glm::vec3(x, y, z + res), glm::vec3(x, y, z) });
 
-			y = (float)data[vert+width];
+			y = (float)data[vert + width];
 			vertices.push_back(Vertex{ glm::vec3(x + res, y, z), glm::vec3(x, y, z) });
 
-			y = (float)data[vert+1+width];
+			y = (float)data[vert + 1 + width];
 			vertices.push_back(Vertex{ glm::vec3(x + res, y, z + res), glm::vec3(x, y, z) });
 
 			vert++;
-			// Get tex elvation for (i, j) tex coordinate)
-			//unsigned char* texEl = data + (j + width * i) * channels;
-			// Raw height at coordinate
-			//unsigned char y = texEl[0]; // Needs correct path to file, gives nullptr if file is not found
-
-		/*	vertices.push_back(Vertex{ 
-				(-height / 2.0f + height * i/(float)height), 
-				((int)y * yScale - yShift), 
-				(-width / 2.0f + width * j / (float)width) 
-			});*/
 		}
 	}
 	
@@ -100,7 +90,7 @@ void HeightMap::draw() {
 			//glDrawElements(GL_TRIANGLE_STRIP, NUM_VERTS_PER_STRIP, GL_UNSIGNED_INT, (void*)(sizeof(unsigned int) * NUM_VERTS_PER_STRIP * strip));
 			//glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
 			//glDrawArrays(GL_POINTS, 0, vertices.size());// vertices.size());
-			glDrawArrays(GL_LINE_STRIP, 0, vertices.size());// vertices.size());
+			glDrawArrays(GL_LINE_STRIP, 0, vertices.size());
 
 			break;
 		case WIREFRAME:
