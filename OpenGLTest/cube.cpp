@@ -48,6 +48,10 @@ Cube::Cube(Shader *inShader, std::string inName) {
     vertices.push_back(Vertex{ glm::vec3( 0.5f,  0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(1.0f, 0.0f) });
     vertices.push_back(Vertex{ glm::vec3(-0.5f,  0.5f,  0.5f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0.0f, 0.0f) });
     vertices.push_back(Vertex{ glm::vec3(-0.5f,  0.5f, -0.5f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0.0f, 1.0f) });
+
+
+
+
 }
 
 Cube::~Cube() {
@@ -88,6 +92,7 @@ void Cube::draw() {
     switch (RenderStyle(renderVal)) {
     case SOLID:
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*)0);
         break;
     case WIREFRAME:
         glDrawArrays(GL_LINES, 0, vertices.size());

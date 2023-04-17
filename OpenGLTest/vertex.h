@@ -51,6 +51,12 @@ public:
 		texCoord = uv;
 	};
 
+	Vertex(float x, float y, float z, glm::vec3 rgb, float u, float v) {
+		position = glm::vec3(x, y, z);
+		normal = rgb;
+		texCoord = glm::vec2(u, v);
+	};
+
 	Vertex(float x, float y, float z) {
 		position = glm::vec3(x, y, z);
 		normal = glm::vec3(0.0f, 0.0f, 0.0f);

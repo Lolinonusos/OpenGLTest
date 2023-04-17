@@ -4,7 +4,7 @@
 
 class Interactive : public VisObject {
 public:
-	Interactive(Shader *inShader);
+	Interactive(Shader *inShader, std::string inName);
 	~Interactive();
 	void init() override;
 	void draw() override;

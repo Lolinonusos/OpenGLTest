@@ -126,6 +126,9 @@
     <ClCompile Include="heightMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="plane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h">
@@ -236,6 +239,9 @@
     <ClInclude Include="heightMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="plane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="first.vs">
@@ -286,6 +292,12 @@
       <Filter>Resource Files\Textures</Filter>
     </Image>
     <Image Include="Norge.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="original.jpg">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="screenshot.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
   </ItemGroup>

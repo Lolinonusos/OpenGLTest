@@ -171,6 +171,7 @@
     <ClCompile Include="model.cpp" />
     <ClCompile Include="moveComponent.cpp" />
     <ClCompile Include="octahedronBall.cpp" />
+    <ClCompile Include="plane.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="positionComponent.cpp" />
     <ClCompile Include="quadTree.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="matteModus.h" />
     <ClInclude Include="moveComponent.h" />
     <ClInclude Include="octahedronBall.h" />
+    <ClInclude Include="plane.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="positionComponent.h" />
     <ClInclude Include="quadTree.h" />
@@ -241,6 +243,8 @@
     <Image Include="awesomeface.png" />
     <Image Include="Helene.png" />
     <Image Include="Norge.png" />
+    <Image Include="original.jpg" />
+    <Image Include="screenshot.png" />
     <Image Include="skeet (1).png" />
   </ItemGroup>
   <ItemGroup>

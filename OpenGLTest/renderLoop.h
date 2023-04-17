@@ -26,6 +26,8 @@
 #include "cube.h"
 #include "heightMap.h"
 #include "light.h"
+#include "plane.h"
+#include "interactive.h"
 
 
 class renderLoop {
@@ -38,6 +40,8 @@ public:
 	const unsigned int SCR_HEIGHT = 800;
 
 	Camera camera{ glm::vec3(0.0f, 2.0f, 3.0f) };
+	
+
 
 	renderLoop();
 	~renderLoop();
@@ -55,8 +59,6 @@ public:
 	glm::mat4 view{};
 	glm::mat4 projection{};
 
-private:
-
 	float lastX = SCR_WIDTH / 2;
 	float lastY = SCR_HEIGHT / 2;
 	bool firstMouse = true;
@@ -69,5 +71,8 @@ private:
 
 	std::vector<Texture*> textures;
 	std::unordered_map < std::string, Texture*> textureMap;
+
+private:
+
 };
 

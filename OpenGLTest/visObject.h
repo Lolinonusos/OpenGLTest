@@ -51,7 +51,6 @@ public:
 	}
 
 	glm::vec3 getVertexPosition(int index) {
-		//std::cout << vertices[index].position.x << " " << vertices[index].position.y << " " << vertices[index].position.z << std::endl;
 		return vertices[index].position;
 	}
 

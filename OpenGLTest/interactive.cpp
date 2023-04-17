@@ -1,14 +1,14 @@
 #include "interactive.h"
 
-Interactive::Interactive(Shader *inShader) {
-    
+Interactive::Interactive(Shader *inShader, std::string inName) {
+	name = inName;
 	objShader = inShader;
 	//glm::vec3 inPosition = glm::vec3(0.0f, 0.0f, 0.0f)
     //vecPosition = inPosition;
     
-    vertices.push_back(Vertex{ glm::vec3(0.5f, -0.4f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f) });
-    vertices.push_back(Vertex{ glm::vec3(-0.5f, -0.4f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f) });
-    vertices.push_back(Vertex{ glm::vec3(0.0f, 0.4, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f) });
+    vertices.push_back(Vertex{ glm::vec3(-0.5f, -0.4f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0.0f, 1.0f) }); // Lower left
+    vertices.push_back(Vertex{ glm::vec3(0.5f, -0.4f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f)}); // Lower right
+    vertices.push_back(Vertex{ glm::vec3(0.0f, 0.4, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec2(0.5f, 1.0f) }); // Upper
 
 }
 

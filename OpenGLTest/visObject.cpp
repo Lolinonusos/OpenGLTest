@@ -59,7 +59,7 @@ void VisObject::setRenderStyle(int i) {
 void VisObject::getNormals() {
 	glm::vec3 normal = glm::vec3(0.0f, 1.0f, 0.0f);  // The normal for the plane
 	//std::vector<glm::vec3> normals;  // Vector to store the normals for each vertex
-	for (int i = 0; i < sizeof(vertices) / sizeof(GLfloat); i += 0) {
+	for (int i = 0; i < sizeof(vertices) / sizeof(GLfloat); i ++) {
 		glm::vec3 v1 = glm::vec3(vertices[i].position);
 		glm::vec3 v2;
 		glm::vec3 v3;
@@ -87,17 +87,17 @@ void VisObject::drawNormals() {
 	//	vertNormals.push_back(position + normal);
 	//}
 	
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
+	//glGenVertexArrays(1, &VAO);
+	//glBindVertexArray(VAO);
 
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertNormals.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
+	//glGenBuffers(1, &VBO);
+	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//glBufferData(GL_ARRAY_BUFFER, vertNormals.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
 
-	// Set vertex attribute pointers
-	// Vertex positions
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+	//// Set vertex attribute pointers
+	//// Vertex positions
+	//glEnableVertexAttribArray(0);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 
-	glDrawElements(GL_LINES, sizeOf()/sizeOf(GLuint), GL_UNSIGNED_INT, )
+	//glDrawElements(GL_LINES, sizeOf()/sizeOf(GLuint), GL_UNSIGNED_INT, )
 }

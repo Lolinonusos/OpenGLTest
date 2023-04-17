@@ -9,17 +9,19 @@ renderLoop::renderLoop() {
 
 void renderLoop::initialize()
 {
+	// Shaders to be used
 	shaders.push_back(new Shader("tekstur", "firstTex.vs", "firstTex.fs")); // Index 0 is texture shader
 	shaders.push_back(new Shader("skole","SkolVert.vs", "SkolFrag.fs")); // Index 0 is texture shader
 	shaders.push_back(new Shader("hoyde", "height.vs", "height.fs")); // index 2 is for height map
 	shaders.push_back(new Shader("lysShader", "light.vs", "light.fs")); // Index 3 is light shader
 
-
+	// Objects to draw
+	objects.push_back(new Interactive{ shaders[0], "player" });
 	objects.push_back(new Cube{ shaders[0], "Hlene" });
-	objects.push_back(new Cube{ shaders[1], "2"});
+	objects.push_back(new Cube{ shaders[0], "2"});
 	objects.push_back(new HeightMap{ "Norge.png", shaders[1], "map" });
 	objects.push_back(new Light{ shaders[3], "lys" });
-
+	objects.push_back(new Plane{ shaders[1], "plan" });
 
 	for (auto i = objects.begin(); i != objects.end(); i++) {
 		objectMap.insert(std::pair<std::string, VisObject*>{(*i)->getName(), (*i)});
@@ -34,7 +36,9 @@ void renderLoop::initialize()
 		(*i).second->init();
 	}
 
-	textures.push_back(new Texture("Helene.png", GL_TEXTURE_2D));
+	textures.push_back(new Texture("screenshot.png", GL_TEXTURE_2D));
+	//textures.push_back(new Texture("Helene.png", GL_TEXTURE_2D));
+	
 	shaders[0]->use();
 	textures[0]->texUnit(*shaders[0], "texture0", 0);
 
@@ -50,12 +54,11 @@ void renderLoop::render() {
 	// Clear depth buffer
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-
+	// Activate texture
 	glActiveTexture(GL_TEXTURE0);
 	textures[0]->bind();
 	
 	for (unsigned int i = 0; i < shaders.size(); i++) {
-	//for (auto i = shaders.begin(); i != shaders.end(); i++) {
 		
 		// Which shader program we will use
 		shaders[i]->use();
@@ -69,7 +72,6 @@ void renderLoop::render() {
 		shaders[i]->setMat4("view", view);
 
 		shaders[i]->setVec3("cameraPosition", camera.position);
-
 	}
 
 	for (auto& obj : objectMap) {

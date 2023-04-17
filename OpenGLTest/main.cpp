@@ -19,32 +19,34 @@ renderLoop render;
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 void processInput(GLFWwindow* window) {
     const float camSpeed = 2.0f * deltaTime;
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
-
-    //float z = 2 * cos(intObj.position.x) * sin(intObj.position.y);
+    }
 
     // Interact object here
     if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) { // FORWARD
         //intObj.move(0.0f, 1.0f, 0.0f, deltaTime);
         //intObj.translate(UP, deltaTime);
         //intObj.translate(0.0f, 1.0f, z, deltaTime);
+        render.objectMap.at("player")->translate(UP, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) { // BACKWARD
         //intObj.move(0.0f, -1.0f, 0.0f, deltaTime);
         //intObj.translate(DOWN, deltaTime);
         //intObj.translate(0.0f, -1.0, z, deltaTime);
-
+        render.objectMap.at("player")->translate(DOWN, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) { // RIGHT
         //intObj.move(1.0f, 0.0f, 0.0f, deltaTime);
         //intObj.translate(RIGHT, deltaTime);
         //intObj.translate(1.0f, 0.0f, z, deltaTime);
+        render.objectMap.at("player")->translate(RIGHT, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) { // LEFT
         //intObj.move(-1.0f, 0.0f, 0.0f, deltaTime);
         //intObj.translate(LEFT, deltaTime);
         //intObj.translate(-1.0f, 0.0f, z, deltaTime);
+        render.objectMap.at("player")->translate(LEFT, deltaTime);
     }
 
     // Camera here
@@ -59,6 +61,14 @@ void processInput(GLFWwindow* window) {
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) { // LEFT
         render.camera.translate(LEFT, deltaTime);
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }
+    else {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
     }
 }
 
