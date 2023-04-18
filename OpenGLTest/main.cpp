@@ -28,13 +28,13 @@ void processInput(GLFWwindow* window) {
         //intObj.move(0.0f, 1.0f, 0.0f, deltaTime);
         //intObj.translate(UP, deltaTime);
         //intObj.translate(0.0f, 1.0f, z, deltaTime);
-        render.objectMap.at("player")->translate(UP, deltaTime);
+        render.objectMap.at("player")->translate(FORWARD, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) { // BACKWARD
         //intObj.move(0.0f, -1.0f, 0.0f, deltaTime);
         //intObj.translate(DOWN, deltaTime);
         //intObj.translate(0.0f, -1.0, z, deltaTime);
-        render.objectMap.at("player")->translate(DOWN, deltaTime);
+        render.objectMap.at("player")->translate(BACKWARD, deltaTime);
     }
     if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) { // RIGHT
         //intObj.move(1.0f, 0.0f, 0.0f, deltaTime);
@@ -63,6 +63,8 @@ void processInput(GLFWwindow* window) {
         render.camera.translate(LEFT, deltaTime);
     }
 
+    // Solid by default
+    // Wireframe when pressing space
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }

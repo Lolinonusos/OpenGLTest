@@ -16,7 +16,7 @@ uniform int specularExponent = 64;
 
 void main() {
 	// ambient
-	vec3 ambient = ambientStrength * lightColour;
+	vec3 ambient = ambientStrength * lightColour * objectColour;
 	
 	// diffuse
 	vec3 normalCorrected = normalize(normalTransposed);

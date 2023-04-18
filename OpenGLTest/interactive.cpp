@@ -34,16 +34,15 @@ void Interactive::init()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
 	// Vertex texture coords
-	//glEnableVertexAttribArray(2);
-	//glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
 
 	glBindVertexArray(0);
 }
 
 void Interactive::draw() {
 	glBindVertexArray(VAO);
-	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
 	objShader->use();
 	objShader->setMat4("model", model);
-	glDrawArrays(GL_TRIANGLES, 0, vertices.size());// vertices.size());
+	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 }

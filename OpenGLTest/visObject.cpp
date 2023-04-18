@@ -49,7 +49,7 @@ void VisObject::draw() {
 	glBindVertexArray(VAO);
 	objShader->use();
 	objShader->setMat4("model", model);
-	drawStyle();
+	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 }
 
 void VisObject::setRenderStyle(int i) {

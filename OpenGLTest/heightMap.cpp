@@ -165,11 +165,9 @@ void HeightMap::draw() {
 
 	switch (RenderStyle(renderVal)) {
 	case SOLID:
+
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*)0);
-		//glDrawElements(GL_TRIANGLE_STRIP, NUM_VERTS_PER_STRIP, GL_UNSIGNED_INT, (void*)(sizeof(unsigned int) * NUM_VERTS_PER_STRIP * strip));
-		//glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-		//glDrawArrays(GL_POINTS, 0, vertices.size());
-		//glDrawArrays(GL_LINES, 0, vertices.size());
+
 		break;
 	case WIREFRAME:
 		glDrawElements(GL_LINES, indices.size(), GL_UNSIGNED_INT, nullptr);
