@@ -77,8 +77,9 @@ void renderLoop::render() {
 		shaders[i]->setVec3("cameraPosition", camera.position);
 	}
 	
-	std::cout << objectMap.at("player")->position.x << " " << objectMap.at("player")->position.y << " " << objectMap.at("player")->position.z << std::endl;
-	//objectMap.at("player")->setY(terrain->getTerrainHeight(glm::vec2(objectMap.at("player")->position.x, objectMap.at("player")->position.z)));
+	//std::cout << objectMap.at("player")->position.x << " " << objectMap.at("player")->position.y << " " << objectMap.at("player")->position.z << std::endl;
+	glm::vec3 playerPos = objectMap.at("player")->position;
+	objectMap.at("player")->setY(terrain->getTerrainHeight(glm::vec2(playerPos.x, playerPos.z)));
 
 	for (auto& obj : objectMap) {
 		obj.second->draw();

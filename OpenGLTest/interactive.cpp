@@ -43,6 +43,7 @@ void Interactive::init()
 void Interactive::draw() {
 	glBindVertexArray(VAO);
 	objShader->use();
-	objShader->setMat4("model", model);
+	objShader->setMat4("model", GetModelMatrix());
+	//objShader->setMat4("model", model);
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 }

@@ -29,28 +29,28 @@ void processInput(GLFWwindow* window) {
         //intObj.translate(UP, deltaTime);
         //intObj.translate(0.0f, 1.0f, z, deltaTime);
         render.objectMap.at("player")->translate(FORWARD, deltaTime);
-        render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
+        //render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
     }
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) { // BACKWARD
         //intObj.move(0.0f, -1.0f, 0.0f, deltaTime);
         //intObj.translate(DOWN, deltaTime);
         //intObj.translate(0.0f, -1.0, z, deltaTime);
         render.objectMap.at("player")->translate(BACKWARD, deltaTime);
-        render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
+        //render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
     }
     if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) { // RIGHT
         //intObj.move(1.0f, 0.0f, 0.0f, deltaTime);
         //intObj.translate(RIGHT, deltaTime);
         //intObj.translate(1.0f, 0.0f, z, deltaTime);
         render.objectMap.at("player")->translate(RIGHT, deltaTime);
-        render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
+        //render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
     }
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) { // LEFT
         //intObj.move(-1.0f, 0.0f, 0.0f, deltaTime);
         //intObj.translate(LEFT, deltaTime);
         //intObj.translate(-1.0f, 0.0f, z, deltaTime);
         render.objectMap.at("player")->translate(LEFT, deltaTime);
-        render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
+        //render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
     }
 
 
@@ -116,6 +116,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 
 
 int main() {
+    std::cout << "hello world!" << std::endl;
     // glfw: initialize and configure
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -177,6 +178,7 @@ int main() {
     //    collision[i].init();
     //}
 
+     
     //collision[1].setPosition(-1.0f, 0.0f, 0.0f);
 
     glEnable(GL_DEPTH_TEST);
@@ -198,14 +200,7 @@ int main() {
 
         render.render();
         
-        //// Background colour
-        //glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        ////// Clean the back buffer and assign the new color to it
-        //glClear(GL_COLOR_BUFFER_BIT);
-        ////// Clear depth buffer
-        //glClear(GL_DEPTH_BUFFER_BIT);
-        //// Can be written together like this
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
         //glActiveTexture(GL_TEXTURE0);
         //helene.bind();

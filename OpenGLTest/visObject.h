@@ -71,6 +71,14 @@ public:
 
 	void drawNormals();
 
+	glm::mat4 GetModelMatrix() {
+		glm::mat4 model = glm::mat4(1.f);
+		model = glm::translate(model, position);
+		return model;
+		//model = glm::rotate(model, rotation.)
+
+	}
+
 protected:
 	
 	std::string name;

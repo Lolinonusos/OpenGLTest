@@ -16,7 +16,7 @@ public:
 
 
 	float getTerrainHeight(const glm::vec2& position);
-	glm::vec3 getBarycCoordinate(const glm::vec2& A, const glm::vec2& B, const glm::vec2& C, const glm::vec2& point);
+	static glm::vec3 getBarycCoordinate(const glm::vec2& A, const glm::vec2& B, const glm::vec2& C, const glm::vec2& point);
 
 private:
 	unsigned int NUM_STRIPS;

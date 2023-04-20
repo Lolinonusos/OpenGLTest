@@ -117,8 +117,10 @@ void HeightMap::FromImageFile(const std::string& fileName, float size, float max
 			float height = imageData[index * numComponents] / 255.f * maxHeight;
 
 			//height = (float)imageData[vert] * heightMultiplier
-
-			vertices.emplace_back(x * h - hSize, height, y * h - hSize, color, x / (float)resolution, y / (float)resolution);
+			Vertex vertex(x * h - hSize, height, y * h - hSize, color, x / (float)resolution, y / (float)resolution);
+			//std::cout << vertex.position.x << " | " << vertex.position.y << " | " << vertex.position.z << std::endl;
+			vertices.push_back(vertex);
+			//vertices.emplace_back(x * h - hSize, height, y * h - hSize, color, x / (float)resolution, y / (float)resolution);
 			yp += pixelJump;
 		}
 		xp += pixelJump;
@@ -185,28 +187,64 @@ void HeightMap::draw() {
 float HeightMap::getTerrainHeight(const glm::vec2& playerPosition) {
 
 
-	glm::vec3 v1, v2, v3;
-	glm::vec3 baryc{-1, -1, -1};
+	glm::vec3 v1{}, v2{}, v3{};
+	glm::vec3 baryc{-1.f, -1.f, -1.f};
 	
 
-	//std::cout << playerPosition.x << " " << playerPosition.y << std::endl;
+	std::cout << "Player X: " << playerPosition.x << " Player Z:" << playerPosition.y << std::endl;
 
-	for (int i = 0; i < vertices.size() - 2; i += 3) {
+	for (size_t i = 0; i < indices.size() / 3; i++)
+	{
+		int i1, i2, i3;
+		i1 = indices[i*3];
+		i2 = indices[i*3+1];
+		i3 = indices[i*3+2];
 
-		v1 = vertices[i].position;
-		v2 = vertices[i + 1].position;
-		v3 = vertices[i + 2].position;
+		glm::vec3 v1, v2, v3;
 
-		//std::cout << v1.x << " " << v1.y << " " << v1.z << std::endl;
+		v1 = vertices[i1].position;
+		v2 = vertices[i2].position;
+		v3 = vertices[i3].position;
+
+		//std::cout << "V1 | " << v1.x << " | " << v1.y << " | " << v1.z << std::endl;
+		//std::cout << "V2 | " << v2.x << " | " << v2.y << " | " << v2.z << std::endl;
+		//std::cout << "V3 | " << v3.x << " | " << v3.y << " | " << v3.z << std::endl;
 
 		baryc = getBarycCoordinate(glm::vec2(v1.x, v1.z), glm::vec2(v2.x, v2.z), glm::vec2(v3.x, v3.z), playerPosition);
 
-		//std::cout << baryc.x << " " << baryc.y << " " << baryc.z;
 
 		if (baryc.x >= 0 && baryc.y >= 0 && baryc.z >= 0) {
+			//std::cout << "IN TRIANGLE" << std::endl;
 			break;
 		}
 	}
+
+	//for (int i = 0; i < vertices.size() - 2; i += 3) {
+
+	//	v1 = vertices[i].position;
+	//	v2 = vertices[i + 1].position;
+	//	v3 = vertices[i + 2].position;
+
+	//	//std::cout << i << std::endl;
+
+	//	// std::cout << "V1 | " << v1.x << " | " << v1.y << " | " << v1.z << std::endl;
+	//	// std::cout << "V2 | " << v2.x << " | " << v2.y << " | " << v2.z << std::endl;
+	//	// std::cout << "V3 | " << v3.x << " | " << v3.y << " | " << v3.z << std::endl;
+	//	baryc = getBarycCoordinate(glm::vec2(v1.x, v1.z), glm::vec2(v2.x, v2.z), glm::vec2(v3.x, v3.z), playerPosition);
+
+
+	//	if (baryc.x >= 0 && baryc.y >= 0 && baryc.z >= 0) {
+	//		//std::cout << "IN TRIANGLE" << std::endl;
+	//		break;
+	//	}
+	//	else {
+	//		//std::cout << "NOT IN TRIANGLE" << std::endl;
+
+	//	}
+	//}
+		
+	std::cout << "Baryc: " << baryc.x << " " << baryc.y << " " << baryc.z << std::endl;
+
 	float height = v1.y * baryc.x + v2.y * baryc.y + v3.y * baryc.z;
 
 	//std::cout << "Returned y value:" << height << std::endl;
@@ -215,22 +253,34 @@ float HeightMap::getTerrainHeight(const glm::vec2& playerPosition) {
 	return height;
 }
 
-glm::vec3 HeightMap::getBarycCoordinate(const glm::vec2& v1, const glm::vec2& v2, const glm::vec2& v3, const glm::vec2& point)
+glm::vec3 HeightMap::getBarycCoordinate(const glm::vec2& a, const glm::vec2& b, const glm::vec2& c, const glm::vec2& x)
 {
-	glm::vec2 v12 = v2 - v1;
-	glm::vec2 v23 = v3 - v2;
+	glm::vec2 v0 = b - a;
+	glm::vec2 v1 = c - a;
+	glm::vec2 v2 = x - a;
 
-	float area = glm::cross(glm::vec3(v12, 0.0f), glm::vec3(v23, 0.0f)).z;
+	float d00 = glm::dot(v0, v0);
+	float d01 = glm::dot(v0, v1);
+	float d11 = glm::dot(v1, v1);
+	float d20 = glm::dot(v2, v0);
+	float d21 = glm::dot(v2, v1);
+	float denom = d00 * d11 - d01 * d01;
 
-	std::cout << area << std::endl;
+	//float area = glm::cross(glm::vec3(v0, 0.0f), glm::vec3(v1, 0.0f)).y;
 
-	glm::vec2 v1p = v1 - point;
-	glm::vec2 v2p = v2 - point;
-	glm::vec2 v3p = v3 - point;
+	//std::cout << area << std::endl;
 
-	float u = glm::vec3(glm::cross(glm::vec3(v1p, 0.0f), glm::vec3(v2p, 0.0f))).z / area;
-	float v = glm::vec3(glm::cross(glm::vec3(v2p, 0.0f), glm::vec3(v3p, 0.0f))).z / area;
-	float w = glm::vec3(glm::cross(glm::vec3(v3p, 0.0f), glm::vec3(v1p, 0.0f))).z / area;
+	//glm::vec2 v1p = a - x;
+	//glm::vec2 v2p = b - x;
+	//glm::vec2 v3p = c - x;
+
+	//float u = glm::cross(glm::vec3(v1p, 0.0f), glm::vec3(v2p, 0.0f)).z / area;
+	//float v = glm::cross(glm::vec3(v2p, 0.0f), glm::vec3(v3p, 0.0f)).z / area;
+	//float w = glm::cross(glm::vec3(v3p, 0.0f), glm::vec3(v1p, 0.0f)).z / area;
+
+	float v = (d11 * d20 - d01 * d21) / denom;
+	float w = (d00 * d21 - d01 * d20) / denom;
+	float u = 1.0f - v - w;
 
 	glm::vec3 baryc3D = glm::vec3(u, v, w);
 
