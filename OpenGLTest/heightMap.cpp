@@ -200,7 +200,7 @@ float HeightMap::getTerrainHeight(const glm::vec2& playerPosition) {
 		i2 = indices[i*3+1];
 		i3 = indices[i*3+2];
 
-		glm::vec3 v1, v2, v3;
+		//glm::vec3 v1, v2, v3;
 
 		v1 = vertices[i1].position;
 		v2 = vertices[i2].position;
@@ -247,7 +247,7 @@ float HeightMap::getTerrainHeight(const glm::vec2& playerPosition) {
 
 	float height = v1.y * baryc.x + v2.y * baryc.y + v3.y * baryc.z;
 
-	//std::cout << "Returned y value:" << height << std::endl;
+	std::cout << "Returned y value:" << height << std::endl;
 
 
 	return height;
