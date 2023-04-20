@@ -19,9 +19,11 @@ void renderLoop::initialize()
 	objects.push_back(new Interactive{ shaders[0], "player" });
 	objects.push_back(new Cube{ shaders[0], "Hlene" });
 	objects.push_back(new Cube{ shaders[0], "2"});
-	objects.push_back(new HeightMap{ "Norge.png", shaders[1], "map" });
 	objects.push_back(new Light{ shaders[3], "lys" });
 	objects.push_back(new Plane{ shaders[1], "plan" });
+	
+	//objects.push_back(
+	terrain = new HeightMap{ "Norge.png", shaders[1], "terrain" };
 
 	for (auto i = objects.begin(); i != objects.end(); i++) {
 		objectMap.insert(std::pair<std::string, VisObject*>{(*i)->getName(), (*i)});
@@ -35,6 +37,7 @@ void renderLoop::initialize()
 	for (auto i = objectMap.begin(); i != objectMap.end(); i++) {
 		(*i).second->init();
 	}
+	terrain->init();
 
 	textures.push_back(new Texture("screenshot.png", GL_TEXTURE_2D));
 	//textures.push_back(new Texture("Helene.png", GL_TEXTURE_2D));
@@ -73,6 +76,9 @@ void renderLoop::render() {
 
 		shaders[i]->setVec3("cameraPosition", camera.position);
 	}
+	
+	std::cout << objectMap.at("player")->position.x << " " << objectMap.at("player")->position.y << " " << objectMap.at("player")->position.z << std::endl;
+	//objectMap.at("player")->setY(terrain->getTerrainHeight(glm::vec2(objectMap.at("player")->position.x, objectMap.at("player")->position.z)));
 
 	for (auto& obj : objectMap) {
 		obj.second->draw();
@@ -81,7 +87,8 @@ void renderLoop::render() {
 			//std::cout << "hurrah";
 		}
 	}
-
+	terrain->draw();
+	//objectMap.at(std::string("terrain"))->setTerrainHeight(glm::vec2());
 	//glfwSwapBuffers(window);
 	//glfwPollEvents();
 }

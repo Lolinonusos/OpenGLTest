@@ -29,25 +29,30 @@ void processInput(GLFWwindow* window) {
         //intObj.translate(UP, deltaTime);
         //intObj.translate(0.0f, 1.0f, z, deltaTime);
         render.objectMap.at("player")->translate(FORWARD, deltaTime);
+        render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
     }
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) { // BACKWARD
         //intObj.move(0.0f, -1.0f, 0.0f, deltaTime);
         //intObj.translate(DOWN, deltaTime);
         //intObj.translate(0.0f, -1.0, z, deltaTime);
         render.objectMap.at("player")->translate(BACKWARD, deltaTime);
+        render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
     }
     if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) { // RIGHT
         //intObj.move(1.0f, 0.0f, 0.0f, deltaTime);
         //intObj.translate(RIGHT, deltaTime);
         //intObj.translate(1.0f, 0.0f, z, deltaTime);
         render.objectMap.at("player")->translate(RIGHT, deltaTime);
+        render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
     }
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) { // LEFT
         //intObj.move(-1.0f, 0.0f, 0.0f, deltaTime);
         //intObj.translate(LEFT, deltaTime);
         //intObj.translate(-1.0f, 0.0f, z, deltaTime);
         render.objectMap.at("player")->translate(LEFT, deltaTime);
+        render.objectMap.at("player")->setY(render.terrain->getTerrainHeight(glm::vec2(render.objectMap.at("player")->position.x, render.objectMap.at("player")->position.z)));
     }
+
 
     // Camera here
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // FORWARD

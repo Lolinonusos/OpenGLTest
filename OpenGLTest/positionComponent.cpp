@@ -106,3 +106,8 @@ void PositionComponent::setPosition(float x, float y, float z) {
 void PositionComponent::setRotation(float angle, glm::vec3)
 {
 }
+
+void PositionComponent::setY(float y) {
+	position.y = y;
+	setPositionMatrix(position);
+}

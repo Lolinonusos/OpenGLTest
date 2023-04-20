@@ -63,6 +63,9 @@ public:
 	float lastY = SCR_HEIGHT / 2;
 	bool firstMouse = true;
 
+
+	HeightMap* terrain;
+
 	std::vector<VisObject*> objects;
 	std::unordered_map<std::string, VisObject*> objectMap;
 

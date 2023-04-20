@@ -182,16 +182,63 @@ void HeightMap::draw() {
 	glBindVertexArray(0);
 }
 
-void HeightMap::bary(glm::vec3 point) {
+float HeightMap::getTerrainHeight(const glm::vec2& playerPosition) {
 
-	for (int i = 0; i < vertices.size(); i += 3) {
 
+	glm::vec3 v1, v2, v3;
+	glm::vec3 baryc{-1, -1, -1};
+	
+
+	//std::cout << playerPosition.x << " " << playerPosition.y << std::endl;
+
+	for (int i = 0; i < vertices.size() - 2; i += 3) {
+
+		v1 = vertices[i].position;
+		v2 = vertices[i + 1].position;
+		v3 = vertices[i + 2].position;
+
+		//std::cout << v1.x << " " << v1.y << " " << v1.z << std::endl;
+
+		baryc = getBarycCoordinate(glm::vec2(v1.x, v1.z), glm::vec2(v2.x, v2.z), glm::vec2(v3.x, v3.z), playerPosition);
+
+		//std::cout << baryc.x << " " << baryc.y << " " << baryc.z;
+
+		if (baryc.x >= 0 && baryc.y >= 0 && baryc.z >= 0) {
+			break;
+		}
 	}
+	float height = v1.y * baryc.x + v2.y * baryc.y + v3.y * baryc.z;
 
-	float A = 0;
-	float B = 0;
-	float C = 0;
-
+	//std::cout << "Returned y value:" << height << std::endl;
 
 
+	return height;
 }
+
+glm::vec3 HeightMap::getBarycCoordinate(const glm::vec2& v1, const glm::vec2& v2, const glm::vec2& v3, const glm::vec2& point)
+{
+	glm::vec2 v12 = v2 - v1;
+	glm::vec2 v23 = v3 - v2;
+
+	float area = glm::cross(glm::vec3(v12, 0.0f), glm::vec3(v23, 0.0f)).z;
+
+	std::cout << area << std::endl;
+
+	glm::vec2 v1p = v1 - point;
+	glm::vec2 v2p = v2 - point;
+	glm::vec2 v3p = v3 - point;
+
+	float u = glm::vec3(glm::cross(glm::vec3(v1p, 0.0f), glm::vec3(v2p, 0.0f))).z / area;
+	float v = glm::vec3(glm::cross(glm::vec3(v2p, 0.0f), glm::vec3(v3p, 0.0f))).z / area;
+	float w = glm::vec3(glm::cross(glm::vec3(v3p, 0.0f), glm::vec3(v1p, 0.0f))).z / area;
+
+	glm::vec3 baryc3D = glm::vec3(u, v, w);
+
+	/*std::cout << "u:" << u << std::endl;
+	std::cout << "v:" << v << std::endl;
+	std::cout << "w:" << w << std::endl;*/
+
+
+	return baryc3D;
+}
+

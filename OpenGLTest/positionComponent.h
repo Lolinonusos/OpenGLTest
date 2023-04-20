@@ -41,6 +41,8 @@ public:
 	// Set position
 	void setPosition(glm::vec3 offset);
 	void setPosition(float x, float y, float z);
+	//void setX(float x);
+	void setY(float y);
 
 	void setRotation(float angle, glm::vec3 axis);
 
