@@ -64,6 +64,7 @@ HeightMap::HeightMap(const char* imgPath, Shader *inShader, std::string inName) 
 
 }
 
+// Takk Marcus Helmelk
 void HeightMap::FromImageFile(const std::string& fileName, float size, float maxHeight, unsigned resolution)
 {
 	int numComponents = 4; // RGBA
@@ -125,6 +126,22 @@ void HeightMap::FromImageFile(const std::string& fileName, float size, float max
 		}
 		xp += pixelJump;
 		yp = 0.f;
+	}
+
+
+	// Normals
+	for (int i = 0; i < indices.size(); i += 3) {
+		glm::vec3 v1 = vertices[indices[i + 1]].position - vertices[indices[i]].position;
+		glm::vec3 v2 = vertices[indices[i + 2]].position - vertices[indices[i]].position;
+		glm::vec3 normal = glm::normalize(glm::cross(v1, v2));
+
+		vertices[indices[i]].normal += normal;
+		vertices[indices[i + 1]].normal += normal;
+		vertices[indices[i + 2]].normal += normal;
+	}
+
+	for (int i = 0; i < vertices.size(); i++) {
+		vertices[i].normal = glm::normalize(vertices[i].normal);
 	}
 
 	stbi_image_free(imageData);
@@ -191,8 +208,9 @@ float HeightMap::getTerrainHeight(const glm::vec2& playerPosition) {
 	glm::vec3 baryc{-1.f, -1.f, -1.f};
 	
 
-	std::cout << "Player X: " << playerPosition.x << " Player Z:" << playerPosition.y << std::endl;
+	//std::cout << "Player X: " << playerPosition.x << " Player Z:" << playerPosition.y << std::endl;
 
+	// Takk Mathias :)
 	for (size_t i = 0; i < indices.size() / 3; i++)
 	{
 		int i1, i2, i3;
@@ -243,11 +261,11 @@ float HeightMap::getTerrainHeight(const glm::vec2& playerPosition) {
 	//	}
 	//}
 		
-	std::cout << "Baryc: " << baryc.x << " " << baryc.y << " " << baryc.z << std::endl;
+	//std::cout << "Baryc: " << baryc.x << " " << baryc.y << " " << baryc.z << std::endl;
 
 	float height = v1.y * baryc.x + v2.y * baryc.y + v3.y * baryc.z;
 
-	std::cout << "Returned y value:" << height << std::endl;
+	//std::cout << "Returned y value:" << height << std::endl;
 
 
 	return height;

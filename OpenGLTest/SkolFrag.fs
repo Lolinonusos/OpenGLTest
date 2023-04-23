@@ -4,7 +4,7 @@ out vec4 fragmentColor;     //color sent to fragment on screen
 in vec3 fragmentPosition;
 in vec3 normalTransposed;              //color received from the pipeline (and vertex shader)
 
-uniform float ambientStrength = 1;
+uniform float ambientStrength = 0.5;
 uniform float lightStrength = 0.3;
 uniform vec3 lightPosition = vec3(0.0, 3.0, 0.0);
 uniform vec3 lightColour = vec3(0.8, 0.8, 0.3);

@@ -61,6 +61,9 @@ void renderLoop::render() {
 	glActiveTexture(GL_TEXTURE0);
 	textures[0]->bind();
 	
+	// Lag tick funksjon
+	// objectMap.tick(deltaTime);
+
 	for (unsigned int i = 0; i < shaders.size(); i++) {
 		
 		// Which shader program we will use
@@ -75,12 +78,15 @@ void renderLoop::render() {
 		shaders[i]->setMat4("view", view);
 
 		shaders[i]->setVec3("cameraPosition", camera.position);
+		shaders[i]->setVec3("lightPosition", objectMap.at("player")->position + glm::vec3(0.0f, 2.0f, 0.0f));
 	}
 	
+
 	//std::cout << objectMap.at("player")->position.x << " " << objectMap.at("player")->position.y << " " << objectMap.at("player")->position.z << std::endl;
 	glm::vec3 playerPos = objectMap.at("player")->position;
 	objectMap.at("player")->setY(terrain->getTerrainHeight(glm::vec2(playerPos.x, playerPos.z)));
 
+	// draw loop
 	for (auto& obj : objectMap) {
 		obj.second->draw();
 		if (obj.second->getName() == "2") {

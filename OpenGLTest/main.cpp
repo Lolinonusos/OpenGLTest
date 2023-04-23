@@ -71,10 +71,10 @@ void processInput(GLFWwindow* window) {
     // Solid by default
     // Wireframe when pressing space
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wireframe
     }
     else {
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Filled triangles
 
     }
 }
