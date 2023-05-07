@@ -22,6 +22,7 @@ void renderLoop::initialize()
 	shaders.push_back(new Shader("skole","SkolVert.vs", "SkolFrag.fs")); // Index 1 is light shader
 	shaders.push_back(new Shader("hoyde", "height.vs", "height.fs")); // index 2 is for height map
 	shaders.push_back(new Shader("lysShader", "light.vs", "light.fs")); // Index 3 is lie shader
+	shaders.push_back(new Shader("plain", "first.vs", "first.fs")); // Index 4 is plain shader?   
 
 	// Objects to draw
 	objects.push_back(new Interactive{ shaders[0], "player" }); // 0
