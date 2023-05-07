@@ -4,10 +4,11 @@
 
 class OctahedronBall : public VisObject {
 public:
-	OctahedronBall(int n = 0);
+	OctahedronBall(Shader* inShader, std::string inName, int n = 0);
+	OctahedronBall();
 	~OctahedronBall();
 	void init() override;
-	void draw(Shader shader);
+	void draw();
 private:
 	int recursions;
 	int indices;

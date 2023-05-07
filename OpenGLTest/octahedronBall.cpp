@@ -1,9 +1,21 @@
 #include "octahedronBall.h"
 
-OctahedronBall::OctahedronBall(int n) : recursions(n), indices(0), VisObject() {
+OctahedronBall::OctahedronBall(Shader* inShader, std::string inName,int n) : recursions(n), indices(0), VisObject() {
+	model = glm::mat4(1.0f);
+	objShader = inShader;
+	name = inName;
+	
 	vertices.reserve(3 * 8 * pow(4, recursions));
 	octahedronUnitBall();
 }
+
+
+OctahedronBall::OctahedronBall() : recursions(1), indices(0), VisObject() {
+
+	vertices.reserve(3 * 8 * pow(4, recursions));
+	octahedronUnitBall();
+}
+
 
 OctahedronBall::~OctahedronBall() {
 
@@ -33,10 +45,11 @@ void OctahedronBall::init() {
 	glBindVertexArray(0);
 }
 
-void OctahedronBall::draw(Shader shader) {
+void OctahedronBall::draw() {
 	glBindVertexArray(VAO);
-	//glUniformMatrix4fv(matrixUniform, 1, GL_FALSE, glm::value_ptr(matrix));
-	shader.setMat4("model", model);
+	objShader->use();
+	objShader->setMat4("model", model);
+
 	drawStyle();
 }
 

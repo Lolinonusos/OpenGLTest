@@ -153,14 +153,6 @@ int main() {
     // Captures the mouse cursor within the center the window 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    // build and compile our shader program
-    //Shader ourShader("firstTexVertShader.vs", "firstTexFragShader.fs"); 
-    // you can name your shader files however you like
-    //Shader ourShader("SkolVert.vs", "SkolFrag.fs"); 
-    //Shader ourShader("firstTex.vs", "firstTex.fs");
-    //Shader lightShader("lightVert.vs", "lightFrag.fs");
-
-
     render.initialize();
 
     //// Oblig 2

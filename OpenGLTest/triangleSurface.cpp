@@ -31,8 +31,10 @@ TriangleSurface::TriangleSurface(Shader* inShader) :VisObject() {
 	model = glm::mat4(1.0f);
 }
 
-TriangleSurface::TriangleSurface(std::string fileName, bool write) : VisObject() {
+TriangleSurface::TriangleSurface(Shader* inShader, std::string fileName, bool write) : VisObject() {
 	
+	objShader = inShader;
+
 	if (write) {
 		writefile(fileName);
 	}

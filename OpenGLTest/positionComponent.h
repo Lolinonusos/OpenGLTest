@@ -27,8 +27,7 @@ public:
 	glm::vec3 scale;
 	
 	// Should these be protected?
-	glm::mat4 model{}; // position i guess
-	//glm::mat4 rotation = glm::mat4(1.0f);
+	glm::mat4 model{}; // position
 
 	PositionComponent();
 

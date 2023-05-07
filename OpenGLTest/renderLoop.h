@@ -22,13 +22,16 @@
 #include "positionComponent.h"
 #include "visObject.h"
 
+#include "triangleSurface.h"
 #include "interactive.h"
 #include "cube.h"
+#include "graph.h"
 #include "heightMap.h"
 #include "light.h"
 #include "plane.h"
 #include "interactive.h"
-
+#include "trophy.h"
+#include "npc.h"
 
 class renderLoop {
 public:
@@ -76,6 +79,9 @@ public:
 	std::unordered_map < std::string, Texture*> textureMap;
 
 private:
+
+
+	std::vector<Trophy*> trophyMode;
 
 };
 

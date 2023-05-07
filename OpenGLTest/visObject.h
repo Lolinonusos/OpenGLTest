@@ -65,7 +65,7 @@ public:
 		}
 	}
 
-	float radius{};
+	float radius{0.5};
 
 	void getNormals();
 

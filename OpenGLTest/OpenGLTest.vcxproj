@@ -170,6 +170,7 @@
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="model.cpp" />
     <ClCompile Include="moveComponent.cpp" />
+    <ClCompile Include="npc.cpp" />
     <ClCompile Include="octahedronBall.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="point.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="matteModus.h" />
     <ClInclude Include="moveComponent.h" />
+    <ClInclude Include="npc.h" />
     <ClInclude Include="octahedronBall.h" />
     <ClInclude Include="plane.h" />
     <ClInclude Include="point.h" />

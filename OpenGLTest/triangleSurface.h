@@ -6,7 +6,7 @@
 class TriangleSurface : public VisObject {
 public:
 	TriangleSurface(Shader *inShader);
-	TriangleSurface(std::string fileName, bool write);
+	TriangleSurface(Shader* inShader, std::string fileName, bool write);
 	~TriangleSurface();
 	void writefile(std::string fileName);
 	void readFile(std::string fileName);

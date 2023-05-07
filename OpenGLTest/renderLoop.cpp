@@ -11,9 +11,9 @@ void renderLoop::initialize()
 {
 	// Shaders to be used
 	shaders.push_back(new Shader("tekstur", "firstTex.vs", "firstTex.fs")); // Index 0 is texture shader
-	shaders.push_back(new Shader("skole","SkolVert.vs", "SkolFrag.fs")); // Index 0 is texture shader
+	shaders.push_back(new Shader("skole","SkolVert.vs", "SkolFrag.fs")); // Index 1 is light shader
 	shaders.push_back(new Shader("hoyde", "height.vs", "height.fs")); // index 2 is for height map
-	shaders.push_back(new Shader("lysShader", "light.vs", "light.fs")); // Index 3 is light shader
+	shaders.push_back(new Shader("lysShader", "light.vs", "light.fs")); // Index 3 is lie shader
 
 	// Objects to draw
 	objects.push_back(new Interactive{ shaders[0], "player" });
@@ -21,9 +21,25 @@ void renderLoop::initialize()
 	objects.push_back(new Cube{ shaders[0], "2"});
 	objects.push_back(new Light{ shaders[3], "lys" });
 	objects.push_back(new Plane{ shaders[1], "plan" });
-	
+	objects.push_back(new npc{ shaders[1], "NPC"});
+	objects.push_back(new TriangleSurface{ shaders[0], "Oppg444.txt", false});
+
+	trophyMode.push_back(new Trophy{ shaders[0], "T0" });
+	trophyMode.push_back(new Trophy{ shaders[0], "T1" });
+	trophyMode.push_back(new Trophy{ shaders[0], "T2" });
+
+
+
 	//objects.push_back(
 	terrain = new HeightMap{ "Norge.png", shaders[1], "terrain" };
+
+	for (int i = 0; i < trophyMode.size(); i++) {
+		float tX{0.2f + i};
+		float tZ{-2.0f + i};
+		trophyMode[i]->setPosition(glm::vec3(tX, terrain->getTerrainHeight(glm::vec2(tX, tZ)), tZ));
+
+		trophyMode[i]->init();
+	}
 
 	for (auto i = objects.begin(); i != objects.end(); i++) {
 		objectMap.insert(std::pair<std::string, VisObject*>{(*i)->getName(), (*i)});
@@ -77,6 +93,7 @@ void renderLoop::render() {
 		view = camera.getViewMatrix();
 		shaders[i]->setMat4("view", view);
 
+		// For shaders that use these
 		shaders[i]->setVec3("cameraPosition", camera.position);
 		shaders[i]->setVec3("lightPosition", objectMap.at("player")->position + glm::vec3(0.0f, 2.0f, 0.0f));
 	}
@@ -85,6 +102,18 @@ void renderLoop::render() {
 	//std::cout << objectMap.at("player")->position.x << " " << objectMap.at("player")->position.y << " " << objectMap.at("player")->position.z << std::endl;
 	glm::vec3 playerPos = objectMap.at("player")->position;
 	objectMap.at("player")->setY(terrain->getTerrainHeight(glm::vec2(playerPos.x, playerPos.z)));
+
+
+	// Trophy placement
+	for (int i = 0; i < trophyMode.size(); i++) {
+		//trophyMode[i]->setPosition(glm::vec3(2.0f, 1.0f, 3.0f));
+		//trophyMode[i]->setY(terrain->getTerrainHeight(glm::vec2(playerPos.x, playerPos.z)));
+		trophyMode[i]->checkCollision(objectMap.at("player"));
+	}
+	for (int i = 0; i < trophyMode.size(); i++) {
+		trophyMode[i]->draw();
+	}
+
 
 	// draw loop
 	for (auto& obj : objectMap) {
