@@ -92,6 +92,8 @@ void renderLoop::render(float deltaTime) {
 	
 	// Lag tick funksjon
 	// objectMap.tick(deltaTime);
+	glm::vec3 playerPos = objectMap.at("player")->position;
+	objectMap.at("player")->setY(terrain->getTerrainHeight(glm::vec2(playerPos.x, playerPos.z)));
 
 	for (unsigned int i = 0; i < shaders.size(); i++) {
 		
@@ -107,7 +109,7 @@ void renderLoop::render(float deltaTime) {
 			view = camera.getViewMatrix();
 		}
 		if (cam2.isActive) {
-			view = cam2.getViewMatrix();
+			view = cam2.lookAtPoint(playerPos);
 		}
 		shaders[i]->setMat4("view", view);
 
@@ -118,8 +120,8 @@ void renderLoop::render(float deltaTime) {
 	
 
 	//std::cout << objectMap.at("player")->position.x << " " << objectMap.at("player")->position.y << " " << objectMap.at("player")->position.z << std::endl;
-	glm::vec3 playerPos = objectMap.at("player")->position;
-	objectMap.at("player")->setY(terrain->getTerrainHeight(glm::vec2(playerPos.x, playerPos.z)));
+
+
 
 
 	// Trophy placement

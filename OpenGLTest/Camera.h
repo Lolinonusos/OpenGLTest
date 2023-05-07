@@ -8,7 +8,7 @@
 #include "positionComponent.h"
 //#include "Enum.h"
 
-// This camera is from learnOpenGL.com 
+// This camera is mostly from learnOpenGL.com 
 
 const float YAW = -90.0f;
 const float PITCH = 0.0f;
@@ -97,6 +97,10 @@ public:
 		yaw = inYaw;
 		pitch = inPitch;
 		updateCameraVectors();
+	}
+
+	glm::mat4 lookAtPoint(glm::vec3 point) {
+		return glm::lookAt(position, point, up);
 	}
 
 private:
