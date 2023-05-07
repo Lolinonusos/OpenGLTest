@@ -1,7 +1,7 @@
 #include "main.h"
 
 // settings
-const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_WIDTH = 1800;
 const unsigned int SCR_HEIGHT = 800;
 
 // Time
@@ -66,6 +66,17 @@ void processInput(GLFWwindow* window) {
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) { // LEFT
         render.camera.translate(LEFT, deltaTime);
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+        if (render.camera.isActive) {
+            render.camera.isActive = false;
+            render.cam2.isActive = true;
+        }
+        else if (!render.camera.isActive) {
+            render.camera.isActive = true;
+            render.cam2.isActive = false;
+        }
     }
 
     // Solid by default
@@ -190,7 +201,7 @@ int main() {
         // input
         processInput(window);
 
-        render.render();
+        render.render(deltaTime);
         
 
 

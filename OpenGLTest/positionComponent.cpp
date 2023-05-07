@@ -94,7 +94,7 @@ void PositionComponent::translate(float inX, float inY, float inZ, float deltaTi
 }
 
 void PositionComponent::setPosition(glm::vec3 offset) {
-	position = offset;
+	position += offset;
 	setPositionMatrix(position);
 }
 
@@ -103,8 +103,10 @@ void PositionComponent::setPosition(float x, float y, float z) {
 	setPositionMatrix(position);
 }
 
-void PositionComponent::setRotation(float angle, glm::vec3)
-{
+void PositionComponent::setRotation(float angle, glm::vec3 axis) {
+	model = glm::mat4(1.0f);
+	model = glm::rotate(model, glm::radians(angle), axis);
+	model = glm::translate(model, position);
 }
 
 void PositionComponent::setY(float y) {

@@ -10,13 +10,6 @@
 
 // This camera is from learnOpenGL.com 
 
-//enum Camera_Movement {
-//	FORWARD,
-//	BACKWARD,
-//	LEFT,
-//	RIGHT
-//};
-
 const float YAW = -90.0f;
 const float PITCH = 0.0f;
 const float SPEED = 2.5f;
@@ -26,6 +19,9 @@ const float ZOOM = 45.0f;
 
 class Camera : public PositionComponent{
 public:
+
+	bool isActive;
+
 	// Camera position and movement
 	//glm::vec3 position;
 	glm::vec3 front;
@@ -95,6 +91,12 @@ public:
 			zoom = 1.0f;
 		if (zoom > 45.0f)
 			zoom = 45.0f;
+	}
+
+	void rotateCam(float inYaw, float inPitch) {
+		yaw = inYaw;
+		pitch = inPitch;
+		updateCameraVectors();
 	}
 
 private:

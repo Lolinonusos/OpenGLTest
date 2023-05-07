@@ -42,8 +42,8 @@ public:
 	const unsigned int SCR_WIDTH = 800;
 	const unsigned int SCR_HEIGHT = 800;
 
-	Camera camera{ glm::vec3(0.0f, 2.0f, 3.0f) };
-	
+	Camera camera{ glm::vec3(0.0f, 10.0f, 3.0f) };
+	Camera cam2{ glm::vec3(0.0f, 10.0f, 30.0f) };
 
 
 	renderLoop();
@@ -52,7 +52,7 @@ public:
 	// run initialize here
 	void initialize();
 
-	void render();
+	void render(float deltaTime);
 
 	void processInput();
 	void mouse_callback(GLFWwindow*, double xPosIn, double yPosIn);
@@ -68,7 +68,9 @@ public:
 
 
 	HeightMap* terrain;
-
+	npc* NPC;
+	TriangleSurface* npcGraph;
+	
 	std::vector<VisObject*> objects;
 	std::unordered_map<std::string, VisObject*> objectMap;
 

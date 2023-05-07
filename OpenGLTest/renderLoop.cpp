@@ -9,6 +9,14 @@ renderLoop::renderLoop() {
 
 void renderLoop::initialize()
 {
+	// Starting camera values
+	camera.isActive = true;
+	camera.rotateCam(-90.0f, -45.0f);
+
+	cam2.isActive = false;
+	cam2.rotateCam(-90.0f, -12.5f);
+
+
 	// Shaders to be used
 	shaders.push_back(new Shader("tekstur", "firstTex.vs", "firstTex.fs")); // Index 0 is texture shader
 	shaders.push_back(new Shader("skole","SkolVert.vs", "SkolFrag.fs")); // Index 1 is light shader
@@ -16,14 +24,15 @@ void renderLoop::initialize()
 	shaders.push_back(new Shader("lysShader", "light.vs", "light.fs")); // Index 3 is lie shader
 
 	// Objects to draw
-	objects.push_back(new Interactive{ shaders[0], "player" });
-	objects.push_back(new Cube{ shaders[0], "Hlene" });
-	objects.push_back(new Cube{ shaders[0], "2"});
-	objects.push_back(new Light{ shaders[3], "lys" });
-	objects.push_back(new Plane{ shaders[1], "plan" });
-	objects.push_back(new npc{ shaders[1], "NPC"});
-	objects.push_back(new TriangleSurface{ shaders[0], "Oppg444.txt", false});
+	objects.push_back(new Interactive{ shaders[0], "player" }); // 0
+	objects.push_back(new Cube{ shaders[0], "Hlene" }); // 1
+	objects.push_back(new Cube{ shaders[0], "2"}); // 2
+	objects.push_back(new Light{ shaders[3], "lys" }); // 3
+	objects.push_back(new Plane{ shaders[1], "plan" }); // 4
 
+	// Other objects
+	NPC = new npc(shaders[1], "NPC");
+	npcGraph = new TriangleSurface(shaders[0], "Oppg444.txt", false); // 5
 	trophyMode.push_back(new Trophy{ shaders[0], "T0" });
 	trophyMode.push_back(new Trophy{ shaders[0], "T1" });
 	trophyMode.push_back(new Trophy{ shaders[0], "T2" });
@@ -53,8 +62,12 @@ void renderLoop::initialize()
 	for (auto i = objectMap.begin(); i != objectMap.end(); i++) {
 		(*i).second->init();
 	}
+	npcGraph->init();
+	NPC->init();
+	NPC->getGraphPositions(npcGraph);
 	terrain->init();
-
+	
+	
 	textures.push_back(new Texture("screenshot.png", GL_TEXTURE_2D));
 	//textures.push_back(new Texture("Helene.png", GL_TEXTURE_2D));
 	
@@ -64,7 +77,7 @@ void renderLoop::initialize()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void renderLoop::render() {
+void renderLoop::render(float deltaTime) {
 
 	// Background colour
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -90,7 +103,12 @@ void renderLoop::render() {
 		shaders[i]->setMat4("projection", projection);
 
 		// View matrix
-		view = camera.getViewMatrix();
+		if (camera.isActive) {
+			view = camera.getViewMatrix();
+		}
+		if (cam2.isActive) {
+			view = cam2.getViewMatrix();
+		}
 		shaders[i]->setMat4("view", view);
 
 		// For shaders that use these
@@ -113,7 +131,8 @@ void renderLoop::render() {
 	for (int i = 0; i < trophyMode.size(); i++) {
 		trophyMode[i]->draw();
 	}
-
+	npcGraph->draw();
+	NPC->FollowCurve(npcGraph, deltaTime);
 
 	// draw loop
 	for (auto& obj : objectMap) {
@@ -123,6 +142,7 @@ void renderLoop::render() {
 			//std::cout << "hurrah";
 		}
 	}
+	NPC->draw();
 	terrain->draw();
 	//objectMap.at(std::string("terrain"))->setTerrainHeight(glm::vec2());
 	//glfwSwapBuffers(window);
@@ -135,8 +155,7 @@ renderLoop::~renderLoop() {
 	}
 }
 
-void renderLoop::processInput()
-{
+void renderLoop::processInput() {
 
 }
 

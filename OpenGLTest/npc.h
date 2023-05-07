@@ -14,52 +14,55 @@ public:
 
 	};
 
+
     int NodeIndex = 0;
-
     int VertAmount = 0;
-
     bool GoingBack;
-
     std::vector<glm::vec3> vPositions;
 
-    void getGraphPositions(TriangleSurface grap) {
-        for (int i = 0; i < grap.vertexAmount(); i++) {
-            vPositions.push_back(grap.getVertexPosition(i));
+    float seconds{};
+
+    void getGraphPositions(TriangleSurface* grap) {
+        for (int i = 0; i < grap->vertexAmount(); i++) {
+            vPositions.push_back(grap->getVertexPosition(i));
         }
+        VertAmount = grap->vertexAmount();
     }
 
-	void FollowCurve(TriangleSurface grap, float deltaTime) {
+	void FollowCurve(TriangleSurface* grap, float deltaTime) {
+        seconds += deltaTime;
+        //if (true) {
+        if (seconds > 0.01f) {
+        
+            glm::vec3 trans;
 
-        glm::vec3 trans;
+            if (NodeIndex < VertAmount && GoingBack) {
+                glm::vec3 temp = grap->getVertexPosition(NodeIndex);
 
-        if (NodeIndex < VertAmount && GoingBack) {
-            glm::vec3 temp = vPositions[NodeIndex];
+                trans = temp - position;
+                setPosition(trans);
 
-            trans = temp - position;
-
-            translate(trans[0], trans[1], trans[2], deltaTime);
-
-            if (position == vPositions[NodeIndex]) {
                 NodeIndex++;
+           
+                if (NodeIndex >= VertAmount - 1) {
+                    GoingBack = false;
+                }
             }
-            if (NodeIndex >= VertAmount - 1) {
-                GoingBack = false;
-            }
-        }
-        else if (NodeIndex >= 0 && !GoingBack) {
-            glm::vec3 temp = vPositions[NodeIndex];
+            else if (NodeIndex >= 0 && !GoingBack) {
+                glm::vec3 temp = grap->getVertexPosition(NodeIndex);
 
-            trans = temp - position;
+                trans = temp - position;
 
-            translate(trans[0], trans[1], trans[2], deltaTime);
+                setPosition(trans);
 
-            if (position == vPositions[NodeIndex]); {
                 NodeIndex--;
+            
+                if (NodeIndex <= 0) {
+                    NodeIndex = 0;
+                    GoingBack = true;
+                }
             }
-            if (NodeIndex <= 0) {
-                NodeIndex = 0;
-                GoingBack = true;
-            }
+            seconds = 0.0f;
         }
     }
 };

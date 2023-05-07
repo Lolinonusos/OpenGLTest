@@ -58,9 +58,8 @@ void TriangleSurface::writefile(std::string fileName) {
 		out.close();
 	}
 	else {
-	std::cout << "ERROR: Could not find file" << std::endl;
+		std::cout << "ERROR: Could not find file" << std::endl;
 	}
-
 }
 
 void TriangleSurface::readFile(std::string fileName) {
